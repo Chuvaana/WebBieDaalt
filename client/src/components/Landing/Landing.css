@@ -1,0 +1,73 @@
+
+
+.landing__container {
+    width: 100%;
+    min-height: 420px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.landing__container .landing_body {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: calc(100vh - 200px);
+    margin-top: 30px;
+    align-items: center;
+    gap: 80px;
+}
+
+.landing__container .landing_body .bigCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    padding-left: 150px;
+    padding-top: 50px;
+    gap: 100px;
+}
+
+.landing__container .landing_body .bigCart .texts {
+    height: fit-content;
+    width: fit-content;
+}
+
+.landing__container .landing_body .bigCart .texts .title {
+    width: 470px;
+}
+
+.landing__container .landing_body .bigCart .texts .title p {
+    flex-wrap: wrap;
+    font-weight: 600;
+    font-size: 44px;
+    color: white;
+}
+
+.landing__container .landing_body .bigCart .texts .shopnow {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+    width: fit-content;
+}
+
+.landing__container .landing_body .bigCart .texts .shopnow p {
+    margin: 0;
+    font-size: 20px;
+    text-decoration: underline;
+    color: white;
+}
+
+.landing__container .landing_body .bigCart .photo {
+    height: fit-content;
+    width: fit-content;
+}
+
+.landing__container .landing_body .bigCart .photo .shopnow_image {
+    height: fit-content;
+    width: fit-content;
+}
