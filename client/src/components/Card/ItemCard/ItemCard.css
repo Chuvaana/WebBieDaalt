@@ -1,8 +1,6 @@
-
-
 .product__card__card {
     height: 450px;
-    width: 270px;
+    width: 245px;
     margin: 14px;
     border-width: 1px;
     box-shadow: 0px 2px 6px -3px;
@@ -13,37 +11,36 @@
     height: 100%;
     width: 100%;
 }
+
 .product__card_button {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     font-size: 16px;
-    width: 270px;
+    width: 100%;
     height: 40px;
-    background-color: #E0E0E0;
-
+    background-color: #E0E0E0; 
 }
 
-.saleprecent {
-    position: absolute;
-    z-index: 1;
-    top:0;
-    left:0;
-    background-color: white;
-    margin: 20px;
-    height: 30px;
-    width: 40px;
+.product__card_button:hover{
+    background-color: #c5c5c5;
+}
+
+.wishlist-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    p{
-        margin: 8px;
-        color:#DB4444;
-        font-size: 16px;
-        font-weight: 600;
-    }
+    margin: 10px;
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top: 0;
+    background-color: white;
+    height: 34px;
+    width: 34px;
+    border-radius: 50%;
+    border: none;
 }
 
 .product__image {
@@ -58,7 +55,7 @@
     position: relative;
 }
 
-.product__image > img{
+.product__image>img {
     max-width: 100%;
     height: 100%;
     transition: 1s;
@@ -68,13 +65,13 @@
 }
 
 .product__card__detail {
-    height: 20%;
+    height: 24%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: #ffffff ;
+    background-color: #ffffff;
 }
 
 .product__name {
@@ -85,6 +82,7 @@
     align-items: center;
     font-size: 1rem;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .product__description {
@@ -98,22 +96,11 @@
 }
 
 .product__price {
-    height: 50%;
+    /* height: 50%; */
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.1rem;
     font-weight: bold;
-}
-
-.product__card__action {
-    width: 100%;
-    height: 45px;
-    position: absolute;
-    bottom: 0%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    padding: 0px 5px;
 }

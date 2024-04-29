@@ -1,0 +1,83 @@
+.login-form-all {
+    display: flex;
+}
+
+.login-form-all input::-webkit-outer-spin-button,
+.login-form-all input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.image {
+    display: flex;
+    width: 50%;
+    height: 50%;
+    flex-direction: column;
+}
+
+.login-form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto Condensed";
+}
+
+.login-form .login-header {
+    text-align: center;
+}
+
+.login-form .input-all {
+    margin-top: 10px;
+}
+
+.login-form .input-all input {
+    margin: 10px 0px;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    height: 40px;
+    width: 300px;
+}
+
+.login-form .input-all input:focus {
+    outline: none;
+}
+
+.login-form .btn-all a {
+    margin-top: 20px;
+    right: 0px;
+    text-decoration: none;
+    color: #DB4444;
+}
+
+.login-form .btn-all .register-btn,
+.login-form .btn-all .re-login-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E4E4E4;
+    color: black;
+    margin-top: 20px;
+    border-style: none;
+    width: 300px;
+    height: 40px;
+}
+
+.login-form .btn-all .register-btn:hover,
+.login-form .btn-all .re-login-btn:hover {
+    background-color: #7c7c7c;
+}
+
+.login-form .btn-all button {
+    margin-top: 20px;
+    border-radius: 5px, transparent;
+    border-style: none;
+    width: 300px;
+    height: 40px;
+    background-color: #DB4444;
+    color: white;
+}
+
+.login-form .btn-all button:hover {
+    background-color: #f00000;
+}

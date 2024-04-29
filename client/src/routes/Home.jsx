@@ -4,7 +4,8 @@ import Landing from "../components/Landing/Landing";
 import FeaturedItems from "../components/Featured/Items/FetauredItems";
 import FeaturedCategories from "../components/Featured/Categories/FeaturedCategories";
 import { TabTitle } from "../utils/General";
-
+import AllItems from "../components/Featured/AllItems/AllItems";
+import Highlight from "../components/Featured/Highlight/Highlight";
 
 const Home = () => {
     const [ featuredItems, setFeaturedItems ] = useState()
@@ -26,6 +27,8 @@ const Home = () => {
             <Landing />
             <FeaturedCategories />
             <FeaturedItems items={featuredItems}/>
+            <Highlight/>
+            <AllItems items={featuredItems}/>
         </Fragment>
     );
 }

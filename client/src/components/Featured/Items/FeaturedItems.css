@@ -1,4 +1,6 @@
-
+.cardslist{
+    height: fit-content;
+}
 .featured__products__container {
     width: 100%;
     height: auto;
@@ -98,12 +100,10 @@
 }
 
 .featured__products__card__container {
-    margin-top: 20px;
-    padding: 30px;
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }

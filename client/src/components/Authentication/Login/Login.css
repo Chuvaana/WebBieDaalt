@@ -3,6 +3,10 @@
 .login__auth__container {
     height: auto;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .login__auth {
@@ -12,4 +16,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family:'Courier New', Courier, monospace;
 }

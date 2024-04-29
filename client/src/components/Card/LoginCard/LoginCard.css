@@ -1,80 +1,83 @@
-
-.login__card__container {
-    height: 500px;
-    width:420px;
-    margin: auto;
-    box-shadow: 0px 2px 5px -2px;
-}
-
-.login__card {
-    height: 100%;
-    width: 90%;
-    margin: auto;
-    padding: 10px;
-}
-
-.login__header {
-    height: 25%;
-    width: 100%;
+.login-form-all {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
 }
 
-
-.login__header h1 {
-    font-size: 2.5rem;
-    font-weight: bolder;
-
+.login-form-all input::-webkit-outer-spin-button,
+.login-form-all input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.login__inputs {
-    height: 60%;
-    width: 100%;
-}
-
-.input__container {
-    height: 35%;
-    width: 100%;
+.image {
     display: flex;
-    justify-content: flex-start;
+    width: 50%;
+    height: 50%;
     flex-direction: column;
 }
 
-.input__label {
-    height: 40%;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 500;
+.login-form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto Condensed";
 }
 
-.login__input {
-    width: 100%;
-    height: 50%;
+.login-form .login-header {
+    text-align: center;
+}
+
+.login-form .input-all {
+    margin-top: 10px;
+}
+
+.login-form .input-all input {
+    margin: 10px 0px;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    height: 40px;
+    width: 300px;
+}
+
+.login-form .input-all input:focus {
+    outline: none;
+}
+
+.login-form .btn-all a {
+    margin-top: 20px;
+    right: 0px;
+    text-decoration: none;
+    color: #DB4444;
+}
+
+.login-form .btn-all .register-btn,
+.login-form .btn-all .re-login-btn {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #E4E4E4;
+    color: black;
+    margin-top: 20px;
+    border-style: none;
+    width: 300px;
+    height: 40px;
 }
 
-.login__button__container {
-    height: 30%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.login-form .btn-all .register-btn:hover,
+.login-form .btn-all .re-login-btn:hover {
+    background-color: #7c7c7c;
 }
 
-.login__button {
-    height: 60%;
-    width: 100%;
-    font-size: 1.1rem;
-    background-color: #FFE26E;
-    border-color: #FFE26E;
-    border-style: dashed;
-    font-weight:bold;
+.login-form .btn-all button {
+    margin-top: 20px;
+    border-radius: 5px, transparent;
+    border-style: none;
+    width: 300px;
+    height: 40px;
+    background-color: #DB4444;
+    color: white;
 }
 
-.login__other__actions {
-    height: 20%;
-    width: 100%;
+.login-form .btn-all button:hover {
+    background-color: #f00000;
 }

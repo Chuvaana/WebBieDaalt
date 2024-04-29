@@ -1,40 +1,53 @@
-import { Link } from 'react-router-dom';
-import './RegisterCard.css';
+import React from "react";
+import { useState} from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
+import "./RegisterCard.css";
+// import logo from '../../assets/3maral.jpg';
 
 const RegisterCard = () => {
-    return ( 
-        <div className="register__card__container">
-            <div className="register__card">
-                <div className="register__header">
-                    <h1>Create Account</h1>
-                </div>
-                <div className="register__inputs">
-                <div className="fname__input__container reg__input__container">
-                        <label className="fname__label input__label">First name</label>
-                        <input type="text" className="fname__input register__input" />
-                    </div>
-                    <div className="lname__input__container reg__input__container">
-                        <label className="lname__label input__label">Last name</label>
-                        <input type="text" className="lname__input register__input"/>
-                    </div>
-                    <div className="email__input__container reg__input__container">
-                        <label className="email__label input__label">Email</label>
-                        <input type="email" className="email__input register__input" placeholder='example@gmail.com' />
-                    </div>
-                    <div className="password__input__container reg__input__container">
-                        <label className="password__label input__label">Password</label>
-                        <input type="password" className="password__input register__input" />
-                    </div>
-                    <div className="register__button__container">
-                        <button className="register__button" >Create Account</button>
-                    </div>
-                </div>
-                <div className="register__other__actions">
-                    <div className="register__login__account">Already have account? <Link to="/account/login">Login</Link></div>
-                </div>
+    const [name, setName] = useState()
+    const [phoneNumber, setphoneNumber] = useState()
+    const [password, setPassword] = useState()
+    const [con_password, setPasswordRepeat] = useState()
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log("register");
+        if (password === con_password) {
+            axios.post('http://localhost:5000/api/user/register', { name, phoneNumber, password })
+                .then(result => {
+                    console.log(result)
+                    navigate('api/user/login')
+                })
+                .catch(err => console.log(err))
+        } else {
+            alert("nuuts ug taarhgvi bn");
+        }
+    };
+    return <form className="login-form-all" onSubmit={handleSubmit}>
+        <div className="login-form">
+            <div className="login-header">
+                <h1>Бүртгүүлэх</h1>
+            </div>
+            <div className="input-all">
+                <input type="text" className="name" pattern="[a-zA-Z]*" placeholder="Нэр" required onChange={(e) => setName(e.target.value)}></input><br />
+                <input type="number" className="phone-number" pattern="[8-9]{1}[0-9]{7}" placeholder="Утасны дугаар" required onChange={(e) => setphoneNumber(e.target.value)}></input><br />
+                <input type="password" className="password" placeholder="Нууц үг" minLength={8} required onChange={(e) => setPassword(e.target.value)}></input><br />
+                <input type="password" className="password-confirm" placeholder="Нууц үг давтах" minLength={8} required onChange={(e) => setPasswordRepeat(e.target.value)}></input>
+            </div>
+            <div className="btn-all">
+                <button type="submit" className="re-register-btn">Бүртгүүлэх</button><br />
+                <Link to="/account/login" className="re-login-btn" >
+                    Нэвтрэх
+                </Link>
             </div>
         </div>
-     );
-}
- 
+    </form>;
+};
+
+
 export default RegisterCard;

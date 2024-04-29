@@ -5,19 +5,19 @@ export const menuItemsData = [
         submenu: [           
             {
                 title: 'Хүзүүний зүүлт',
-                url: '/necklaces',
+                url: '/item/necklaces',
             },
             {
                 title: 'Ээмэг',
-                url: '/earrings',
+                url: '/item/earrings',
             },
             {
                 title: 'Бугуйвч',
-                url: '/bracelet',
+                url: '/item/bracelet',
             },
             {
                 title: 'Бөгж',
-                url: '/ring',
+                url: '/item/ring',
             },
         ],
     },
@@ -27,32 +27,32 @@ export const menuItemsData = [
         submenu: [            
             {
                 title: 'Ороолт',
-                url: '/scarf',
+                url: '/item/scarf',
             },
             {
                 title: 'Цүнх',
-                url: '/bag',
+                url: '/item/bag',
             },
             {
                 title: 'Нарны шил',
-                url: '/sunglasses',
+                url: '/item/sunglasses',
             },
             {
                 title: 'Малгай',
-                url: '/hat',
+                url: '/item/hat',
             },
             {
                 title: 'Маскны гинж',
-                url: '/maskchain',
+                url: '/item/maskchain',
             },
             {
                 title: 'Багц',
-                url: '/sets',
+                url: '/item/sets',
             },
         ],
     },
     {
         title: 'Хямдрал',
-        url: '/sale',
+        url: '/item/sale',
     }
 ];
