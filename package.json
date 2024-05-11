@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Bereky/shema-mern-ecommerce#readme",
   "dependencies": {
+    "antd": "^5.17.0",
     "cors": "^2.8.5",
+    "react-animated-heart": "^0.0.8",
     "sass": "^1.75.0",
     "scss": "^0.2.4"
   }

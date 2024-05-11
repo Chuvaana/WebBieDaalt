@@ -1,0 +1,67 @@
+.contact-all {
+    display: flex;
+    font-family: "Roboto Condensed";
+    flex-flow: row;
+    margin: 100px 0px;
+    gap: 100px;
+    width: 100%;
+    justify-content: center;
+}
+
+.contact-all .left_table {
+    left: 0;
+    width: 300px;
+    padding: 20px 20px 60px 20px;
+    border: 1px solid #c4c4c4;
+    border-style: none;
+    box-shadow: 1px 1px 3px 3px #eaeaea;
+}
+
+.contact-all .right_table {
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid #c4c4c4;
+    border-style: none;
+    box-shadow: 1px 1px 3px 3px #eaeaea;
+}
+
+.contact-all .right_table_upper {
+    margin: 30px 40px 0px 40px;
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+}
+
+.contact-all .right_table_upper input {
+    padding-left: 12px;
+    width: 240px;
+    height: 50px;
+    background: #F5F5F5;
+    border-style: none;
+}
+
+.contact-all .message {
+    margin: 30px 40px 30px 40px;
+    width: 800px;
+    height: 250px;
+    background: #F5F5F5;
+    border-style: none;
+}
+
+.contact-all form {
+    display: flex;
+    justify-content: flex-end;
+    margin: 30px 40px 30px 40px;
+}
+
+.contact-all form .edit_save {
+    height: 46px;
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #DB4444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+}

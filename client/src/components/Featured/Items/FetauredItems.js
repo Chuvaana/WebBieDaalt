@@ -14,8 +14,8 @@ const FeaturedItems = (props) => {
     };
 
     return (
-        <div className="featured__products__container">
-            <div className="featured__products">
+        <div className="home_featured__products__container">
+            <div className="home_featured__products">
                 <div className='date'>
                     <div className='red_p'>
                         <div className='red'></div>

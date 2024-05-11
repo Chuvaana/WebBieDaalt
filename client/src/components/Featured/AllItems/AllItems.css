@@ -1,4 +1,4 @@
-.featured__products__container {
+.home_featured__products__container {
     width: 100%;
     height: auto;
     min-height: 25rem;
@@ -16,7 +16,7 @@
     justify-content: center;
     gap: 30px;
     padding-bottom: 40px;
-    align-items: self-start;
+    padding-left: 50px;
 }
 
 .itemsFrame .date {

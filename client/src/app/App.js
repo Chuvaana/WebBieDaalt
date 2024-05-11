@@ -28,6 +28,14 @@ import Ring from '../components/Categories/Ring.js';
 import Bracelet from '../components/Categories/Bracelet.js';
 import Earings from '../components/Categories/Earrings.js';
 import Necklaces from '../components/Categories/Necklaces.js';
+import ViewAll from '../components/Featured/ViewAll/ViewAll.js';
+import Scarf from '../components/Categories/Scarf.js';
+import Bag from '../components/Categories/Bag.js';
+import Hat from '../components/Categories/Hats.js';
+import Maskchain from '../components/Categories/Maskchain.js';
+import Sets from '../components/Categories/Sets.js';
+import Sunglasses from '../components/Categories/Sunglasses.js';
+import Contact from '../components/Footer_menu_items/Contact.jsx';
 
 function App() {
 
@@ -49,16 +57,25 @@ function App() {
                 <Route path="changepass" element={<Changepass />}/>
                 <Route path="*" element={<Login />}/>
               </Route>
+
               <Route path="/shop" element={<Shop />}/>
+              <Route path="/contact" element={<Contact />}/>
               <Route path="/category">
                 <Route path=":id" element={<CategoryView />}/>
               </Route>
               <Route path="/item">
                 <Route path='sale' element={<SaleItems/>}></Route>
+                <Route path='viewAll' element={<ViewAll/>}></Route>
                 <Route path='ring' element={<Ring/>}></Route>
-                <Route path='bracelet' element={<Bracelet/>}></Route>
-                <Route path='earrings' element={<Earings/>}></Route>
-                <Route path='necklaces' element={<Necklaces/>}></Route>
+                {/* <Route path='bracelet' element={<Bracelet/>}></Route> */}
+                {/* <Route path='earrings' element={<Earings/>}></Route> */}
+                {/* <Route path='necklaces' element={<Necklaces/>}></Route> */}
+                {/* <Route path='scarf' element={<Scarf/>}></Route> */}
+                {/* <Route path='bag' element={<Bag/>}></Route> */}
+                {/* <Route path='hat' element={<Hat/>}></Route> */}
+                {/* <Route path='maskchain' element={<Maskchain/>}></Route> */}
+                {/* <Route path='sets' element={<Sets/>}></Route> */}
+                {/* <Route path='sunglasses' element={<Sunglasses/>}></Route> */}
                 <Route path="/item/men">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>

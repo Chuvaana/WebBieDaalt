@@ -2,7 +2,7 @@ import './highlight.css'
 
 export default function Highlight() {
     return (
-        <div className="featured__products__container">
+        <div className="home_featured__products__container">
             <div className="highlight">
                 <div className='date'>
                     <div className='red'></div>

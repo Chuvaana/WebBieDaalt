@@ -1,19 +1,19 @@
 import ItemCard from '../../Card/ItemCard/ItemCard';
 import ReactLoading from 'react-loading';
 import { useNavigate } from "react-router-dom";
-import './AllItems.css'
+import './AllItems.css';
 
 const AllItems = (props) => {
     const navigate = useNavigate();
-    // Slice the first 4 items
-    const firstFourItems = props.items ? props.items.slice(0, 4) : [];
+    // Filter items where sale field is false
+    const saleFalseItems = props.items ? props.items.filter(item => !item.sale) : [];
 
     const handleViewAllItems = () => {
-        navigate('/api/sale/item');
+        navigate('/item/viewAll');
     };
 
     return (
-        <div className="featured__products__container">
+        <div className="home_featured__products__container">
             <div className="itemsFrame">
                 <div className='date'>
                     <div className='red'></div>
@@ -22,9 +22,9 @@ const AllItems = (props) => {
                 <div className='itemList'>
                     <div className='cardlist'>
                         {!props.items && <ReactLoading type="balls" color='#FFE26E' height={100} width={100} className='m-auto' />}
-                        {firstFourItems && (
+                        {saleFalseItems.length > 0 && (
                             <div className="featured__products__card__container">
-                                {firstFourItems.map((item, index) => (
+                                {saleFalseItems.map((item, index) => (
                                     <ItemCard key={index} item={item} category="featured" />
                                 ))}
                             </div>

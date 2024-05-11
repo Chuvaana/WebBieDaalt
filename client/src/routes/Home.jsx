@@ -6,6 +6,7 @@ import FeaturedCategories from "../components/Featured/Categories/FeaturedCatego
 import { TabTitle } from "../utils/General";
 import AllItems from "../components/Featured/AllItems/AllItems";
 import Highlight from "../components/Featured/Highlight/Highlight";
+import Support from "../components/Footer/Support";
 
 const Home = () => {
     const [ featuredItems, setFeaturedItems ] = useState()
@@ -25,10 +26,10 @@ const Home = () => {
     return ( 
         <Fragment>
             <Landing />
-            <FeaturedCategories />
             <FeaturedItems items={featuredItems}/>
             <Highlight/>
             <AllItems items={featuredItems}/>
+            <Support/>
         </Fragment>
     );
 }

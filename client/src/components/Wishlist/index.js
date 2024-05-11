@@ -32,8 +32,8 @@ const Wishlist = () => {
 
 
     return (
-        <div className="featured__products__container">
-            <div className="itemsFrame">
+        <div className="wishlist__container">
+            <div className="wish_itemsFrame">
                 <div className='date'>
                     <p>Хүслийн  жагсаалт ( {wishItems.items.length} )</p>
                 </div>
