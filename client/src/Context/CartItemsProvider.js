@@ -28,7 +28,8 @@ const CartItemsProvider = (props) => {
     const quantityHandler = (itemId, action) => {
         if(action === 'INC'){
             setCartItems(cartItems.map((item) => {
-                if(item.id  === itemId){
+                console.log( item._id);
+                if(item._id  === itemId){
                     item.itemQuantity += 1
                 }
                 return item
@@ -36,7 +37,7 @@ const CartItemsProvider = (props) => {
         }
         else {
             setCartItems(cartItems.map((item) => {
-                if(item.id  === itemId){
+                if(item._id  === itemId){
                     item.itemQuantity -= 1
                 }
                 return item

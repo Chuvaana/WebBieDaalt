@@ -1,23 +1,25 @@
 import React from 'react';
-import './Header.css';
-
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Badge from '@mui/material/Badge';
-import { Link } from 'react-router-dom';
-
 import { useContext, useState } from 'react';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Link, useNavigate } from 'react-router-dom';
+
+import Badge from '@mui/material/Badge';
+import SearchIcon from '@mui/icons-material/Search';
 
 import { WishItemsContext } from '../../Context/WishItemsContext';
-
 import { CartItemsContext } from '../../Context/CartItemsContext';
+import { SearchContext } from '../../Context/SearchContext';
 
 import logo from './logo.jpg';
 import Navbar from './Navbar';
-
+import './Header.css';
 
 function Header() {
+    const wishItems = useContext(WishItemsContext);
+    const cartItems = useContext(CartItemsContext);
+    const searchContext = useContext(SearchContext)
     const [profileVisible, setProfileVisible] = useState(false);
+    const [ searchInput, setSearchInput] = useState('')
+    const navigate = useNavigate()
 
     const toggleProfileVisibility = () => {
         setProfileVisible(!profileVisible);
@@ -29,10 +31,15 @@ function Header() {
         }
     };
 
-    const wishItems = useContext(WishItemsContext);
-    const cartItems = useContext(CartItemsContext);
+    const handelChange = (e) => {
+        setSearchInput(e.target.value)
+    }
 
-
+    const handelFormSubmit = (e) => {  
+        e.preventDefault()
+        searchContext.setSearchQuery(searchInput)
+        navigate('/search')
+    }
 
     return (
         <>
@@ -48,25 +55,33 @@ function Header() {
                         <Navbar />
                     </div>
                     <div className='container-header-items'>
-                        <div className='search-form'>
+                        <div className='search-form' >
+{/* 
                             <input
                                 type="text"
                                 className="search-form-control"
                                 placeholder="Хайлт"
 
                             />
+                            <Link to="/search">
+                                <button type="submit" className="search-button">
+                                    <svg
+                                        fill="currentColor"
+                                        viewBox="0 0 16 16"
+                                        height="20px"
+                                        width="20px"
 
-                            <button type="submit" className="search-button">
-                                <svg
-                                    fill="currentColor"
-                                    viewBox="0 0 16 16"
-                                    height="20px"
-                                    width="20px"
-
-                                >
-                                    <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
-                                </svg>
-                            </button>
+                                    >
+                                        <path d="M11.742 10.344a6.5 6.5 0 10-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 001.415-1.414l-3.85-3.85a1.007 1.007 0 00-.115-.1zM12 6.5a5.5 5.5 0 11-11 0 5.5 5.5 0 0111 0z" />
+                                    </svg>
+                                </button>
+                            </Link> */}
+                            <form className="search__form" onSubmit={handelFormSubmit}>
+                                <input type="text" placeholder='Бараа хайх' className="search__form__input" value={searchInput} onChange={handelChange} required />
+                                <button className="search-button" type='submit'>
+                                    <SearchIcon fontSize='medium' />
+                                </button>
+                            </form>
                         </div>
 
                         <div className='wishlist-icon-header'>

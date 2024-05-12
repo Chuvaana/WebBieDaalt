@@ -44,7 +44,7 @@ const Ring = () => {
     return (
         <div className="featured__products__container">
             <div className='price-filter'>
-            <Slider defaultValue={30} />
+            {/* <Slider defaultValue={30} /> */}
                 <form>
                     <div className="form-group">
                         <div>

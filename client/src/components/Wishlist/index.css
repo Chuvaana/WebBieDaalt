@@ -10,9 +10,9 @@
 }
 
 .wishlist__container {
+    margin-left: 15%;
     height: auto;
     width: 70%;
-    background-color: rgb(243, 243, 243);
 }
 
 .wishlist__header{

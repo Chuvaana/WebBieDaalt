@@ -16,12 +16,13 @@ const CartCard = (props) => {
     const [size, setSize] = useState(props.item.size[0]);
 
     const handelQuantityIncrement = (event) => {
-        cartItems.quantity(props.item.id, 'INC');
+        cartItems.quantity(props.item._id, 'INC');
+        console.log(props.item._id);
     };
 
     const handelQuantityDecrement = (event) => {
         if(props.item.itemQuantity >1){
-            cartItems.quantity(props.item.id, 'DEC');
+            cartItems.quantity(props.item._id, 'DEC');
         }
     };
 
@@ -33,14 +34,20 @@ const CartCard = (props) => {
         setSize(event.target.value);
     };
 
+    const local_price = props.item.price * props.item.itemQuantity;
+
+    cartItems.totalAmount = local_price;
+
+
     return (
         <div className='cart__item__card'>
             <div className="cart__item__detail">
                 <div className="cart__item__image">
-                    <img src={`https://shema-ecommerce.herokuapp.com/${props.item.category}/${props.item.image[0].filename}`} alt="item" className="item__image"/>
+                    <img src={`https://localhost:5000/${props.item.image[0].filename}`} width={120} height={80} alt="item" className="item__image"/>
                 </div>
                 <div className="cart__item__name">{props.item.name}</div>
             </div>
+            <div className="cart__item__price">{props.item.price}₮</div>
             <div className="cart__item__quantity">
                 <IconButton onClick={handelQuantityIncrement}>
                     <AddCircleIcon />
@@ -50,26 +57,16 @@ const CartCard = (props) => {
                     <RemoveCircleIcon fontSize='medium'/>
                 </IconButton>
             </div>
-            <div className="product size">
-                <Box sx={{ minWidth: 80} }>
-                    <FormControl fullWidth size="small">
-                        <InputLabel>Size</InputLabel>
-                        <Select
-                        value={size}
-                        label="size"
-                        onChange={handleSizeChange}
-                        >
-                        {props.item.size.map((size) => <MenuItem value={size}>{size}</MenuItem>)}
-                        </Select>
-                    </FormControl>
-                </Box>
+            <div className='sum_price'>
+                <p>{local_price}₮</p>
             </div>
-            <div className="cart__item__price">${props.item.price}</div>
             <div className="remove__item__icon">
                 <IconButton>
                     <HighlightOffIcon onClick={handelRemoveItem}/>
                 </IconButton>
             </div>
+            
+
         </div>
      );
 }

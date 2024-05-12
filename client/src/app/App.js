@@ -16,6 +16,7 @@ import CartItemsProvider from '../Context/CartItemsProvider';
 import Login from '../components/Authentication/Login/Login';
 import Register from '../components/Authentication/Register/Register';
 import Wishlist from '../components/Wishlist';
+import Cart from '../components/Card/Cart/Cart';
 import WishItemsProvider from '../Context/WishItemsProvider';
 import DrawerNav from '../components/Nav/DrawerNav/DrawerNav';
 import Checkout from '../components/Checkout/Checkout';
@@ -36,6 +37,7 @@ import Maskchain from '../components/Categories/Maskchain.js';
 import Sets from '../components/Categories/Sets.js';
 import Sunglasses from '../components/Categories/Sunglasses.js';
 import Contact from '../components/Footer_menu_items/Contact.jsx';
+import Delivery_form from '../components/Card/Delivery/Delivery_form.js';
 
 function App() {
 
@@ -89,6 +91,8 @@ function App() {
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
               </Route>
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/delivery_form" element={<Delivery_form />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/search/*" element={<SearchView />} />
             </Routes>

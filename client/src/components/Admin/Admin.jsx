@@ -34,7 +34,7 @@ const AddItemForm = () => {
         formDataToSend.append(key, formData[key]);
       }
 
-      const response = await axios.post('/api/items/add', formDataToSend, {
+      const response = await axios.post('http://localhost:5000/api/items/add', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
