@@ -7,6 +7,8 @@ const getItem = async (req, res) => {
         const items = await Item.find();
         // Respond with the retrieved items
         res.json(items);
+        // res.send(items);
+
     } catch (error) {
         // Handle errors, if any
         console.error("Error fetching items:", error);
@@ -42,7 +44,7 @@ const addItem = async (req, res) => {
                 mimetype: file.mimetype,
                 destination: file.destination,
                 filename: file.filename,
-                path: file.path,
+                path: `http://localhost:5000/images/${file.filename}`, // Construct the image path here
                 size: file.size
             }))
         });
@@ -57,6 +59,7 @@ const addItem = async (req, res) => {
         res.status(400).json({ message: "Unable to add item" });
     }
 };
+
 
 /* PUT Request handler */
 const updateItem = (req, res) => {

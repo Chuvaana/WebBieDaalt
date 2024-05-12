@@ -90,6 +90,9 @@ function App() {
                 <Route path="/item/featured">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
+                <Route path="/item/ring">
+                  <Route path=":id" element={<ItemView />}/>
+                </Route>
               </Route>
               <Route path="/cart" element={<Cart />} />
               <Route path="/delivery_form" element={<Delivery_form />} />

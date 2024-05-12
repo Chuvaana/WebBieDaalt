@@ -5,6 +5,11 @@ import './Item.css';
 import Related from './Related/Related';
 
 const Item = (props) => {
+    // Check if props.item exists before accessing its properties
+    if (!props.item) {
+        return <div>No item data available</div>;
+    }
+
     return ( 
         <div className="item__container">
             <div className="detail__and__carousel__container">
@@ -15,10 +20,12 @@ const Item = (props) => {
                 <Description item={props.item}/>
             </div>
             <div className="related__items__container">
-                <Related category={props.item.category}/>
+                {/* Check if props.item.category exists before passing it */}
+                {props.item.category && <Related category={props.item.category}/>}
             </div>
         </div>
      );
 }
+
  
 export default Item;

@@ -1,3 +1,4 @@
+
 import './ItemCard.css';
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,12 +8,16 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { WishItemsContext } from '../../../Context/WishItemsContext';
 import Heart from "react-animated-heart";
+import { Link } from 'react-router-dom';
+import imgas from './images-1661736021736.jpg';
 
 const ItemCard = (props) => {
     const [isHovered, setIsHovered] = useState(false);
     const cartItemsContext = useContext(CartItemsContext);
     const wishItemsContext = useContext(WishItemsContext);
+    // const [allproducts, setAllProducts] = useState([]);
     const navigate = useNavigate();
+    // console.log('../../../../'+props.item.image[0].path);
 
     const handleAddToWishList = () => {
         if (isClick) {
@@ -29,6 +34,16 @@ const ItemCard = (props) => {
         // Toggle the click state
         setClick(!isClick);
     }
+    // useEffect(() => {
+    //     fetchinfo();
+    //   }, [])
+
+    // const fetchinfo = () =>{
+    //     fetch('http://localhost:5000/api/items')
+    //     .then((res) => res.json())
+    //     .then((data) => setAllProducts(data))
+    //     console.log(setAllProducts.data);
+    // }
 
     const handleAddToCart = () => {
         cartItemsContext.addItem(props.item, 1);
@@ -43,23 +58,57 @@ const ItemCard = (props) => {
     // Load heart click state from localStorage on component mount
     useEffect(() => {
         const heartClickState = localStorage.getItem(props.item._id);
+        console.log(props.item);
         if (heartClickState === 'true') {
             setClick(true);
         }
     }, [props.item._id]);
 
+    const renderImage = () => {
+        if (props.item.image && props.item.image.length > 0) {
+            console.log(props.item.image[0].path);
+            return <img 
+                        style={{ width: 245, height: 342}}
+                        src={props.item.image[0].path}
+                        alt=""
+                    />;
+        } else {
+            // If no image is available, render a placeholder image
+            return <img 
+                        style={{ width: 245, height: 342}}
+                        src={imgas} 
+                        alt=""
+                    />;
+        }
+    }
+
     return (
         <div className="product__card__card">
             <div className="product__card" >
                 <div className="product__image"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
                 >
 
                     <div className='wishlist-icon' onClick={handleAddToWishList}>
                         <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
                     </div>
-                    {isHovered ? <img src={props.item.image[0].path} alt="item" className="product__img" /> : <img src={props.item.image[1].path} alt="item" className="product__img" />}
+                    {/* {isHovered ? <img src={props.item.image[0].path} alt="item" className="product__img" /> : <img src={props.item.image[1].path} alt="item" className="product__img" />} */}
+                    {/* <Link to={`${props.item.id}`} style={{ textDecoration: 'none' }}> */}
+                    {/* <img 
+                        style={{ width: 245, height: 342}}
+                        src={props.item.image[0].path} 
+                        src="https://reactjs.org/logo-og.png" 
+
+                        alt=""
+                    /> */}
+                    {/* </Link> */}
+                    {renderImage()}
+                    {/* {allproducts.map((e) =>{
+                        return (
+                            <div>
+                                <img src={e.image} />
+                            </div>
+                        );
+                    })} */}
                 </div>
                 <div className="product__card__detail">
                     <div className="product__card_button" onClick={handleAddToCart}>
@@ -89,3 +138,4 @@ const ItemCard = (props) => {
 }
 
 export default ItemCard;
+

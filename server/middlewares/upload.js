@@ -1,6 +1,4 @@
-/* 
-    * Middleware to uplad images via multer
-*/
+
 const multer = require("multer")
 
 const storage = multer.diskStorage({
