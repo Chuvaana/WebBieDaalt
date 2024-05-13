@@ -38,7 +38,7 @@ const Cart = () => {
                     <div className="product_name_img">Бараа</div>
                     <div className="product_price">Үнэ</div>
                     <div className="product_number">Тоо</div>
-                    <div className="product_number">Нийт үнэ</div>
+                    <div className="product_sumprice">Нийт үнэ</div>
                 </div>
                 <div className="cart__items__container">
                     <div className="cartItems">
@@ -63,7 +63,7 @@ const Cart = () => {
                                     <div className="total__amount__label">Хүргэлт:</div>
                                     <div className="total__amount__value">8000.00₮</div>
                                 </div>
-                                <div className="total__amount">
+                                <div className="total__amount_last">
                                     <div className="total__amount__label">Нийт төлөх дүн:</div>
                                     <div className="total__amount__value">{cartItems.totalAmount + 8000}.00₮</div>
                                 </div>

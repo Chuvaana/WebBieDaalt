@@ -25,7 +25,7 @@ const SaleItems = () => {
 
 
     return (
-        <div className="featured__products__container">
+        <div className="sale_featured__products__container">
             <div className="itemsFrame">
                 <div className='date'>
                     <p>Хямдралтай барааны жагсаалт ( {featuredItems.length} )</p>

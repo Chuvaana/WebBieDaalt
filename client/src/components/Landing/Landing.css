@@ -1,5 +1,3 @@
-
-
 .landing__container {
     width: 100%;
     min-height: 420px;
@@ -8,11 +6,12 @@
     justify-content: center;
     align-items: center;
 }
+
 .landing__container .landing_body {
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: calc(100vh - 200px);
+    height: 80%;
     margin-top: 30px;
     align-items: center;
     gap: 80px;
@@ -27,7 +26,6 @@
     background-color: black;
     padding-left: 150px;
     padding-top: 50px;
-    gap: 100px;
 }
 
 .landing__container .landing_body .bigCart .texts {
@@ -53,6 +51,7 @@
     gap: 20px;
     padding-top: 30px;
     width: fit-content;
+    cursor: pointer;
 }
 
 .landing__container .landing_body .bigCart .texts .shopnow p {
@@ -62,12 +61,7 @@
     color: white;
 }
 
-.landing__container .landing_body .bigCart .photo {
-    height: fit-content;
-    width: fit-content;
-}
-
 .landing__container .landing_body .bigCart .photo .shopnow_image {
-    height: fit-content;
-    width: fit-content;
+    height: 90%;
+    width: auto;
 }

@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import imgas from './images-1661736021736.jpg';
 
 const ItemCard = (props) => {
-    const [isHovered, setIsHovered] = useState(false);
     const cartItemsContext = useContext(CartItemsContext);
     const wishItemsContext = useContext(WishItemsContext);
     // const [allproducts, setAllProducts] = useState([]);
@@ -72,13 +71,6 @@ const ItemCard = (props) => {
                         src={props.item.image[0].path}
                         alt=""
                     />;
-        } else {
-            // If no image is available, render a placeholder image
-            return <img 
-                        style={{ width: 245, height: 342}}
-                        src={imgas} 
-                        alt=""
-                    />;
         }
     }
 
@@ -91,24 +83,9 @@ const ItemCard = (props) => {
                     <div className='wishlist-icon' onClick={handleAddToWishList}>
                         <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
                     </div>
-                    {/* {isHovered ? <img src={props.item.image[0].path} alt="item" className="product__img" /> : <img src={props.item.image[1].path} alt="item" className="product__img" />} */}
-                    {/* <Link to={`${props.item.id}`} style={{ textDecoration: 'none' }}> */}
-                    {/* <img 
-                        style={{ width: 245, height: 342}}
-                        src={props.item.image[0].path} 
-                        src="https://reactjs.org/logo-og.png" 
-
-                        alt=""
-                    /> */}
-                    {/* </Link> */}
+                    
                     {renderImage()}
-                    {/* {allproducts.map((e) =>{
-                        return (
-                            <div>
-                                <img src={e.image} />
-                            </div>
-                        );
-                    })} */}
+                    
                 </div>
                 <div className="product__card__detail">
                     <div className="product__card_button" onClick={handleAddToCart}>

@@ -38,6 +38,8 @@ import Sets from '../components/Categories/Sets.js';
 import Sunglasses from '../components/Categories/Sunglasses.js';
 import Contact from '../components/Footer_menu_items/Contact.jsx';
 import Delivery_form from '../components/Card/Delivery/Delivery_form.js';
+import KartPayment from '../components/Card/PaymentType/KartPayment/KartPayment.js';
+import BankPayment from '../components/Card/PaymentType/BankPayment/BankPayment.js';
 
 function App() {
 
@@ -96,6 +98,8 @@ function App() {
               </Route>
               <Route path="/cart" element={<Cart />} />
               <Route path="/delivery_form" element={<Delivery_form />} />
+              <Route path="/kart_payment" element={<KartPayment />} />
+              <Route path="/bank_payment" element={<BankPayment />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/search/*" element={<SearchView />} />
             </Routes>

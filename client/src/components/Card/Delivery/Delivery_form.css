@@ -1,0 +1,51 @@
+.delivery_form_body{
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.d_form_body{
+    width: 90%;
+    display: flex;
+    justify-content: space-between ;
+}
+.delivery_address_body{
+    width: 46%;
+    display: flex;
+    flex-direction: column;
+}
+.delivery_address_body h2{
+    font-weight: 600;
+}
+
+.delivery_address_body button {
+    height: 46px;
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #DB4444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.delivery_order_body{
+    width: 46%;
+}
+
+.delivery_order_body h2{
+    font-weight: 600;
+}
+
+.delivery_shop__cart__items{
+    gap:0;
+}
+
+.type_payment{
+    width: 100%;
+    padding: 10px 0 10px 0;
+}

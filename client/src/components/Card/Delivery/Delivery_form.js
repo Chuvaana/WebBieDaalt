@@ -1,23 +1,12 @@
-import { useState, useEffect } from "react";
-import { Button, Form, Input, Select, Space, InputNumber } from 'antd';
+import { useState, useEffect, useContext } from "react";
+import { CartItemsContext } from '../../../Context/CartItemsContext';
+
+import { Button, Form, Input, Select, Space, InputNumber, Radio, ConfigProvider } from 'antd';
 import { useNavigate } from "react-router-dom";
 import './Delivery_form.css';
+import DeliveryCartCard from "./DeliveryCartCard/DeliveryCartCard";
 
 const { Option } = Select;
-const layout = {
-    labelCol: {
-        span: 8,
-    },
-    wrapperCol: {
-        span: 16,
-    },
-};
-const tailLayout = {
-    wrapperCol: {
-        offset: 8,
-        span: 16,
-    },
-};
 
 const countries = [
     { id: 1, name: "Багануур", value: "Багануур" },
@@ -117,12 +106,148 @@ const cities = [
     { id: 82, name: "41-р хороо", value: "41-р хороо", country: "Баянзүрх" },
     { id: 83, name: "42-р хороо", value: "42-р хороо", country: "Баянзүрх" },
     { id: 84, name: "43-р хороо", value: "43-р хороо", country: "Баянзүрх" },
+
+    { id: 85, name: "1-р хороо", value: "1-р хороо", country: "Налайх" },
+    { id: 86, name: "2-р хороо", value: "2-р хороо", country: "Налайх" },
+    { id: 87, name: "3-р хороо", value: "3-р хороо", country: "Налайх" },
+    { id: 88, name: "4-р хороо", value: "4-р хороо", country: "Налайх" },
+    { id: 89, name: "5-р хороо", value: "5-р хороо", country: "Налайх" },
+    { id: 90, name: "6-р хороо", value: "6-р хороо", country: "Налайх" },
+    { id: 91, name: "7-р хороо", value: "7-р хороо", country: "Налайх" },
+    { id: 92, name: "8-р хороо", value: "8-р хороо", country: "Налайх" },
+
+    { id: 93, name: "1-р хороо", value: "1-р хороо", country: "Сонгинохайрхан" },
+    { id: 94, name: "2-р хороо", value: "2-р хороо", country: "Сонгинохайрхан" },
+    { id: 95, name: "3-р хороо", value: "3-р хороо", country: "Сонгинохайрхан" },
+    { id: 96, name: "4-р хороо", value: "4-р хороо", country: "Сонгинохайрхан" },
+    { id: 97, name: "5-р хороо", value: "5-р хороо", country: "Сонгинохайрхан" },
+    { id: 98, name: "6-р хороо", value: "6-р хороо", country: "Сонгинохайрхан" },
+    { id: 99, name: "7-р хороо", value: "7-р хороо", country: "Сонгинохайрхан" },
+    { id: 100, name: "8-р хороо", value: "8-р хороо", country: "Сонгинохайрхан" },
+    { id: 101, name: "9-р хороо", value: "9-р хороо", country: "Сонгинохайрхан" },
+    { id: 102, name: "10-р хороо", value: "10-р хороо", country: "Сонгинохайрхан" },
+    { id: 103, name: "11-р хороо", value: "11-р хороо", country: "Сонгинохайрхан" },
+    { id: 104, name: "12-р хороо", value: "12-р хороо", country: "Сонгинохайрхан" },
+    { id: 105, name: "13-р хороо", value: "13-р хороо", country: "Сонгинохайрхан" },
+    { id: 106, name: "14-р хороо", value: "14-р хороо", country: "Сонгинохайрхан" },
+    { id: 107, name: "15-р хороо", value: "15-р хороо", country: "Сонгинохайрхан" },
+    { id: 108, name: "16-р хороо", value: "16-р хороо", country: "Сонгинохайрхан" },
+    { id: 109, name: "17-р хороо", value: "17-р хороо", country: "Сонгинохайрхан" },
+    { id: 110, name: "18-р хороо", value: "18-р хороо", country: "Сонгинохайрхан" },
+    { id: 111, name: "19-р хороо", value: "19-р хороо", country: "Сонгинохайрхан" },
+    { id: 112, name: "20-р хороо", value: "20-р хороо", country: "Сонгинохайрхан" },
+    { id: 113, name: "21-р хороо", value: "21-р хороо", country: "Сонгинохайрхан" },
+    { id: 114, name: "22-р хороо", value: "22-р хороо", country: "Сонгинохайрхан" },
+    { id: 115, name: "23-р хороо", value: "23-р хороо", country: "Сонгинохайрхан" },
+    { id: 116, name: "24-р хороо", value: "24-р хороо", country: "Сонгинохайрхан" },
+    { id: 117, name: "25-р хороо", value: "25-р хороо", country: "Сонгинохайрхан" },
+    { id: 118, name: "26-р хороо", value: "26-р хороо", country: "Сонгинохайрхан" },
+    { id: 119, name: "27-р хороо", value: "27-р хороо", country: "Сонгинохайрхан" },
+    { id: 120, name: "28-р хороо", value: "28-р хороо", country: "Сонгинохайрхан" },
+    { id: 121, name: "29-р хороо", value: "29-р хороо", country: "Сонгинохайрхан" },
+    { id: 122, name: "30-р хороо", value: "30-р хороо", country: "Сонгинохайрхан" },
+    { id: 123, name: "31-р хороо", value: "31-р хороо", country: "Сонгинохайрхан" },
+    { id: 124, name: "32-р хороо", value: "32-р хороо", country: "Сонгинохайрхан" },
+    { id: 125, name: "33-р хороо", value: "33-р хороо", country: "Сонгинохайрхан" },
+    { id: 126, name: "34-р хороо", value: "34-р хороо", country: "Сонгинохайрхан" },
+    { id: 127, name: "35-р хороо", value: "35-р хороо", country: "Сонгинохайрхан" },
+    { id: 128, name: "36-р хороо", value: "36-р хороо", country: "Сонгинохайрхан" },
+    { id: 129, name: "37-р хороо", value: "37-р хороо", country: "Сонгинохайрхан" },
+    { id: 130, name: "38-р хороо", value: "38-р хороо", country: "Сонгинохайрхан" },
+    { id: 131, name: "39-р хороо", value: "39-р хороо", country: "Сонгинохайрхан" },
+    { id: 132, name: "40-р хороо", value: "40-р хороо", country: "Сонгинохайрхан" },
+    { id: 133, name: "41-р хороо", value: "41-р хороо", country: "Сонгинохайрхан" },
+    { id: 134, name: "42-р хороо", value: "42-р хороо", country: "Сонгинохайрхан" },
+    { id: 135, name: "43-р хороо", value: "43-р хороо", country: "Сонгинохайрхан" },
+
+    { id: 136, name: "1-р хороо", value: "1-р хороо", country: "Сүхбаатар" },
+    { id: 137, name: "2-р хороо", value: "2-р хороо", country: "Сүхбаатар" },
+    { id: 138, name: "3-р хороо", value: "3-р хороо", country: "Сүхбаатар" },
+    { id: 139, name: "4-р хороо", value: "4-р хороо", country: "Сүхбаатар" },
+    { id: 140, name: "5-р хороо", value: "5-р хороо", country: "Сүхбаатар" },
+    { id: 141, name: "6-р хороо", value: "6-р хороо", country: "Сүхбаатар" },
+    { id: 142, name: "7-р хороо", value: "7-р хороо", country: "Сүхбаатар" },
+    { id: 143, name: "8-р хороо", value: "8-р хороо", country: "Сүхбаатар" },
+    { id: 144, name: "9-р хороо", value: "9-р хороо", country: "Сүхбаатар" },
+    { id: 145, name: "10-р хороо", value: "10-р хороо", country: "Сүхбаатар" },
+    { id: 146, name: "11-р хороо", value: "11-р хороо", country: "Сүхбаатар" },
+    { id: 147, name: "12-р хороо", value: "12-р хороо", country: "Сүхбаатар" },
+    { id: 148, name: "13-р хороо", value: "13-р хороо", country: "Сүхбаатар" },
+    { id: 149, name: "14-р хороо", value: "14-р хороо", country: "Сүхбаатар" },
+    { id: 150, name: "15-р хороо", value: "15-р хороо", country: "Сүхбаатар" },
+    { id: 151, name: "16-р хороо", value: "16-р хороо", country: "Сүхбаатар" },
+    { id: 152, name: "17-р хороо", value: "17-р хороо", country: "Сүхбаатар" },
+    { id: 153, name: "18-р хороо", value: "18-р хороо", country: "Сүхбаатар" },
+    { id: 154, name: "19-р хороо", value: "19-р хороо", country: "Сүхбаатар" },
+    { id: 155, name: "20-р хороо", value: "20-р хороо", country: "Сүхбаатар" },
+
+    { id: 156, name: "1-р хороо", value: "1-р хороо", country: "Хан-Уул" },
+    { id: 157, name: "2-р хороо", value: "2-р хороо", country: "Хан-Уул" },
+    { id: 158, name: "3-р хороо", value: "3-р хороо", country: "Хан-Уул" },
+    { id: 159, name: "4-р хороо", value: "4-р хороо", country: "Хан-Уул" },
+    { id: 160, name: "5-р хороо", value: "5-р хороо", country: "Хан-Уул" },
+    { id: 161, name: "6-р хороо", value: "6-р хороо", country: "Хан-Уул" },
+    { id: 162, name: "7-р хороо", value: "7-р хороо", country: "Хан-Уул" },
+    { id: 163, name: "8-р хороо", value: "8-р хороо", country: "Хан-Уул" },
+    { id: 164, name: "9-р хороо", value: "9-р хороо", country: "Хан-Уул" },
+    { id: 165, name: "10-р хороо", value: "10-р хороо", country: "Хан-Уул" },
+    { id: 166, name: "11-р хороо", value: "11-р хороо", country: "Хан-Уул" },
+    { id: 167, name: "12-р хороо", value: "12-р хороо", country: "Хан-Уул" },
+    { id: 168, name: "13-р хороо", value: "13-р хороо", country: "Хан-Уул" },
+    { id: 169, name: "14-р хороо", value: "14-р хороо", country: "Хан-Уул" },
+    { id: 170, name: "15-р хороо", value: "15-р хороо", country: "Хан-Уул" },
+    { id: 171, name: "16-р хороо", value: "16-р хороо", country: "Хан-Уул" },
+    { id: 172, name: "17-р хороо", value: "17-р хороо", country: "Хан-Уул" },
+    { id: 173, name: "18-р хороо", value: "18-р хороо", country: "Хан-Уул" },
+    { id: 174, name: "19-р хороо", value: "19-р хороо", country: "Хан-Уул" },
+    { id: 175, name: "20-р хороо", value: "20-р хороо", country: "Хан-Уул" },
+    { id: 176, name: "21-р хороо", value: "21-р хороо", country: "Хан-Уул" },
+    { id: 177, name: "22-р хороо", value: "22-р хороо", country: "Хан-Уул" },
+    { id: 178, name: "23-р хороо", value: "23-р хороо", country: "Хан-Уул" },
+    { id: 179, name: "24-р хороо", value: "24-р хороо", country: "Хан-Уул" },
+    { id: 180, name: "25-р хороо", value: "25-р хороо", country: "Хан-Уул" },
+
+    { id: 181, name: "1-р хороо", value: "1-р хороо", country: "Чингэлтэй" },
+    { id: 182, name: "2-р хороо", value: "2-р хороо", country: "Чингэлтэй" },
+    { id: 183, name: "3-р хороо", value: "3-р хороо", country: "Чингэлтэй" },
+    { id: 184, name: "4-р хороо", value: "4-р хороо", country: "Чингэлтэй" },
+    { id: 185, name: "5-р хороо", value: "5-р хороо", country: "Чингэлтэй" },
+    { id: 186, name: "6-р хороо", value: "6-р хороо", country: "Чингэлтэй" },
+    { id: 187, name: "7-р хороо", value: "7-р хороо", country: "Чингэлтэй" },
+    { id: 188, name: "8-р хороо", value: "8-р хороо", country: "Чингэлтэй" },
+    { id: 189, name: "9-р хороо", value: "9-р хороо", country: "Чингэлтэй" },
+    { id: 190, name: "10-р хороо", value: "10-р хороо", country: "Чингэлтэй" },
+    { id: 191, name: "11-р хороо", value: "11-р хороо", country: "Чингэлтэй" },
+    { id: 192, name: "12-р хороо", value: "12-р хороо", country: "Чингэлтэй" },
+    { id: 193, name: "13-р хороо", value: "13-р хороо", country: "Чингэлтэй" },
+    { id: 194, name: "14-р хороо", value: "14-р хороо", country: "Чингэлтэй" },
+    { id: 195, name: "15-р хороо", value: "15-р хороо", country: "Чингэлтэй" },
+    { id: 196, name: "16-р хороо", value: "16-р хороо", country: "Чингэлтэй" },
+    { id: 197, name: "17-р хороо", value: "17-р хороо", country: "Чингэлтэй" },
+    { id: 198, name: "18-р хороо", value: "18-р хороо", country: "Чингэлтэй" },
+    { id: 199, name: "19-р хороо", value: "19-р хороо", country: "Чингэлтэй" },
+    { id: 200, name: "20-р хороо", value: "20-р хороо", country: "Чингэлтэй" },
+    { id: 201, name: "21-р хороо", value: "21-р хороо", country: "Чингэлтэй" },
+    { id: 202, name: "22-р хороо", value: "22-р хороо", country: "Чингэлтэй" },
+    { id: 203, name: "23-р хороо", value: "23-р хороо", country: "Чингэлтэй" },
+    { id: 204, name: "24-р хороо", value: "24-р хороо", country: "Чингэлтэй" }
 ];
 
 const Delivery_form = () => {
     const [selectedCountry, setSelectedCountry] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
     const [cityItems, setCityItems] = useState([]);
+    const [name, setName] = useState("");
+    const [address, setAddress] = useState("");
+    const [addition, setAddition] = useState("");
+    const [phoneNumber, setPhoneNUmber] = useState("");
+    const [mail, setMail] = useState("");
+
+    const [value, setValue] = useState(1);
+    const onChange = (e) => {
+        console.log('radio checked', e.target.value);
+        setValue(e.target.value);
+    };
 
     const [form] = Form.useForm();
 
@@ -136,7 +261,7 @@ const Delivery_form = () => {
     const navigate = useNavigate();
 
     const handleViewAllItems = () => {
-        navigate('/payment');
+        navigate('/kart_payment');
     };
 
     const onFinish = (values) => {
@@ -148,102 +273,185 @@ const Delivery_form = () => {
         setSelectedCity("");
     };
 
+    const cartItems = useContext(CartItemsContext);
+
     return (
         <div className="delivery_form_body">
-            <div className="delivery_address_body">
-                <Form
-                    layout="vertical"
-                    form={form}
-                    onFinish={onFinish}
-                    style={{ maxWidth: 600 }}
-                >
-                    <Form.Item
-                        name="Нэр"
-                        label="Нэр"
-                        rules={[{ required: true, message: 'Нэрээ оруулна уу!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="Дүүрэг"
-                        label="Дүүрэг"
-                        rules={[{ required: true, message: 'Дүүргээ сонгоно уу!' }]}
-                    >
-                        <Select
-                            value={selectedCountry}
-                            onChange={(value) => setSelectedCountry(value)}
+            <ConfigProvider
+                theme={{
+                    components: {
+                        Button: {
+                            colorPrimary: '#DB4444',
+                            algorithm: true, // Enable algorithm
+                        },
+                        Input: {
+                            colorPrimary: '#7D7463',
+                            algorithm: true, // Enable algorithm
+                        },
+                        InputNumber: {
+                            colorPrimary: '#7D7463',
+                            algorithm: true, // Enable algorithm
+                        },
+                        Select: {
+                            colorPrimary: '#7D7463',
+                            algorithm: true, // Enable algorithm
+                        },
+                        Radio: {
+                            colorPrimary: '#E72929',
+                            algorithm: true, // Enable algorithm
+                        }
+                    },
+                }}
+            >
+                <div className="d_form_body" >
+                    <div className="delivery_address_body">
+                        <h2>Хүргэлтийн хаяг</h2>
+                        <Form
+                            layout="vertical"
+                            form={form}
+                            onFinish={onFinish}
+                            style={{ maxWidth: 600 }}
                         >
-                            {countries.map((country) => (
-                                <Option key={country.id} value={country.value}>
-                                    {country.name}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
+                            <Form.Item
+                                name="Нэр"
+                                label="Нэр"
+                                onChange={(value) => setName(value)}
+                                rules={[{ required: true, message: 'Нэрээ оруулна уу!' }]}
+                            >
+                                <Input />
+                            </Form.Item>
 
-                    <Form.Item
-                        name="Хороо"
-                        label="Хороо"
-                        rules={[{ required: true, message: 'Хороогоо сонгоно уу!' }]}
-                    >
-                        <Select
-                            value={selectedCity}
-                            onChange={(value) => setSelectedCity(value)}
-                        >
-                            {cityItems.map((city) => (
-                                <Option key={city.id} value={city.value}>
-                                    {city.name}
-                                </Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
+                            <Form.Item
+                                name="Дүүрэг"
+                                label="Дүүрэг"
+                                rules={[{ required: true, message: 'Дүүргээ сонгоно уу!' }]}
+                            >
+                                <Select
+                                    value={selectedCountry}
+                                    onChange={(value) => setSelectedCountry(value)}
+                                >
+                                    {countries.map((country) => (
+                                        <Option key={country.id} value={country.value}>
+                                            {country.name}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
 
-                    <Form.Item
-                        name="Хүргүүлэх хаяг"
-                        label="Хүргүүлэх хаяг"
-                        rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name="Нэмэлт мэдээлэл"
-                        label="Нэмэлт мэдээлэл"
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Утасны дугаар"
-                        name="Утасны дугаар"
-                        rules={[
-                            {
-                                required: true,
-                                minlength: "6",
-                                maxlength: "6",
-                                message: 'Please input!',
-                            },
-                        ]}
-                    >
-                        <InputNumber
-                            style={{
-                                width: '100%',
-                            }}
-                        />
-                    </Form.Item>
+                            <Form.Item
+                                name="Хороо"
+                                label="Хороо"
+                                rules={[{ required: true, message: 'Хороогоо сонгоно уу!' }]}
+                            >
+                                <Select
+                                    value={selectedCity}
+                                    onChange={(value) => setSelectedCity(value)}
+                                >
+                                    {cityItems.map((city) => (
+                                        <Option key={city.id} value={city.value}>
+                                            {city.name}
+                                        </Option>
+                                    ))}
+                                </Select>
+                            </Form.Item>
 
-                    <Form.Item {...tailLayout}>
-                        <Space>
-                            <Button type="primary" htmlType="submit">Submit</Button>
-                            <Button htmlType="button" onClick={onReset}>Reset</Button>
-                        </Space>
-                    </Form.Item>
-                </Form>
-            </div>
+                            <Form.Item
+                                name="Хүргүүлэх хаяг"
+                                label="Хүргүүлэх хаяг"
+                                onChange={(value) => setAddress(value)}
+                                rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                name="Нэмэлт мэдээлэл"
+                                label="Нэмэлт мэдээлэл"
+                                onChange={(value) => setAddition(value)}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                label="Утасны дугаар"
+                                name="Утасны дугаар"
+                                onChange={(value) => setPhoneNUmber(value)}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Утасны дугаараа оруулна уу!',
+                                    }, {
+                                        type: 'number',
+                                        // min: 8,
+                                        max: "8",
+                                        message: 'Утасны дугаараа зөв оруулна уу!',
 
-            <div className="delivery_order_body">
-                <Button type='button' onClick={handleViewAllItems}>Payment</Button>
-            </div>
-        </div>
+                                    }
+                                ]}
+                            >
+                                <InputNumber
+                                    style={{
+                                        width: '100%',
+                                    }}
+                                />
+                            </Form.Item>
+
+                            <Form.Item
+                                name="И-мэйл"
+                                label="И-мэйл"
+                                onChange={(value) => setMail(value)}
+                                rules={[
+                                    {
+                                        type: 'email',
+                                        message: 'The input is not valid E-mail!',
+                                    },
+                                    {
+                                        required: true,
+                                        message: 'Please input your E-mail!',
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                        </Form>
+                    </div>
+
+                    <div className="delivery_order_body">
+                        <h2>Таны захиалга</h2>
+                        {cartItems.items.length === 0 ? (
+                            <div className="cart__empty">Empty cart!</div>
+                        ) : (
+                            <div className="delivery_shop__cart__items">
+                                {cartItems.items.map((item) => (
+                                    <DeliveryCartCard key={item._id} item={item} />
+                                ))}
+                            </div>
+                        )}
+                        <div className="total__amount">
+                            <div className="total__amount__label">Барааны нийт үнэ:</div>
+                            <div className="total__amount__value">{cartItems.totalAmount}.00₮</div>
+                        </div>
+                        <div className="total__amount">
+                            <div className="total__amount__label">Хүргэлт:</div>
+                            <div className="total__amount__value">8000.00₮</div>
+                        </div>
+                        <div className="total__amount">
+                            <div className="total__amount__label">Нийт төлөх дүн:</div>
+                            <div className="total__amount__value">{cartItems.totalAmount + 8000}.00₮</div>
+                        </div>
+
+                        <div className="type_payment">
+                            <Radio.Group onChange={onChange} value={value}>
+                                <Space direction="vertical">
+                                    <Radio style={{fontSize: '17px'}} value={1}>Банкаар шилжүүлэх</Radio>
+                                    <Radio style={{fontSize: '17px'}} value={2}>Картаар төлөх</Radio>
+                                </Space>
+                            </Radio.Group><br></br>
+                        </div>
+                        <Button style={{height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px'}} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
+
+                    </div>
+                </div>
+            </ConfigProvider>
+        </div >
     );
 };
 

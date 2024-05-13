@@ -64,7 +64,7 @@ const AddItemForm = () => {
         <input type="checkbox" name="sale" checked={formData.sale} onChange={() => setFormData({ ...formData, sale: !formData.sale })} />
       </label>
       {formData.sale && <input type="number" name="saleAmount" placeholder="Sale Amount" value={formData.saleAmount} onChange={handleChange} />}
-      <input type="file" name="images" onChange={handleImageChange} />
+      <input type="file" name="images" multiple onChange={handleImageChange} />
       <button type="submit">Add Item</button>
     </form>
   );

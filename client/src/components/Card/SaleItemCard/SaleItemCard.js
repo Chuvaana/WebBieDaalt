@@ -51,6 +51,18 @@ const SaleItemCard = (props) => {
         }
     }, [props.item._id]);
 
+    const renderImage = () => {
+        if (props.item.image && props.item.image.length > 0) {
+            console.log(props.item.image[0].path);
+            return <img
+                style={{ width: 245, height: 342 }}
+                src={props.item.image[0].path}
+                alt=""
+            />;
+        }
+    }
+
+
     return (
         <div className="product__card__card">
             <div className="product__card">
@@ -61,6 +73,7 @@ const SaleItemCard = (props) => {
                     <div className='wishlist-icon' onClick={handleAddToWishList}>
                         <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
                     </div>
+                    {renderImage()}
                 </div>
                 <div className="product__card__detail">
                     <div className="product__card_button" onClick={handleAddToCart}>
