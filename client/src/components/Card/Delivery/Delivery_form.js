@@ -281,25 +281,17 @@ const Delivery_form = () => {
 
     const navigate = useNavigate();
 
-<<<<<<< HEAD
     const handleViewAllItems = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/order/add', formData);
-            console.log(response.data); // Log the response from the server
-            // Handle successful response if needed
-            navigate('/kart_payment');
-        } catch (error) {
-            console.error('Error creating order:', error);
-            // Handle error response if needed
-=======
-    const handleViewAllItems = async () => {
-        try {
-            // Validate the form
             await form.validateFields();
             const formValues = form.getFieldsValue();
             console.log('Form values:', formValues);
 
+
+            const response = await axios.post('http://localhost:5000/api/order/add', formData);
+            console.log(response.data); // Log the response from the server
+            // Handle successful response if needed
             // If the form is valid, navigate to the appropriate payment page
             if (value === 1) {
                 navigate('/bank_payment');
@@ -308,10 +300,11 @@ const Delivery_form = () => {
                 navigate('/kart_payment');
             }
         } catch (error) {
-            // Handle any validation errors
-            console.error('Form validation failed:', error);
->>>>>>> 469fca2ee261acfb8c63ba020e86e9c98720bbce
-        }
+            console.error('Error creating order:', error);
+            // Handle error response if needed
+            // Validate the form
+
+        };
     };
 
 
@@ -417,11 +410,7 @@ const Delivery_form = () => {
                             <Form.Item
                                 name="address"
                                 label="Хүргүүлэх хаяг"
-<<<<<<< HEAD
                                 value={formData.product_id} onChange={handleChange}
-=======
-                                onChange={(e) => setAddress(e.target.value)}
->>>>>>> 469fca2ee261acfb8c63ba020e86e9c98720bbce
                                 rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
                             >
                                 <Input onChange={(e) => setAddress(e.target.value)} />
@@ -436,14 +425,9 @@ const Delivery_form = () => {
                             </Form.Item>
                             <Form.Item
                                 label="Утасны дугаар"
-<<<<<<< HEAD
                                 name="Утасны дугаар"
                                 value={formData.deliver_phone} onChange={handleChange}
                                 // onChange={(value) => setPhoneNUmber(value)}
-=======
-                                name="phoneNumber"
-                                onChange={(value) => setPhoneNumber(value)}
->>>>>>> 469fca2ee261acfb8c63ba020e86e9c98720bbce
                                 rules={[
                                     {
                                         required: true,
@@ -466,7 +450,7 @@ const Delivery_form = () => {
                                     style={{
                                         width: '100%',
                                     }}
-                                    onChange={(e) => setPhoneNUmber(e)}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
                                 />
                             </Form.Item>
 
@@ -519,9 +503,6 @@ const Delivery_form = () => {
                                     <div className="total__amount__value">{cartItems.totalAmount + 8000}.00₮</div>
                                 </div>
 
-<<<<<<< HEAD
-                            </div>
-                        )}
                                 <div className="type_payment">
                                     <Radio.Group onChange={onChange} value={value}>
                                         <Space direction="vertical">
@@ -531,23 +512,14 @@ const Delivery_form = () => {
                                     </Radio.Group><br></br>
                                 </div>
                                 <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
-=======
-                        <div className="type_payment">
-                            <Radio.Group onChange={onChange} value={value}>
-                                <Space direction="vertical">
-                                    <Radio style={{ fontSize: '17px' }} value={1}>Банкаар шилжүүлэх</Radio>
-                                    <Radio style={{ fontSize: '17px' }} value={2}>Картаар төлөх</Radio>
-                                </Space>
-                            </Radio.Group><br></br>
-                        </div>
-                        <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
->>>>>>> 469fca2ee261acfb8c63ba020e86e9c98720bbce
 
-                    </div>
-                </div>
-            </ConfigProvider>
+                            </div >
+                        )}
+                    </div >
+                </div >
+            </ConfigProvider >
         </div >
     );
-};
 
+}
 export default Delivery_form;
