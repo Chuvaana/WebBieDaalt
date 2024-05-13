@@ -242,8 +242,8 @@ const Delivery_form = () => {
     const [addition, setAddition] = useState("");
     const [phoneNumber, setPhoneNUmber] = useState("");
     const [mail, setMail] = useState("");
-
     const [value, setValue] = useState(1);
+    
     const onChange = (e) => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);
@@ -272,7 +272,6 @@ const Delivery_form = () => {
         setSelectedCountry("");
         setSelectedCity("");
     };
-
     const cartItems = useContext(CartItemsContext);
 
     return (

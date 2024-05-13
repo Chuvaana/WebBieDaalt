@@ -11,7 +11,9 @@ const AddWorkerForm = () => {
         deliver_email: '',
         deliver_address: '',
         deliver_date: '',
-        deliver_type: ''
+        deliver_type: '',
+        deliver_username: '',
+        deliver_password: ''
     });
 
     const handleChange = (e) => {
@@ -32,7 +34,9 @@ const AddWorkerForm = () => {
                 deliver_email: '',
                 deliver_address: '',
                 deliver_date: '',
-                deliver_type: ''
+                deliver_type: '',
+                deliver_username: '',
+                deliver_password: ''
             });
             // Handle success message or redirect user if needed
         } catch (error) {
@@ -83,6 +87,14 @@ const AddWorkerForm = () => {
                     <div>
                         <label>Төлөв :</label><br />
                         <input type="text" name="deliver_type" value={formData.deliver_type} onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label>Нэвтрэх нэр :</label><br />
+                        <input type="text" name="deliver_username" value={formData.deliver_username} onChange={handleChange} required />
+                    </div>
+                    <div>
+                        <label>Нэвтрэх нууц үг :</label><br />
+                        <input type="text" name="deliver_password" value={formData.deliver_password} onChange={handleChange} required />
                     </div>
                 </div>
                 <div className="btn_subtim">
