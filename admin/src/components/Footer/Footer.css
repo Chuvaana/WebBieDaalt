@@ -1,0 +1,89 @@
+.footer {
+    background-color: black;
+    height: fit-content;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 18px;
+}
+
+.footer .foot_mail,
+.footer .foot_helpmenu,
+.footer .foot_contact {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer .foot_mail a,
+.footer .foot_helpmenu a,
+.footer .foot_contact a {
+    margin: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.footer .foot_mail .foot_header,
+.footer .foot_helpmenu .foot_header,
+.footer .foot_contact .foot_header {
+    font-weight: 600;
+}
+
+.footer .foot_mail .footer_icons,
+.footer .foot_mail .foot_icon_text,
+.footer .foot_helpmenu .footer_icons,
+.footer .foot_helpmenu .foot_icon_text,
+.footer .foot_contact .footer_icons,
+.footer .foot_contact .foot_icon_text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer .foot_mail .footer_icons p,
+.footer .foot_mail .foot_icon_text p,
+.footer .foot_helpmenu .footer_icons p,
+.footer .foot_helpmenu .foot_icon_text p,
+.footer .foot_contact .footer_icons p,
+.footer .foot_contact .foot_icon_text p {
+    margin: 0;
+}
+
+.footer .foot_mail .desc,
+.footer .foot_helpmenu .desc,
+.footer .foot_contact .desc {
+    width: 250px;
+    white-space: wrap;
+}
+
+.footer .foot_mail .input-icons,
+.footer .foot_helpmenu .input-icons,
+.footer .foot_contact .input-icons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.footer .foot_mail .input-icons svg,
+.footer .foot_helpmenu .input-icons svg,
+.footer .foot_contact .input-icons svg {
+    position: absolute;
+    margin-right: 6px;
+}
+
+.footer .foot_mail .input-field,
+.footer .foot_helpmenu .input-field,
+.footer .foot_contact .input-field {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    border: 0.5px solid gray;
+}
