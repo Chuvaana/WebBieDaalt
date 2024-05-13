@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import axios from 'axios';
 import { CartItemsContext } from '../../../Context/CartItemsContext';
 
 import { Button, Form, Input, Select, Space, InputNumber, Radio, ConfigProvider } from 'antd';
@@ -243,14 +244,34 @@ const Delivery_form = () => {
     const [phoneNumber, setPhoneNUmber] = useState("");
     const [mail, setMail] = useState("");
     const [value, setValue] = useState(1);
-    
     const onChange = (e) => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);
     };
+    const [formData, setFormData] = useState({
+        product_id: '',
+        product_code: '',
+        product_number: '',
+        order_price: '',
+        order_all_price: '',
+        deliver_loc_name: '',
+        deliver_loc_District: '',
+        deliver_loc_Committee: '',
+        deliver_location: '',
+        deliver_information: '',
+        deliver_phone: '',
+        deliver_email: ''
+    });
 
     const [form] = Form.useForm();
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
     useEffect(() => {
         setCityItems([]);
         setSelectedCity("");
@@ -260,8 +281,17 @@ const Delivery_form = () => {
 
     const navigate = useNavigate();
 
-    const handleViewAllItems = () => {
-        navigate('/kart_payment');
+    const handleViewAllItems = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:5000/api/order/add', formData);
+            console.log(response.data); // Log the response from the server
+            // Handle successful response if needed
+            navigate('/kart_payment');
+        } catch (error) {
+            console.error('Error creating order:', error);
+            // Handle error response if needed
+        }
     };
 
     const onFinish = (values) => {
@@ -273,6 +303,19 @@ const Delivery_form = () => {
         setSelectedCity("");
     };
     const cartItems = useContext(CartItemsContext);
+    console.log(cartItems.items[0]);
+    formData.product_id = cartItems.items[0].category;
+    formData.product_code = cartItems.items[0].category;
+    formData.product_number = cartItems.items[0].category;
+    formData.order_price = cartItems.totalAmount
+    formData.order_all_price = cartItems.totalAmount + 8000
+    formData.deliver_loc_name = name;
+    formData.deliver_loc_District =
+        formData.deliver_loc_Committee =
+        formData.deliver_location = address;
+    formData.deliver_information = addition;
+    formData.deliver_phone = phoneNumber;
+    formData.deliver_email = mail;
 
     return (
         <div className="delivery_form_body">
@@ -314,10 +357,10 @@ const Delivery_form = () => {
                             <Form.Item
                                 name="Нэр"
                                 label="Нэр"
-                                onChange={(value) => setName(value)}
+                                value={formData.product_id} onChange={handleChange}
                                 rules={[{ required: true, message: 'Нэрээ оруулна уу!' }]}
                             >
-                                <Input />
+                                <Input onChange={(e) => setName(e.target.value)} />
                             </Form.Item>
 
                             <Form.Item
@@ -330,7 +373,7 @@ const Delivery_form = () => {
                                     onChange={(value) => setSelectedCountry(value)}
                                 >
                                     {countries.map((country) => (
-                                        <Option key={country.id} value={country.value}>
+                                        <Option key={country.id} value={country.value} >
                                             {country.name}
                                         </Option>
                                     ))}
@@ -357,22 +400,24 @@ const Delivery_form = () => {
                             <Form.Item
                                 name="Хүргүүлэх хаяг"
                                 label="Хүргүүлэх хаяг"
-                                onChange={(value) => setAddress(value)}
+                                value={formData.product_id} onChange={handleChange}
                                 rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
                             >
-                                <Input />
+                                <Input onChange={(e) => setAddress(e.target.value)} />
                             </Form.Item>
                             <Form.Item
                                 name="Нэмэлт мэдээлэл"
                                 label="Нэмэлт мэдээлэл"
-                                onChange={(value) => setAddition(value)}
+                                value={formData.deliver_information} onChange={handleChange}
+                            // onChange={(value) => setAddition(value)}
                             >
-                                <Input />
+                                <Input onChange={(e) => setAddition(e.target.value)} />
                             </Form.Item>
                             <Form.Item
                                 label="Утасны дугаар"
                                 name="Утасны дугаар"
-                                onChange={(value) => setPhoneNUmber(value)}
+                                value={formData.deliver_phone} onChange={handleChange}
+                                // onChange={(value) => setPhoneNUmber(value)}
                                 rules={[
                                     {
                                         required: true,
@@ -390,13 +435,15 @@ const Delivery_form = () => {
                                     style={{
                                         width: '100%',
                                     }}
+                                    onChange={(e) => setPhoneNUmber(e)}
                                 />
                             </Form.Item>
 
                             <Form.Item
                                 name="И-мэйл"
                                 label="И-мэйл"
-                                onChange={(value) => setMail(value)}
+                                value={formData.deliver_email} onChange={handleChange}
+                                // onChange={(value) => setMail(value)}
                                 rules={[
                                     {
                                         type: 'email',
@@ -408,7 +455,7 @@ const Delivery_form = () => {
                                     },
                                 ]}
                             >
-                                <Input />
+                                <Input onChange={(e) => setMail(e.target.value)} />
                             </Form.Item>
                         </Form>
                     </div>
@@ -424,28 +471,32 @@ const Delivery_form = () => {
                                 ))}
                             </div>
                         )}
-                        <div className="total__amount">
-                            <div className="total__amount__label">Барааны нийт үнэ:</div>
-                            <div className="total__amount__value">{cartItems.totalAmount}.00₮</div>
-                        </div>
-                        <div className="total__amount">
-                            <div className="total__amount__label">Хүргэлт:</div>
-                            <div className="total__amount__value">8000.00₮</div>
-                        </div>
-                        <div className="total__amount">
-                            <div className="total__amount__label">Нийт төлөх дүн:</div>
-                            <div className="total__amount__value">{cartItems.totalAmount + 8000}.00₮</div>
-                        </div>
+                        {cartItems.items.length > 0 && (
+                            <div>
+                                <div className="total__amount">
+                                    <div className="total__amount__label">Барааны нийт үнэ:</div>
+                                    <div className="total__amount__value">{cartItems.totalAmount}.00₮</div>
+                                </div>
+                                <div className="total__amount">
+                                    <div className="total__amount__label">Хүргэлт:</div>
+                                    <div className="total__amount__value">8000.00₮</div>
+                                </div>
+                                <div className="total__amount">
+                                    <div className="total__amount__label">Нийт төлөх дүн:</div>
+                                    <div className="total__amount__value">{cartItems.totalAmount + 8000}.00₮</div>
+                                </div>
 
-                        <div className="type_payment">
-                            <Radio.Group onChange={onChange} value={value}>
-                                <Space direction="vertical">
-                                    <Radio style={{fontSize: '17px'}} value={1}>Банкаар шилжүүлэх</Radio>
-                                    <Radio style={{fontSize: '17px'}} value={2}>Картаар төлөх</Radio>
-                                </Space>
-                            </Radio.Group><br></br>
-                        </div>
-                        <Button style={{height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px'}} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
+                            </div>
+                        )}
+                                <div className="type_payment">
+                                    <Radio.Group onChange={onChange} value={value}>
+                                        <Space direction="vertical">
+                                            <Radio style={{ fontSize: '17px' }} value={1}>Банкаар шилжүүлэх</Radio>
+                                            <Radio style={{ fontSize: '17px' }} value={2}>Картаар төлөх</Radio>
+                                        </Space>
+                                    </Radio.Group><br></br>
+                                </div>
+                                <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
 
                     </div>
                 </div>

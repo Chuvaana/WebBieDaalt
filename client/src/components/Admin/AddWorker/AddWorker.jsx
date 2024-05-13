@@ -86,8 +86,13 @@ const AddWorkerForm = () => {
                     </div>
                     <div>
                         <label>Төлөв :</label><br />
-                        <input type="text" name="deliver_type" value={formData.deliver_type} onChange={handleChange} required />
-                    </div>
+                        <select name="deliver_type" value={formData.deliver_type} onChange={handleChange} required>
+                            <option value="">Select Type</option>
+                            <option value="standard">Standard</option>
+                            <option value="express">Express</option>
+                            <option value="next_day">Next Day</option>
+                        </select>
+                        </div>
                     <div>
                         <label>Нэвтрэх нэр :</label><br />
                         <input type="text" name="deliver_username" value={formData.deliver_username} onChange={handleChange} required />

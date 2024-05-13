@@ -39,7 +39,7 @@ const AddItemForm = () => {
           'Content-Type': 'multipart/form-data'
         }
       });
-      
+
       console.log(response.data);
       // Add any additional handling here, such as redirecting to a success page
     } catch (error) {
@@ -49,24 +49,30 @@ const AddItemForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
-      <input type="text" name="category" placeholder="Category" value={formData.category} onChange={handleChange} />
-      <input type="text" name="color" placeholder="Color" value={formData.color} onChange={handleChange} />
-      <input type="text" name="type" placeholder="Type" value={formData.type} onChange={handleChange} />
-      <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
-      <input type="number" name="price" placeholder="Price" value={formData.price} onChange={handleChange} />
-      <input type="text" name="size" placeholder="Size" value={formData.size} onChange={handleChange} />
-      <input type="text" name="highlights" placeholder="Highlights" value={formData.highlights} onChange={handleChange} />
-      <input type="number" name="quantity" placeholder="Quantity" value={formData.quantity} onChange={handleChange} />
-      <label>
-        Sale:
-        <input type="checkbox" name="sale" checked={formData.sale} onChange={() => setFormData({ ...formData, sale: !formData.sale })} />
-      </label>
-      {formData.sale && <input type="number" name="saleAmount" placeholder="Sale Amount" value={formData.saleAmount} onChange={handleChange} />}
-      <input type="file" name="images" multiple onChange={handleImageChange} />
-      <button type="submit">Add Item</button>
-    </form>
+    <div className="product_add_main">
+      <form onSubmit={handleSubmit}>
+        <div className="product_body_first">
+        <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+        <input type="text" name="category" placeholder="Category" value={formData.category} onChange={handleChange} />
+        </div>
+        <div className="product_body_two">
+        <input type="text" name="color" placeholder="Color" value={formData.color} onChange={handleChange} />
+        <input type="text" name="type" placeholder="Type" value={formData.type} onChange={handleChange} />
+        </div>
+        <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} />
+        <input type="number" name="price" placeholder="Price" value={formData.price} onChange={handleChange} />
+        <input type="text" name="size" placeholder="Size" value={formData.size} onChange={handleChange} />
+        <input type="text" name="highlights" placeholder="Highlights" value={formData.highlights} onChange={handleChange} />
+        <input type="number" name="quantity" placeholder="Quantity" value={formData.quantity} onChange={handleChange} />
+        <label>
+          Sale:
+          <input type="checkbox" name="sale" checked={formData.sale} onChange={() => setFormData({ ...formData, sale: !formData.sale })} />
+        </label>
+        {formData.sale && <input type="number" name="saleAmount" placeholder="Sale Amount" value={formData.saleAmount} onChange={handleChange} />}
+        <input type="file" name="images" multiple onChange={handleImageChange} />
+        <button type="submit">Add Item</button>
+      </form>
+    </div>
   );
 };
 

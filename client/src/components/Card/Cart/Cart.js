@@ -10,6 +10,7 @@ import './Cart.css';
 const Cart = () => {
     const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
     const cartItems = useContext(CartItemsContext);
+    console.log(cartItems.items[1])
     const navigate = useNavigate();
     const handleCheckout = async () => {
         navigate("/delivery_form");

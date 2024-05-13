@@ -23,7 +23,6 @@ const getOrder = async (req, res) => {
 
         // Create a new order instance using the Order model
         const newOrder = new Order({
-            orderid,
             product_id,
             product_code,
             product_number,

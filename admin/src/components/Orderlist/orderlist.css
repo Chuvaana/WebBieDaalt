@@ -1,8 +1,13 @@
+.orderlist{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .orderlist .orderlist_slide{
-    width: 50%;
     margin: 0px 100px;
 }
 .orderlist .order_data{
+    margin-top: 50px;
     width: 50%;
 }
 
@@ -10,14 +15,55 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0px 50px;
 }
 .orderlist .orderlist_slide .orderlist_slide_header{
     font-size: 35px;
 }
 .orderlist .orderlist_slide .orderlist_slide_body .orderlist_slide_body_header p{
-    width: 50px;
+    width: 100px;
+    text-align: center;
 }
 
-.orderlist .orderlist_slide{
+.orderlist .orderlist_slide .orderlist_slide_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 50px 20px;
+}
+.orderlist .orderlist_slide .orderlist_slide_header .shuultuur button{
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    color: #666666;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding-right: 50px;
+    transition: 0.8s;
+}
+.orderlist .orderlist_slide .orderlist_slide_header .shuultuur button:hover{
+    background-color: #e0e0e0;
+}
+    
+.data_body_workers{
+    display: flex;
+    justify-content: center;
+    gap: 110px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    border: 1px solid black;
+    border-bottom: black;
+    border-left: black;
+    border-right: black;
+    transition: 0.3s;
+}
+.data_body_workers:hover{
+    background-color: #e0e0e07d;
+}
+
+.data_body_workers p{
+    text-align: center;
+    width: 100px;
 
 }
