@@ -1,25 +1,27 @@
-import './KartPayment.css';
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import './KartPayment.css';
 import { CartItemsContext } from '../../../../Context/CartItemsContext';
-import {
-    Button,
-    Cascader,
-    DatePicker,
-    Form,
-    Input,
-    InputNumber,
-    Mentions,
-    Select,
-    TreeSelect,
-    ConfigProvider
-} from 'antd';
+
+import { Button, DatePicker, Form, Input, InputNumber, ConfigProvider } from 'antd';
+import moment from 'moment';
+const { MonthPicker} = DatePicker;
+
 const KartPayment = () => {
 
-    const [form] = Form.useForm();
-    const handleViewAllItems = () => {
-        // navigate('/bank_payment');
+    const navigate = useNavigate();
+    const handleViewAllItems = async () => {
+        try {
+            await form.validateFields();
+            navigate('/success');
+        } catch (errorInfo) {
+            console.log('Validation failed:', errorInfo);
+        }
     };
+
+    const [form] = Form.useForm();
     const cartItems = useContext(CartItemsContext);
+    const monthFormat = 'YYYY/MM';
 
     return (
         <div className="kart_payment_body">
@@ -28,8 +30,7 @@ const KartPayment = () => {
                     components: {
                         Button: {
                             colorPrimary: '#DB4444',
-
-                            algorithm: true, // Enable algorithm
+                            algorithm: true, 
                         }
                     },
                 }}
@@ -42,47 +43,84 @@ const KartPayment = () => {
                             layout='vertical'
                             form={form}>
 
-                            <Form.Item label="Картын дугаар" style={{ fontSize: '18px' }}
+                            <Form.Item
+                                label="Картын дугаар"
+                                name="Картын дугаар"
                                 rules={[
                                     {
                                         required: true,
                                         message: 'Картын дугаараа оруулна уу!'
                                     },
-                                    {
-                                        type: 'number',
-                                        max: '3',
-                                        message: 'Картын дугаар буруу байна!'
-                                    },
-                                ]}>
-                                <InputNumber style={{ fontSize: '18px', width: '100%' }} />
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value = "") {
+                                            const isValid = /^\d{16}$/.test(value); // Check if value consists of exactly 16 digits
+                                            if (!isValid) {
+                                                return Promise.reject("Картын дугаар 16 оронтой тоо байна!");
+                                            } else {
+                                                return Promise.resolve();
+                                            }
+                                        }
+                                    })
+                                ]}
+                            >
+                                <Input style={{ width: '100%' }} />
                             </Form.Item>
-                            <Form.Item label="Карт эзэмшигчийн нэр"
-                                rules={[{ required: true, message: 'Please input!' }]}>
-                                <Input style={{ fontSize: '18px' }} />
-                            </Form.Item>
-                            <div className='jus_row'>
-                                <Form.Item label="Дуусах хугацаа">
-                                    <Input style={{ fontSize: '18px' }} />
-                                </Form.Item>
-                                <Form.Item label="CVV код">
-                                    <InputNumber style={{ fontSize: '18px', width: '100%' }} />
-                                </Form.Item>
-                            </div>
+
+
 
                             <Form.Item
                                 label="Карт эзэмшигчийн нэр"
                                 name="Карт эзэмшигчийн нэр"
-                                rules={[{ required: true, message: 'Please input!' }]}>
+                                rules={[
+                                    { required: true, message: 'Карт эзэмшигчийн нэрийг оруулна уу!' },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value = "") {
+                                            const isValid = /^[a-zA-Z. ]{4,}$/.test(value); // Check if value consists of at least 4 letters or periods
+                                            if (!isValid) {
+                                                return Promise.reject("Нэр нь 4-өөс дээш оронтой байх!");
+                                            } else {
+                                                return Promise.resolve();
+                                            }
+                                        }
+                                    })
+                                ]}
+                            >
                                 <Input />
                             </Form.Item>
 
-                            <Form.Item
-                                label="InputNumber"
-                                name="InputNumber"
-                                rules={[{ required: true, message: 'Please input!' }]}
-                            >
-                                <InputNumber style={{ width: '100%' }} />
-                            </Form.Item>
+
+                            <div className='jus_row'>
+                                <Form.Item
+                                    label="Дуусах хугацаа"
+                                    name="Дуусах хугацаа"
+                                    rules={[
+                                        { required: true, message: 'Дуусах хугацаа бөглөнө үү!' },
+                                    ]}
+                                >
+                                    <MonthPicker style={{ width: '100%' }} defaultValue={moment('2025/01', monthFormat)} format={monthFormat} />
+                                </Form.Item>
+
+
+
+                                <Form.Item label="CVV код" name="CVV код"
+                                    rules={[
+                                        { required: true, message: 'Please input!' },
+                                        ({ getFieldValue }) => ({
+                                            validator(rule, value = "") {
+                                                const isValid = /^\d{3}$/.test(value); // Check if value consists of exactly 16 digits
+                                                if (!isValid) {
+                                                    return Promise.reject("CVV кодоо шалгана уу");
+                                                } else {
+                                                    return Promise.resolve();
+                                                }
+                                            }
+                                        })
+                                    ]}>
+                                    <InputNumber placeholder='CVV' style={{ width: '100%' }} />
+                                </Form.Item>
+                            </div>
+
+
 
                             <Button htmlType="submit" style={{ width: '100%', height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
 
@@ -129,10 +167,6 @@ const KartPayment = () => {
                                     <div className="back_content_baraa">{cartItems.totalAmount + 8000}.00₮</div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div className='check_payment'>
-                            <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлбөр шалгах</Button>
                         </div>
                     </div>
                 </div>

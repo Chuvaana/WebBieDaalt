@@ -51,6 +51,13 @@ const SaleItemCard = (props) => {
         }
     }, [props.item._id]);
 
+    // Listen to changes in the wishlist context
+    useEffect(() => {
+        // Check if the item is still in the wishlist
+        const isItemInWishList = wishItemsContext.items.some(item => item._id === props.item._id);
+        setClick(isItemInWishList);
+    }, [wishItemsContext.items, props.item._id]);
+
     const renderImage = () => {
         if (props.item.image && props.item.image.length > 0) {
             console.log(props.item.image[0].path);
@@ -61,7 +68,6 @@ const SaleItemCard = (props) => {
             />;
         }
     }
-
 
     return (
         <div className="product__card__card">

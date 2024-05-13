@@ -1,35 +1,11 @@
-
-.order__history__container {
-    height: 200px;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-self: flex-start;
-}
-
-.order__history {
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.order__history__header {
-    width: 100%;
-    height: 50px;
-    font-size: 1.7rem;
-    font-weight: bolder;
-}
-
-.order__history__detail {
-    width: 100%;
-    height: 50px;
-}
-
 .account__details__container {
-    width: 30%;
-    height: 200px;
+    width: 100%;
+    /* height: 200px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px
 }
 
 .account__details__header {
@@ -59,4 +35,43 @@
 .logout__action {
     width: 20%;
     height: auto;
+}
+
+.account__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.account__holder__name {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.account_user_name,
+.account_user {
+    width: 100%;
+    padding-bottom: 10px;
+}
+
+.account_user {
+    padding: 10px;
+    border-radius: 4px;
+    border: solid 0.5px #424242;
+}
+
+.account_buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.manage__account__action{
+    width: 60%;
 }
