@@ -3,7 +3,7 @@ import './worklist.css';
 
 const ItemCard = (props) => {
     return (
-        <div className="data_body_workers">
+        <div className="data_body_workers2">
             <div className="id_prod" >
                 <p>
             {props.item._id && props.item._id.substring(20, 24)}

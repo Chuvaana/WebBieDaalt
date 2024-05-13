@@ -10,15 +10,20 @@
     width: 100px;
 }
 
-.data_body_workers{
+.data_body_workers2{
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 50px;
-    margin: 0px 50px;
+    /* margin: 0px 50px; */
     text-align: center;
+    padding-top: 10px;
+    border: 1px solid black;
+    border-bottom: black;
+    border-left: black;
+    border-right: black;
 }
-.data_body_workers p{
+.data_body_workers2 p{
     width: 100px;
 }
 

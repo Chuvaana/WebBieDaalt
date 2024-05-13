@@ -4,29 +4,41 @@ import { Link } from 'react-router-dom';
 import './orderlist.css';
 
 // Assuming ItemCard is imported from another file
+import ItemCard from "./OrderItemCard";
+import ProductCard from "./OrderProductCard";
 
 const AddItemForm = () => {
-    // const [ringItems, setRingItems] = useState([]);
+    const [ringItems, setRingItems] = useState([]);
+    const [isConditionMet, setIsConditionMet] = useState(true); // Initial condition
+    // const condition = true;
 
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000/api/items")
-    //         .then(res => {
-    //             console.log(res.data);
-    //             // Filter the items where the category is 'ring'
-    //             const ringItems = res.data.filter(item => item.category === 'ring');
-    //             setRingItems(ringItems); // Set the filtered items
-    //         })
-    //         .catch(err => console.error("Error fetching data:", err));
+    const handleConditionChange = () => {
+        setIsConditionMet(!isConditionMet); // Toggle the condition
+    };
 
-    //     window.scrollTo(0, 0);
-    // }, []);
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/order")
+            .then(res => {
+                console.log(res.data);
+                // Filter the items where the category is 'ring'
+                const ringItems = res.data.filter(item => item.deliver_email === item.deliver_email);
+                setRingItems(ringItems); // Set the filtered items
+            })
+            .catch(err => console.error("Error fetching data:", err));
+
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="orderlist">
             <div className="orderlist_slide">
                 <div className="orderlist_slide_header">
-                    <p>Захиалгын жагсаалт</p>
-
+                    <div>
+                        <p>Захиалгын жагсаалт</p>
+                    </div>
+                    <div className="shuultuur">
+                        <button > Төлөвөөр шүүх</button>
+                    </div>
                 </div>
                 <div className="orderlist_slide_body">
                     <div className="orderlist_slide_body_header">
@@ -38,15 +50,28 @@ const AddItemForm = () => {
 
                     <div className="data_body_productsaa">
                         {/* Mapping through ringItems and rendering ItemCard for each item */}
-                        {/* {ringItems.map((item, index) => (
-                    <ItemCard key={index} item={item} category="ring" />
-                ))} */}
+                        {ringItems.map((item, index) => (
+                            <ItemCard key={index} item={item} />
+                        ))}
                     </div>
                 </div>
             </div>
-            <div className="order_data">
+            {/* <div className="order_data">
 
-            </div>
+                <div className="header_product_card">
+                    <h1>Захиалгын дэлгэрэнгүй</h1>
+                </div>
+                {condition ? (
+                    <div>
+                        <p>Захиалсан бараа</p>
+                        {ringItems.map((item, index) => (
+                            <ItemCard key={index} item={item} />
+                        ))}
+                    </div>
+                ) : (
+                    <p>No workers found.</p>
+                )}
+            </div> */}
         </div>
     );
 };

@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 
 // Define schema for the "Items" collection
 const orderSchema = new mongoose.Schema({
-    orderid: String,
     product_id: [String],
     product_code: [String],
     product_number: [String],

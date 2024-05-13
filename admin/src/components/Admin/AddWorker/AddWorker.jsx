@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './addworker.css'
 
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 const AddWorkerForm = () => {
     const [formData, setFormData] = useState({
         deliver_ovog: '',
@@ -17,6 +17,7 @@ const AddWorkerForm = () => {
         deliver_password: ''
     });
 
+    const navigate = useNavigate();
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -39,6 +40,8 @@ const AddWorkerForm = () => {
                 deliver_username: '',
                 deliver_password: ''
             });
+
+        navigate('/workerlist');
             // Handle success message or redirect user if needed
         } catch (error) {
             console.error('Error adding worker:', error);
@@ -87,8 +90,13 @@ const AddWorkerForm = () => {
                     </div>
                     <div>
                         <label>Төлөв :</label><br />
-                        <input type="text" name="deliver_type" value={formData.deliver_type} onChange={handleChange} required />
-                    </div>
+                        <select name="deliver_type" value={formData.deliver_type} onChange={handleChange} required>
+                            <option value="">Ажилтны төлөв</option>
+                            <option value="Идэвхтэй">Идэвхтэй</option>
+                            <option value="Идэвхгүй">Идэвхгүй</option>
+                            <option value="Амарсан">Амарсан</option>
+                        </select>
+                        </div>
                     <div>
                         <label>Нэвтрэх нэр :</label><br />
                         <input type="text" name="deliver_username" value={formData.deliver_username} onChange={handleChange} required />
@@ -99,9 +107,13 @@ const AddWorkerForm = () => {
                     </div>
                 </div>
                 <div className="btn_subtim">
+
                     <Link to="/workerlist">
-                    <button type="submit" style={{ width: '200px', height: '50px', borderStyle: 'none', backgroundColor: '#DF4444' , color:'white' }}>Add Worker</button>
+                    <button className="cancel_s" type="submit">Цуцлах</button>
                     </Link>
+                    {/* <Link to="/workerlist"> */}
+                    <button type="submit">Add Worker</button>
+                    {/* </Link> */}
                 </div>
             </form>
         </div>
