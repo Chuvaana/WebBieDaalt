@@ -70,10 +70,9 @@
     flex-direction: column;
     height: 100%;
     width: 48%;
-    /* background-image: url(../assets/first_hightlight.jpg); */
-    background-color: yellow;
-    background-size: 600px;
+    background-size: cover;
     justify-content: flex-end;
+    color: black;
 }
 
 .highlight .list .first .inside .name {
@@ -98,6 +97,7 @@
     width: 48%;
     gap: 18px;
     justify-content: space-between;
+    background-size: cover;
 }
 
 .highlight .list .second .s_first {
@@ -105,10 +105,8 @@
     flex-direction: column;
     height: 47%;
     width: 100%;
-    /* background-image: url(../assets/bigpearl.jpg); */
-    background-color: blue;
     justify-content: flex-end;
-    /* background-size: 570px;*/
+    background-size: cover;
 }
 
 .highlight .list .second .s_first .name {
@@ -131,6 +129,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: 45%;
+    background-size: cover;
     width: 100%;
 }
 
@@ -139,10 +138,8 @@
     flex-direction: column;
     height: 100%;
     width: 48%;
-    /* background-image: url(../assets/rainbow.jpg); */
-    background-color: aqua;
     justify-content: flex-end;
-    background-size: 284px;
+    background-size: cover;
 }
 
 .highlight .list .second .s_second .s_s_first .name {
@@ -168,7 +165,7 @@
     background-color: #DB4444;
     /* background-image: url(../assets/side.jpg); */
     justify-content: flex-end;
-    background-size: 284px;
+    background-size: cover;
 }
 
 .highlight .list .second .s_second .s_s_second .name {

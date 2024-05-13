@@ -35,11 +35,17 @@ const WishItemsProvider = (props) => {
         localStorage.setItem("wishItems", JSON.stringify(updatedWishItems));
     };
 
+    const clearWishItems = () => {
+        setWishItems([]);
+        localStorage.removeItem("wishItems");
+    };
+
     const wishItemsCtx = {
         items: wishItems,
         addItem: addToWishHandler,
         removeItem: removeFromWishHandler,
-        addToCart: addToCartHandler
+        addToCart: addToCartHandler,
+        clearWishItems: clearWishItems // Add the clearWishItems function to the context
     };
 
     return ( 

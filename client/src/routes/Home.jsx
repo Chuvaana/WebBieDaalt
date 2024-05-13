@@ -27,7 +27,7 @@ const Home = () => {
         <Fragment>
             <Landing />
             <FeaturedItems items={featuredItems}/>
-            <Highlight/>
+            <Highlight items={featuredItems}/>
             <AllItems items={featuredItems}/>
             <Support/>
         </Fragment>

@@ -16,13 +16,12 @@ const Item = (props) => {
                 <ItemCarousel item={props.item}/>
                 <Detail item={props.item}/>
             </div>
-            <div className="item__description__container">
+            {/* <div className="item__description__container">
                 <Description item={props.item}/>
             </div>
             <div className="related__items__container">
-                {/* Check if props.item.category exists before passing it */}
                 {props.item.category && <Related category={props.item.category}/>}
-            </div>
+            </div> */}
         </div>
      );
 }

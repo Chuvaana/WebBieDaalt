@@ -65,11 +65,16 @@ function Header() {
 
     const handleClick = (e) => {
         e.preventDefault();
+        // Clear wish items context
+        wishItems.clearWishItems();
+        // Clear cart items context
+        cartItems.clearCart();
         // Remove user data from local storage
         localStorage.removeItem('user');
         // Navigate to the login page
         navigate('/account/login');
     };
+    
 
     const handleClickAccount = (e) => {
         e.preventDefault();

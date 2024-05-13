@@ -1,37 +1,44 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import './Detail.css';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { Button } from '@mui/material';
+import { Button, ConfigProvider } from 'antd';
 import { IconButton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import IndeterminateCheckBoxRoundedIcon from '@mui/icons-material/IndeterminateCheckBoxRounded';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import { CartItemsContext } from '../../../Context/CartItemsContext';
 import { WishItemsContext } from '../../../Context/WishItemsContext';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Heart from "react-animated-heart";
 
 const Detail = (props) => {
     const [quantity, setQuantity] = useState(1);
     const [size, setSize] = useState(props.item.size[0]);
+    const [isWished, setIsWished] = useState(() => {
+        // Check if the item is already in the wishlist based on local storage
+        return localStorage.getItem(props.item._id) === "true";
+    });
 
     const cartItems = useContext(CartItemsContext)
     const wishItems = useContext(WishItemsContext)
+
+    useEffect(() => {
+        // Update isWished state based on local storage
+        setIsWished(localStorage.getItem(props.item._id) === "true");
+    }, [props.item._id]);
 
     const handleSizeChange = (event) => {
         setSize(event.target.value);
     };
 
-    
     const handelQuantityIncrement = (event) => {
-        setQuantity((prev) => prev+=1);
+        setQuantity((prev) => prev += 1);
     };
 
     const handelQuantityDecrement = (event) => {
-        if(quantity >1){
-            setQuantity((prev) => prev-=1);
+        if (quantity > 1) {
+            setQuantity((prev) => prev -= 1);
         }
     };
 
@@ -40,65 +47,64 @@ const Detail = (props) => {
     }
 
     const handelAddToWish = () => {
-        wishItems.addItem(props.item)
+        if (isWished) {
+            // If already wished, remove from wishlist
+            wishItems.removeItem(props.item);
+            localStorage.removeItem(props.item._id);
+        } else {
+            // If not wished, add to wishlist
+            wishItems.addItem(props.item);
+            localStorage.setItem(props.item._id, true);
+        }
+        // Toggle the state of isWished
+        setIsWished(!isWished);
     }
-    
-    return ( 
+
+    return (
         <div className="product__detail__container">
             <div className="product__detail">
                 <div className="product__main__detail">
                     <div className="product__name__main">{props.item.name}</div>
+                    <div className="product__price__detail">{props.item.price}₮</div>
                     <div className="product__detail__description">{props.item.description}</div>
-                    <div className="product__color">
-                        <div className="product-color-label">COLOR</div>
-                        <div className="product-color" style={{backgroundColor: `${props.item.color}`}}></div>
-                        </div>
-                    <div className="product__price__detail">${props.item.price}</div>
                 </div>
                 <form onSubmit={handelAddToCart} className="product__form">
-                <div className="product__quantity__and__size">
-                    <div className="product__quantity">
-                        <IconButton onClick={handelQuantityIncrement}>
-                            <AddCircleIcon />
-                        </IconButton>
-                        <div type="text" name="quantity" className="quantity__input">{quantity}</div>
-                        <IconButton onClick={handelQuantityDecrement}>
-                            <RemoveCircleIcon fontSize='medium'/>
-                        </IconButton>
-                    </div>
-                        
-                    <div className="product size">
-                        <Box sx={{ minWidth: 100} }>
-                            <FormControl fullWidth size="small">
-                                <InputLabel>Size</InputLabel>
-                                <Select
-                                value={size}
-                                label="size"
-                                onChange={handleSizeChange}
-                                >
-                                {props.item.size.map((size) => <MenuItem value={size}>{size}</MenuItem>)}
-                                </Select>
-                            </FormControl>
-                        </Box>
-                    </div>
-                </div>  
-                <div className="collect__item__actions">
-                    <div className="add__cart__add__wish">
-                        <div className="add__cart">
-                            <Button variant="outlined" size="large" sx={[{'&:hover': { backgroundColor: '#FFE26E', borderColor: '#FFE26E', borderWidth: '3px', color: 'black'}, minWidth: 200, borderColor: 'black', backgroundColor: "black" , color: "#FFE26E", borderWidth: '3px'}]} onClick={handelAddToCart}>ADD TO BAG</Button>
-                        </div>
-                        <div className="add__wish">
-                            <IconButton variant="outlined" size="large" sx={[{'&:hover': { backgroundColor: '#FFE26E', borderColor: '#FFE26E', borderWidth: '3px', color: 'black'}, borderColor: 'black', backgroundColor: "black" , color: "#FFE26E", borderWidth: '3px'}]} onClick={handelAddToWish}>
-                                <FavoriteBorderIcon sx={{width: '22px', height: '22px'}}/>
+                    <div className="product__quantity__and__size">
+                        <div className="product__quantity">
+                            <IconButton onClick={handelQuantityDecrement}>
+                                <RemoveRoundedIcon style={{height:'30px', width:'30px'}}/>
+                            </IconButton>
+                            <div type="text" name="quantity" style={{height:'44px', width:'70px', borderLeft:'0.5px solid #424242',borderRight:'0.5px solid #424242'}} className="quantity__input">{quantity}</div>
+                            <IconButton style={{backgroundColor:'#db4444', borderRadius:'0'}}onClick={ handelQuantityIncrement}>
+                                <AddRoundedIcon style={{height:'30px', width:'30px', margin:'0', color:'white'}} fontSize='medium' />
                             </IconButton>
                         </div>
+
+                        <div className="add__cart__add__wish">
+                            <div className="add__cart">
+                                <ConfigProvider
+                                    theme={{
+                                        components: {
+                                            Button: {
+                                                colorPrimary: '#DB4444',
+                                                algorithm: true, // Enable algorithm
+                                            }
+                                        },
+                                    }}
+                                >
+                                    <Button type='primary' style={{ height: '46px', fontSize: '16px' }} onClick={handelAddToCart}>Сагсанд нэмэх</Button>
+                                </ConfigProvider>
+                            </div>
+                            <div className="add__wish">
+                                <Heart isClick={isWished} onClick={handelAddToWish} />
+                            </div>
+                        </div>
                     </div>
-                </div>  
                 </form>
-                
+
             </div>
         </div>
-     );
+    );
 }
- 
+
 export default Detail;

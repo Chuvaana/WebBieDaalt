@@ -62,22 +62,22 @@ const CartItemsProvider = (props) => {
         setCartItems([]);
         setTotalAmountOfItems(0);
         localStorage.removeItem("cartItems"); // Optionally clear from localStorage
-      };
+    };
 
-      const cartItemCtx = {
+    const cartItemCtx = {
         items: cartItems,
         totalAmount: totalAmountOfItems,
         addItem: addToCartHandler,
         removeItem: removeFromCartHandler,
         quantity: quantityHandler,
         clearCart: clearCart, // Include the clearCart function
-      };
+    };
 
-      return (
+    return (
         <CartItemsContext.Provider value={cartItemCtx}>
-          {props.children}
+            {props.children}
         </CartItemsContext.Provider>
-      );
+    );
 }
 
 export default CartItemsProvider;

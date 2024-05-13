@@ -55,6 +55,22 @@
     border-style: solid;
 }
 
+.wish_content_header p{
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+.wish_content_header{
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    
+}
 
-.wishlist__item__label> div {
+.wish_itemsFrame{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

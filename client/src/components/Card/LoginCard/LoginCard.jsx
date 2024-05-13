@@ -1,8 +1,9 @@
 import React from "react";
-import { useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { message } from 'antd'
 
 import "./LoginCard.css";
 
@@ -17,10 +18,11 @@ const LoginCard = () => {
         axios.post('http://localhost:5000/api/user/login', { phoneNumber, password })
             .then(result => {
                 console.log(result.data);
-                if (result.data === "No record exist" || result.data === 'the password is incorrect') {
-                    alert(result.data);
-                } else {
-                    alert("Амжилттай нэвтэрлээ");
+                if (result.data === "No record exist" || result.data === 'the password is incorrect') { 
+                    message.error("Нууц үг эсвэл утасны дугаар буруу байна");
+                }
+                else {
+                    message.success("Амжилттай нэвтэрлээ");
                     localStorage.setItem("user", JSON.stringify(result.data));
                     console.log(result.data);
                     navigate('/');

@@ -82,25 +82,25 @@ function App() {
                 <Route path='sale' element={<SaleItems/>}></Route>
                 <Route path='viewAll' element={<ViewAll/>}></Route>
                 <Route path='ring' element={<Ring/>}></Route>
-                {/* <Route path='bracelet' element={<Bracelet/>}></Route> */}
-                {/* <Route path='earrings' element={<Earings/>}></Route> */}
-                {/* <Route path='necklaces' element={<Necklaces/>}></Route> */}
-                {/* <Route path='scarf' element={<Scarf/>}></Route> */}
-                {/* <Route path='bag' element={<Bag/>}></Route> */}
-                {/* <Route path='hat' element={<Hat/>}></Route> */}
-                {/* <Route path='maskchain' element={<Maskchain/>}></Route> */}
-                {/* <Route path='sets' element={<Sets/>}></Route> */}
-                {/* <Route path='sunglasses' element={<Sunglasses/>}></Route> */}
-                <Route path="/item/men">
+                <Route path='bracelet' element={<Bracelet/>}></Route>
+                <Route path='earrings' element={<Earings/>}></Route>
+                <Route path='necklaces' element={<Necklaces/>}></Route>
+                <Route path='scarf' element={<Scarf/>}></Route>
+                <Route path='bag' element={<Bag/>}></Route>
+                <Route path='hat' element={<Hat/>}></Route>
+                <Route path='maskchain' element={<Maskchain/>}></Route>
+                <Route path='sets' element={<Sets/>}></Route>
+                <Route path='sunglasses' element={<Sunglasses/>}></Route>
+                <Route path="/item/earrings">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
-                <Route path="/item/women">
+                <Route path="/item/bracelet">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
-                <Route path="/item/kids">
+                <Route path="/item/hat">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
-                <Route path="/item/featured">
+                <Route path="/item/scarf">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
                 <Route path="/item/ring">
