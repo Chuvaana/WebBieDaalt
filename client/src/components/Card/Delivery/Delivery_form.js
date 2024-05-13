@@ -370,7 +370,7 @@ const Delivery_form = () => {
                             <Form.Item
                                 name="address"
                                 label="Хүргүүлэх хаяг"
-                                onChange={(value) => setAddress(value)}
+                                onChange={(e) => setAddress(e.target.value)}
                                 rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
                             >
                                 <Input />

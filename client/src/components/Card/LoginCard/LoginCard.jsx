@@ -21,7 +21,7 @@ const LoginCard = () => {
                     alert(result.data);
                 } else {
                     alert("Амжилттай нэвтэрлээ");
-                    localStorage.setItem("user", result.data);
+                    localStorage.setItem("user", JSON.stringify(result.data));
                     console.log(result.data);
                     navigate('/');
                 }

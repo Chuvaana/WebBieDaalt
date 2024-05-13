@@ -45,6 +45,7 @@ import Delivery_form from '../components/Card/Delivery/Delivery_form.js';
 import KartPayment from '../components/Card/PaymentType/KartPayment/KartPayment.js';
 import BankPayment from '../components/Card/PaymentType/BankPayment/BankPayment.js';
 import SuccessPayment from '../components/Card/PaymentType/Success_payment/Success_payment.js';
+import ChangePassAccount from '../components/Account/ChangePass/ChangePassAccount.js';
 
 function App() {
 
@@ -60,6 +61,7 @@ function App() {
                 <Route path="me" element={<MyAccount/>}/>
                 <Route path="admin" element={<AddItemForm/>}/>
                 <Route path="manage" element={<ManageAccount/>}/>
+                <Route path="change_pass" element={<ChangePassAccount/>}/>
                 <Route path="login" element={<Login />}/>
                 <Route path="register" element={<Register />}/>
                 <Route path="password_reset" element={<Resetpass />}/>
