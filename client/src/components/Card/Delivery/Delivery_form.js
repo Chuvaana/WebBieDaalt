@@ -242,8 +242,8 @@ const Delivery_form = () => {
     const [addition, setAddition] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [mail, setMail] = useState("");
-
     const [value, setValue] = useState(1);
+    
     const onChange = (e) => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);

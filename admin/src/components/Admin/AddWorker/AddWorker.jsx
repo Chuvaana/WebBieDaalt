@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './addworker.css'
 
+import { Link } from 'react-router-dom';
 const AddWorkerForm = () => {
     const [formData, setFormData] = useState({
         deliver_ovog: '',
@@ -98,7 +99,9 @@ const AddWorkerForm = () => {
                     </div>
                 </div>
                 <div className="btn_subtim">
+                    <Link to="/workerlist">
                     <button type="submit" style={{ width: '200px', height: '50px', borderStyle: 'none', backgroundColor: '#DF4444' , color:'white' }}>Add Worker</button>
+                    </Link>
                 </div>
             </form>
         </div>

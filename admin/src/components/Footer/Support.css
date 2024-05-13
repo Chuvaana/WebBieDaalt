@@ -1,0 +1,53 @@
+.support {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 20px;
+    padding-bottom: 70px;
+}
+
+.support .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    border: none;
+    background-color: #959496;
+}
+
+.support .logo .logo_in {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 58px;
+    width: 58px;
+    border-radius: 50%;
+    border: none;
+    background-color: #000000;
+}
+
+.support .delivery,
+.support .order,
+.support .back {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.support .delivery .title,
+.support .order .title,
+.support .back .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.support .delivery .description,
+.support .order .description,
+.support .back .description {
+    text-align: center;
+}

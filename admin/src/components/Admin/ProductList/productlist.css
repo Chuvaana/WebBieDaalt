@@ -1,0 +1,51 @@
+.productlist{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 10%;
+}
+.header_medeell{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 100px 50px 100px;
+}
+.main_body_product{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px 50px;
+    gap: 50px;
+}
+.main_body_product p{
+    width: 100px;
+    text-align: center;
+}
+.data_body_products p{
+    width: 100px;
+    text-align: center;
+}
+
+.data_body_products{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px 50px;
+    gap: 50px;
+}
+.header_medeell .shuultuur{
+    width: 230px;
+    height: 40px;
+    color: #666666;
+    border-radius: 13px;
+    padding-right: 70px;
+    background-color: white;
+    border: 1px solid #666666;
+}
+.header_medeell .product_nemeh{
+    width: 190px;
+    height: 56px;
+    background-color: #DB4444;
+    color: white;
+    border-style: none;
+}

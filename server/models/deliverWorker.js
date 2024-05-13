@@ -10,7 +10,9 @@ const deliverSchema = new mongoose.Schema({
     deliver_email: String,
     deliver_address: String,
     deliver_date: Date,
-    deliver_type: String
+    deliver_type: String,
+    deliver_username: String,
+    deliver_password: String
 });
 
 // Create model for the "Items" collection

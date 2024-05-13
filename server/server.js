@@ -18,6 +18,7 @@ app.use(cors());
 app.use('/images', express.static('public/uploads'));
 app.use('/api/items', require("./routes/items"));
 app.use('/api/worker', require("./routes/worker"));
+app.use('/api/order', require("./routes/order"));
 app.use('/api/payment', cors(), require("./routes/payment"));
 app.use('/api/user', require("./routes/users"));
 

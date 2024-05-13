@@ -27,7 +27,9 @@ const addWorker = async (req, res) => {
             deliver_email,
             deliver_address,
             deliver_date,
-            deliver_type } = req.body
+            deliver_type ,
+            deliver_username,
+            deliver_password} = req.body
 
         const newWorker = new Worker({
             deliver_ovog,
@@ -37,7 +39,9 @@ const addWorker = async (req, res) => {
             deliver_email,
             deliver_address,
             deliver_date,
-            deliver_type
+            deliver_type,
+            deliver_username,
+            deliver_password
         });
         const savedWorker = await newWorker.save();
 
