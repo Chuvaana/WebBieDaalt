@@ -22,10 +22,14 @@ import DrawerNav from '../components/Nav/DrawerNav/DrawerNav';
 import Checkout from '../components/Checkout/Checkout';
 import SearchProvider from '../Context/SearchProvider';
 import AddItemForm from '../components/Admin/Admin.jsx'
+import Addworker from '../components/Admin/AddWorker/AddWorker.jsx'
 import Resetpass from '../components/ResetPass/ResetPass.js';
 import Changepass from '../components/Change/Changepass.js';
 import SaleItems from '../components/SaleItems/SaleItems.js';
 import Ring from '../components/Categories/Ring.js';
+import Productlist from '../components/ProductList/Productlist.jsx';
+import Workerlist from '../components/Admin/WorkerList/Workerlist.jsx';
+import Orderlist from '../components/Orderlist/Orderlist.jsx';
 import Bracelet from '../components/Categories/Bracelet.js';
 import Earings from '../components/Categories/Earrings.js';
 import Necklaces from '../components/Categories/Necklaces.js';
@@ -64,6 +68,10 @@ function App() {
 
               <Route path="/shop" element={<Shop />}/>
               <Route path="/contact" element={<Contact />}/>
+              <Route path="/addworker" element={<Addworker />}/>
+              <Route path="/productlist" element={<Productlist />} />
+              <Route path="/workerlist" element={<Workerlist />} />
+              <Route path="/orderlist" element={<Orderlist />} />
               <Route path="/category">
                 <Route path=":id" element={<CategoryView />}/>
               </Route>
@@ -106,6 +114,7 @@ function App() {
             <Footer />
             <Routes>
             <Route path="/admin" element={<Wishlist />} />
+              {/* <Route path="addworker" element={<Addworker />}/> */}
             </Routes>
           </Router>
         </SearchProvider>

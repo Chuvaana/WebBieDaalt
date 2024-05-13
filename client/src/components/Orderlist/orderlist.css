@@ -1,0 +1,23 @@
+.orderlist .orderlist_slide{
+    width: 50%;
+    margin: 0px 100px;
+}
+.orderlist .order_data{
+    width: 50%;
+}
+
+.orderlist .orderlist_slide .orderlist_slide_body .orderlist_slide_body_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.orderlist .orderlist_slide .orderlist_slide_header{
+    font-size: 35px;
+}
+.orderlist .orderlist_slide .orderlist_slide_body .orderlist_slide_body_header p{
+    width: 50px;
+}
+
+.orderlist .orderlist_slide{
+
+}

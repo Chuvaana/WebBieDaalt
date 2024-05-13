@@ -16,6 +16,75 @@ const getItem = async (req, res) => {
     }
 }
 
+// const Worker = require("../models/deliverWorker")
+
+// const addWorker = async (req, res) => {
+//     try {
+//         const { deliver_ovog,
+//             deliver_name,
+//             deliver_rd,
+//             deliver_phone,
+//             deliver_email,
+//             deliver_address,
+//             deliver_date,
+//             deliver_type } = req.body
+
+//         const newWorker = new Worker({
+//             deliver_ovog,
+//             deliver_name,
+//             deliver_rd,
+//             deliver_phone,
+//             deliver_email,
+//             deliver_address,
+//             deliver_date,
+//             deliver_type
+//         });
+//         const savedWorker = await newWorker.save();
+
+//         // Respond with success message and the saved order
+//         res.status(201).json({ message: "Order added successfully", order: savedWorker });
+//     } catch (err) {
+//         console.error("Error adding order:", error);
+//         res.status(400).json({ message: "Unable to add order" });
+//     }
+// };
+
+const Order = require("../models/orderModel");
+
+const getOrder = async (req, res) => {
+    try {
+        // Extracting request body parameters
+        const { orderid, product_id, product_code, product_number, order_price, order_all_price, deliver_loc_name, deliver_loc_District, deliver_loc_Committee, deliver_location, deliver_information, deliver_phone, deliver_email } = req.body;
+
+        // Create a new order instance using the Order model
+        const newOrder = new Order({
+            orderid,
+            product_id,
+            product_code,
+            product_number,
+            order_price,
+            order_all_price,
+            deliver_loc_name,
+            deliver_loc_District,
+            deliver_loc_Committee,
+            deliver_location,
+            deliver_information,
+            deliver_phone,
+            deliver_email
+        });
+
+        // Save the new order to the database
+        const savedOrder = await newOrder.save();
+
+        // Respond with success message and the saved order
+        res.status(201).json({ message: "Order added successfully", order: savedOrder });
+    } catch (error) {
+        console.error("Error adding order:", error);
+        res.status(400).json({ message: "Unable to add order" });
+    }
+};
+
+
 /* POST Request handler */
 const addItem = async (req, res) => {
     try {
@@ -73,6 +142,8 @@ const deleteItem = (req, res) => {
 
 module.exports = {
     getItem,
+    getOrder,
+    // addWorker,
     addItem,
     updateItem,
     deleteItem
