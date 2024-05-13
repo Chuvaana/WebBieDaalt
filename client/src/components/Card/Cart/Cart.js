@@ -1,4 +1,4 @@
-import { useContext, useState} from 'react';
+import { useContext, useState } from 'react';
 import { CartItemsContext } from '../../../Context/CartItemsContext';
 
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,11 @@ const Cart = () => {
     const cartItems = useContext(CartItemsContext);
     const navigate = useNavigate();
     const handleCheckout = async () => {
-        navigate("/delivery_form");
+        const user = localStorage.getItem('user');
+        if (user)
+            navigate("/delivery_form");
+        else
+            navigate("/account/login")
         // if (cartItems.totalAmount > 0) {
         //     const config = {
         //         reason: 'checkout',
@@ -43,7 +47,7 @@ const Cart = () => {
                 <div className="cart__items__container">
                     <div className="cartItems">
                         {cartItems.items.length === 0 ? (
-                            <div className="cart__empty">Empty cart!</div>
+                            <div className="cart__empty">Сагс хоосон байна!</div>
                         ) : (
                             <div className="shop__cart__items">
                                 {cartItems.items.map((item) => (

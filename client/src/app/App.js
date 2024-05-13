@@ -44,6 +44,7 @@ import Contact from '../components/Footer_menu_items/Contact.jsx';
 import Delivery_form from '../components/Card/Delivery/Delivery_form.js';
 import KartPayment from '../components/Card/PaymentType/KartPayment/KartPayment.js';
 import BankPayment from '../components/Card/PaymentType/BankPayment/BankPayment.js';
+import SuccessPayment from '../components/Card/PaymentType/Success_payment/Success_payment.js';
 
 function App() {
 
@@ -108,6 +109,7 @@ function App() {
               <Route path="/delivery_form" element={<Delivery_form />} />
               <Route path="/kart_payment" element={<KartPayment />} />
               <Route path="/bank_payment" element={<BankPayment />} />
+              <Route path="/success" element={<SuccessPayment />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/search/*" element={<SearchView />} />
             </Routes>

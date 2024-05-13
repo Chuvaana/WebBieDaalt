@@ -7,7 +7,7 @@ const loginUser = async (req, res) => {
         .then(user => {
             if (user) {
                 if (user.password === password) {
-                    res.json("Success")
+                    res.json(user)
                 } else {
                     res.json("the password is incorrect")
                 }

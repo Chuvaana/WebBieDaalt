@@ -16,11 +16,14 @@ const LoginCard = () => {
         e.preventDefault();
         axios.post('http://localhost:5000/api/user/login', { phoneNumber, password })
             .then(result => {
-                if (result.data == "Success") {
-                    alert("Success");
-                    navigate('/');
-                } else {
+                console.log(result.data);
+                if (result.data === "No record exist" || result.data === 'the password is incorrect') {
                     alert(result.data);
+                } else {
+                    alert("Амжилттай нэвтэрлээ");
+                    localStorage.setItem("user", result.data);
+                    console.log(result.data);
+                    navigate('/');
                 }
             })
             .catch(err => console.log(err))

@@ -5,11 +5,18 @@ const CartItemsProvider = (props) => {
 
     const [cartItems, setCartItems] = useState([])
     const [totalAmountOfItems, setTotalAmountOfItems] = useState(0)
-    
+
+    useEffect(() => {
+        const storedCartItems = JSON.parse(localStorage.getItem("cartItems"));
+        if (storedCartItems) {
+            setCartItems(storedCartItems);
+        }
+    }, []);
+
     const addToCartHandler = (item, quantity) => {
-        const { _id, name, price, image, category, size} = item;
+        const { _id, name, price, image, category, size } = item;
         removeFromCartHandler(item)
-        setCartItems((prevItems) => [...prevItems, {_id, name, price, image, category, itemQuantity: quantity, size}])
+        setCartItems((prevItems) => [...prevItems, { _id, name, price, image, category, itemQuantity: quantity, size }])
     }
 
     const removeFromCartHandler = (item) => {
@@ -26,10 +33,10 @@ const CartItemsProvider = (props) => {
     }
 
     const quantityHandler = (itemId, action) => {
-        if(action === 'INC'){
+        if (action === 'INC') {
             setCartItems(cartItems.map((item) => {
-                console.log( item._id);
-                if(item._id  === itemId){
+                console.log(item._id);
+                if (item._id === itemId) {
                     item.itemQuantity += 1
                 }
                 return item
@@ -37,7 +44,7 @@ const CartItemsProvider = (props) => {
         }
         else {
             setCartItems(cartItems.map((item) => {
-                if(item._id  === itemId){
+                if (item._id === itemId) {
                     item.itemQuantity -= 1
                 }
                 return item
@@ -46,23 +53,31 @@ const CartItemsProvider = (props) => {
     }
 
     useEffect(() => {
-        calculateTotalAmount(cartItems)
-    }, [cartItems])
+        calculateTotalAmount(cartItems);
+        // Save cart items to localStorage whenever it changes
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
+    const clearCart = () => {
+        setCartItems([]);
+        setTotalAmountOfItems(0);
+        localStorage.removeItem("cartItems"); // Optionally clear from localStorage
+      };
 
-    const cartItemCtx = {
+      const cartItemCtx = {
         items: cartItems,
         totalAmount: totalAmountOfItems,
         addItem: addToCartHandler,
         removeItem: removeFromCartHandler,
-        quantity: quantityHandler
-    }
+        quantity: quantityHandler,
+        clearCart: clearCart, // Include the clearCart function
+      };
 
-    return ( 
+      return (
         <CartItemsContext.Provider value={cartItemCtx}>
-            {props.children}
+          {props.children}
         </CartItemsContext.Provider>
-     );
+      );
 }
- 
+
 export default CartItemsProvider;

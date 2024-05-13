@@ -1,11 +1,6 @@
-
-import './ItemCard.css';
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartItemsContext } from "../../../Context/CartItemsContext";
-import { IconButton } from '@mui/material';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { WishItemsContext } from '../../../Context/WishItemsContext';
 import Heart from "react-animated-heart";
 import { Link } from 'react-router-dom';
@@ -16,63 +11,44 @@ const ItemCard = (props) => {
     const wishItemsContext = useContext(WishItemsContext);
     // const [allproducts, setAllProducts] = useState([]);
     const navigate = useNavigate();
-    // console.log('../../../../'+props.item.image[0].path);
+    const [isWished, setIsWished] = useState(() => {
+        // Check if the item is already in the wishlist based on local storage
+        return localStorage.getItem(props.item._id) === "true";
+    });
+
+    useEffect(() => {
+        // Update isWished state based on local storage
+        setIsWished(localStorage.getItem(props.item._id) === "true");
+    }, [props.item._id]);
+
+    // Listen to changes in the wishlist context
+    useEffect(() => {
+        // Check if the item is still in the wishlist
+        const isItemInWishList = wishItemsContext.items.some(item => item._id === props.item._id);
+        setIsWished(isItemInWishList);
+    }, [wishItemsContext.items, props.item._id]);
 
     const handleAddToWishList = () => {
-        if (isClick) {
-            // If already in wishlist, remove it
+        if (isWished) {
+            // If already wished, remove from wishlist
             wishItemsContext.removeItem(props.item);
-            // Remove item from localStorage
             localStorage.removeItem(props.item._id);
         } else {
-            // If not in wishlist, add it
+            // If not wished, add to wishlist
             wishItemsContext.addItem(props.item);
-            // Add item to localStorage
             localStorage.setItem(props.item._id, true);
         }
-        // Toggle the click state
-        setClick(!isClick);
-    }
-    // useEffect(() => {
-    //     fetchinfo();
-    //   }, [])
-
-    // const fetchinfo = () =>{
-    //     fetch('http://localhost:5000/api/items')
-    //     .then((res) => res.json())
-    //     .then((data) => setAllProducts(data))
-    //     console.log(setAllProducts.data);
-    // }
+        // Toggle the state of isWished
+        setIsWished(!isWished);
+    };
 
     const handleAddToCart = () => {
         cartItemsContext.addItem(props.item, 1);
-    }
+    };
 
     const jump = () => {
         navigate(`/item/${props.item.category}/${props.item._id}`);
-    }
-
-    const [isClick, setClick] = useState(false);
-
-    // Load heart click state from localStorage on component mount
-    useEffect(() => {
-        const heartClickState = localStorage.getItem(props.item._id);
-        console.log(props.item);
-        if (heartClickState === 'true') {
-            setClick(true);
-        }
-    }, [props.item._id]);
-
-    const renderImage = () => {
-        if (props.item.image && props.item.image.length > 0) {
-            console.log(props.item.image[0].path);
-            return <img 
-                        style={{ width: 245, height: 342}}
-                        src={props.item.image[0].path}
-                        alt=""
-                    />;
-        }
-    }
+    };
 
     return (
         <div className="product__card__card">
@@ -81,11 +57,15 @@ const ItemCard = (props) => {
                 >
 
                     <div className='wishlist-icon' onClick={handleAddToWishList}>
-                        <Heart isClick={isClick} onClick={() => setClick(!isClick)} />
+                        <Heart isClick={isWished} />
                     </div>
-                    
-                    {renderImage()}
-                    
+                    {props.item.image && props.item.image.length > 0 && (
+                        <img
+                            style={{ width: 245, height: 342 }}
+                            src={props.item.image[0].path}
+                            alt=""
+                        />
+                    )}
                 </div>
                 <div className="product__card__detail">
                     <div className="product__card_button" onClick={handleAddToCart}>
@@ -101,7 +81,6 @@ const ItemCard = (props) => {
                         </div>
                         <span>Сагсанд нэмэх</span>
                     </div>
-
                     <div className="product__name" onClick={jump}>
                         {props.item.name}
                     </div>
@@ -112,7 +91,7 @@ const ItemCard = (props) => {
             </div>
         </div>
     );
-}
+};
 
 export default ItemCard;
 

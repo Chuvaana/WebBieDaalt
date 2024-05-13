@@ -240,7 +240,7 @@ const Delivery_form = () => {
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [addition, setAddition] = useState("");
-    const [phoneNumber, setPhoneNUmber] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [mail, setMail] = useState("");
 
     const [value, setValue] = useState(1);
@@ -260,17 +260,29 @@ const Delivery_form = () => {
 
     const navigate = useNavigate();
 
-    const handleViewAllItems = () => {
-        navigate('/kart_payment');
+    const handleViewAllItems = async () => {
+        try {
+            // Validate the form
+            await form.validateFields();
+            const formValues = form.getFieldsValue();
+            console.log('Form values:', formValues);
+
+            // If the form is valid, navigate to the appropriate payment page
+            if (value === 1) {
+                navigate('/bank_payment');
+            } else if (value === 2) {
+
+                navigate('/kart_payment');
+            }
+        } catch (error) {
+            // Handle any validation errors
+            console.error('Form validation failed:', error);
+        }
     };
+
 
     const onFinish = (values) => {
         console.log(values);
-    };
-
-    const onReset = () => {
-        setSelectedCountry("");
-        setSelectedCity("");
     };
 
     const cartItems = useContext(CartItemsContext);
@@ -313,7 +325,7 @@ const Delivery_form = () => {
                             style={{ maxWidth: 600 }}
                         >
                             <Form.Item
-                                name="Нэр"
+                                name="name"
                                 label="Нэр"
                                 onChange={(value) => setName(value)}
                                 rules={[{ required: true, message: 'Нэрээ оруулна уу!' }]}
@@ -322,7 +334,7 @@ const Delivery_form = () => {
                             </Form.Item>
 
                             <Form.Item
-                                name="Дүүрэг"
+                                name="district"
                                 label="Дүүрэг"
                                 rules={[{ required: true, message: 'Дүүргээ сонгоно уу!' }]}
                             >
@@ -339,7 +351,7 @@ const Delivery_form = () => {
                             </Form.Item>
 
                             <Form.Item
-                                name="Хороо"
+                                name="horoo"
                                 label="Хороо"
                                 rules={[{ required: true, message: 'Хороогоо сонгоно уу!' }]}
                             >
@@ -356,7 +368,7 @@ const Delivery_form = () => {
                             </Form.Item>
 
                             <Form.Item
-                                name="Хүргүүлэх хаяг"
+                                name="address"
                                 label="Хүргүүлэх хаяг"
                                 onChange={(value) => setAddress(value)}
                                 rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
@@ -364,7 +376,7 @@ const Delivery_form = () => {
                                 <Input />
                             </Form.Item>
                             <Form.Item
-                                name="Нэмэлт мэдээлэл"
+                                name="addition"
                                 label="Нэмэлт мэдээлэл"
                                 onChange={(value) => setAddition(value)}
                             >
@@ -372,19 +384,24 @@ const Delivery_form = () => {
                             </Form.Item>
                             <Form.Item
                                 label="Утасны дугаар"
-                                name="Утасны дугаар"
-                                onChange={(value) => setPhoneNUmber(value)}
+                                name="phoneNumber"
+                                onChange={(value) => setPhoneNumber(value)}
                                 rules={[
                                     {
                                         required: true,
                                         message: 'Утасны дугаараа оруулна уу!',
-                                    }, {
-                                        type: 'number',
-                                        // min: 8,
-                                        max: "8",
-                                        message: 'Утасны дугаараа зөв оруулна уу!',
+                                    },
+                                    ({ getFieldValue }) => ({
+                                        validator(rule, value = "") {
+                                            const isValid = /^[89]\d{7}$/.test(value);
 
-                                    }
+                                            if (!isValid) {
+                                                return Promise.reject("Утасны дугаараа шалгана уу!");
+                                            } else {
+                                                return Promise.resolve();
+                                            }
+                                        }
+                                    })
                                 ]}
                             >
                                 <InputNumber
@@ -394,18 +411,20 @@ const Delivery_form = () => {
                                 />
                             </Form.Item>
 
+
+
                             <Form.Item
-                                name="И-мэйл"
+                                name="mail"
                                 label="И-мэйл"
                                 onChange={(value) => setMail(value)}
                                 rules={[
                                     {
                                         type: 'email',
-                                        message: 'The input is not valid E-mail!',
+                                        message: 'И-мэйл зөв хаягаа оруулна уу',
                                     },
                                     {
                                         required: true,
-                                        message: 'Please input your E-mail!',
+                                        message: 'И-мэйл хаягаа оруулна уу!',
                                     },
                                 ]}
                             >
@@ -441,12 +460,12 @@ const Delivery_form = () => {
                         <div className="type_payment">
                             <Radio.Group onChange={onChange} value={value}>
                                 <Space direction="vertical">
-                                    <Radio style={{fontSize: '17px'}} value={1}>Банкаар шилжүүлэх</Radio>
-                                    <Radio style={{fontSize: '17px'}} value={2}>Картаар төлөх</Radio>
+                                    <Radio style={{ fontSize: '17px' }} value={1}>Банкаар шилжүүлэх</Radio>
+                                    <Radio style={{ fontSize: '17px' }} value={2}>Картаар төлөх</Radio>
                                 </Space>
                             </Radio.Group><br></br>
                         </div>
-                        <Button style={{height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px'}} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
+                        <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
 
                     </div>
                 </div>

@@ -1,23 +1,27 @@
 import './BankPayment.css';
-import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import { CartItemsContext } from '../../../../Context/CartItemsContext';
-import { Button, Form, Input, Select, Space, InputNumber, Radio, ConfigProvider } from 'antd';
+import { Button, ConfigProvider } from 'antd';
 
 const BankPayment = () => {
-    function createRandomString(length) {
+    const navigate = useNavigate();
+    const [transitionValue, setTransitionValue] = useState('');
+
+    useEffect(() => {
+        // Generate the random string when the component mounts
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         let result = "";
-        for (let i = 0; i < length; i++) {
+        for (let i = 0; i < 6; i++) {
             result += chars.charAt(Math.floor(Math.random() * chars.length));
         }
-        return result;
-    }
+        setTransitionValue(result);
+    }, []); // Empty dependency array ensures this effect runs only once
+
 
     const handleViewAllItems = () => {
-        // navigate('/bank_payment');
+        navigate("/success");
     };
-
-    const transition_value = createRandomString(6);
 
     const cartItems = useContext(CartItemsContext);
 
@@ -45,7 +49,7 @@ const BankPayment = () => {
                         </div>
                         <div className="infos">
                             <div className="front_content">Гүйлгээний утга</div>
-                            <div className="back_content_last">{transition_value}</div>
+                            <div className="back_content_last">{transitionValue}</div>
                         </div>
                     </div>
                 </div>
@@ -112,4 +116,4 @@ const BankPayment = () => {
     );
 }
 
-export default BankPayment
+export default BankPayment;

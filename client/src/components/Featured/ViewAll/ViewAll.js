@@ -2,7 +2,7 @@ import SaleItemCard from '../../Card/ItemCard/ItemCard';
 import ReactLoading from 'react-loading';
 import { TabTitle } from "../../../utils/General";
 import axios from "axios";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import './ViewAll.css';
 
 const ViewAll = () => {
@@ -25,7 +25,7 @@ const ViewAll = () => {
 
 
     return (
-        <div className="featured__products__container">
+        <div className="featured__products__container_all">
             <div className="itemsFrame">
                 <div className='date'>
                     <p>Бүх барааны жагсаалт ( {allItems.length} )</p>

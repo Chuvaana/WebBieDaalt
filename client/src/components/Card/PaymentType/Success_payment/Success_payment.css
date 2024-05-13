@@ -1,0 +1,37 @@
+.success_payment_frame {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.success_payment {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 50px;
+    border-radius: 50px;
+    border: solid 1px black;
+    padding: 50px;
+
+}
+
+.success_photo, .success_word, .success_detail, .launch_trans{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.success_photo img{
+    height: 150px;
+    width: 150px;
+}
+
+.success_word h1, 
+.success_detail h2{
+    font-weight: 600;
+}
+.launch_trans{
+    margin-top: 50px;
+}
