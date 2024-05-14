@@ -46,11 +46,27 @@ const getOrder = async (req, res) => {
 
 
 
+const updateItem = async (req, res) => {
+    const { orderId } = req.body; // Change to req.body to match frontend data
+    const { delivery_status } = req.body;
 
-/* PUT Request handler */
-const updateItem = (req, res) => {
-    res.json({ message: "update Item" })
-}
+    try {
+        // Find the order by ID
+        const order = await Order1.findOneAndUpdate({ _id: orderId }, { delivery_status: delivery_status }, { new: true });
+
+        // If the order is not found, return a 404 status
+        if (!order) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        // Return a success message
+        res.status(200).json({ message: 'Delivery status updated successfully' });
+    } catch (error) {
+        // If there is an error, return a 500 status and the error message
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while updating delivery status' });
+    }
+};
 
 /* DELETE Request handler */
 const deleteItem = (req, res) => {

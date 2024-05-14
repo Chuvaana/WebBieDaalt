@@ -1,13 +1,12 @@
-const express = require("express")
-const router = express.Router()
-const cors = require("cors")
-const { getItem,getOrder, updateItem, deleteItem } = require("../controllers/orderController")
+// routes/order.js
 
-router.get('/getOrder', cors(), getItem)
+const express = require("express");
+const router = express.Router();
+const { getItem, getOrder, updateItem, deleteItem } = require("../controllers/orderController");
 
-router.post('/add', getOrder)
-router.put('/:id', updateItem)
+router.get('/getOrder', getItem);
+router.post('/add', getOrder);
+router.patch('/changeStatus', updateItem); // Ensure this matches your frontend endpoint
+router.delete('/:id', deleteItem);
 
-router.delete('/:id', deleteItem)
-
-module.exports = router
+module.exports = router;
