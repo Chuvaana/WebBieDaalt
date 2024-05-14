@@ -19,7 +19,7 @@ const ItemCard = (props) => {
                 {props.item.deliver_name}
                 </p>
             </div>
-            <div className="name_prod">
+            <div className="name_prod2">
                 <p>
                 {props.item.deliver_rd}
                 </p>

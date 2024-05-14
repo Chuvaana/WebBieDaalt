@@ -2,6 +2,23 @@
 
 const Worker = require("../models/deliverWorker")
 /* GET request handler */
+
+const loginAuser = async (req, res) => {
+    const { deliver_username, deliver_password } = req.body;
+    Worker.findOne({ deliver_username: deliver_username })
+        .then(user => {
+            if (user) {
+                if (user.deliver_password === deliver_password) {
+                    res.json(user)
+                } else {
+                    res.json("the password is incorrect")
+                }
+            } else {
+                res.json("No record exist")
+            }
+        })
+}
+
 const getItem = async (req, res) => {
     try {
         // Query the "Items" collection to retrieve all items
@@ -65,6 +82,7 @@ const deleteItem = (req, res) => {
 
 module.exports = {
     getItem,
+    loginAuser,
     addWorker,
     updateItem,
     deleteItem

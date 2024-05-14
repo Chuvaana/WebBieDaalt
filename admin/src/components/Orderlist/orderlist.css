@@ -5,6 +5,7 @@
 }
 .orderlist .orderlist_slide{
     margin: 0px 100px;
+    width: 50%  ;
 }
 .orderlist .order_data{
     margin-top: 50px;
@@ -64,6 +65,13 @@
 
 .data_body_workers p{
     text-align: center;
-    width: 100px;
+    width: 150px;
 
+}
+
+.name_prod{
+width: 25%;
+display: flex;
+justify-content: center;
+align-items: center;
 }

@@ -10,6 +10,7 @@ import Addproduct from '../components/Admin/Admin';
 import Orderitemsproduct from '../components/Orderlist/Orderitemsproduct/Orderitemsproduct';
 import Orderlist from '../components/Orderlist/Orderlist';
 import Productlist from '../components/Admin/ProductList/Productlist';
+import Login from '../components/Account/Login/Login';
 // import Footer from '../components/Footer/Footer';
 import CartItemsProvider from '../Context/CartItemsProvider';
 import WishItemsProvider from '../Context/WishItemsProvider';
@@ -25,12 +26,13 @@ function App() {
             <Header />
             <Routes>
             {/* <Footer /> */}
-              <Route path="/workerlist" element={<Workerlist1 />} />
+              <Route path="/workerlist" element={<Worklist />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/addproduct" element={<Addproduct />} />
               <Route path="/productlist" element={<Productlist />} />
               <Route path="/orderitemsproduct" element={<Orderitemsproduct />} />
               <Route path="/addworker" element={<Addworker />} />
-              <Route path="/orderlist" element={<Orderlist />} />
+              <Route path="/" element={<Orderlist />} />
             </Routes>
           </Router>
         </SearchProvider>

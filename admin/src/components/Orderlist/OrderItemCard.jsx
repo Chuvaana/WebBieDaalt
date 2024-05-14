@@ -10,10 +10,29 @@ const ItemCard = (props) => {
     const [name, setName] = useState("");
     const navigate = useNavigate();
     const fileRef = useRef(null);
+
+    const formattedDate = new Date(props.item.createdAt).toLocaleString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false // Use 24-hour format
+    });
+    let color = '';
+
+     // Check the delivery status and set the background color accordingly
+     if (props.item.delivery_status == 'Баталгаажсан') {
+        color = '#FF6C6C';
+     } else if(props.item.delivery_status == 'Хүргэгдсэн'){
+        color = '#4cff4c';
+     }
+
     const handleChange = (e) => {
         console.log(props.item._id);
         setName(props.item._id);
-        axios.get("http://localhost:5000/api/order")
+        console.log(name);
+        axios.get("http://localhost:5000/api/order/getOrder")
             .then(res => {
                 console.log(res.data);
                 // Filter the items where the category is 'ring'
@@ -30,22 +49,21 @@ const ItemCard = (props) => {
         <div className="data_body_workers" onClick={() => fileRef.current.click()}>
             <div className="id_prod" >
                 <p>
-            {props.item._id && props.item._id.substring(20, 24)}
             </p>
             </div>
             <div className="code_prod">
                 <p>
-                {props.item.product_code}
+            {props.item._id && props.item._id.substring(20, 24)}
                 </p>
             </div>
             <div className="catecore_prod">
                 <p>
-                {props.item.deliver_email}
+                {formattedDate}
                 </p>
             </div>
-            <div className="name_prod">
+            <div className="name_prod" style={{backgroundColor: color, height: '70%', display: 'flex', alignItems: 'center', borderRadius: '40px'}}>
                 <p>
-                {props.item.deliver_phone}
+                {props.item.delivery_status}
                 </p>
             </div>
             <button ref={fileRef} onClick={handleChange} hidden></button>

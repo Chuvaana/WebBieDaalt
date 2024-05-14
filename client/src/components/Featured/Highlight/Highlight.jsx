@@ -57,7 +57,7 @@ const Highlight = (props) => {
                                 <div className='price'><p>{secondItem.price}₮</p></div>
                             </div>
                         </div>
-                        <div className='s_second'>
+                        {/* <div className='s_second'>
                             <div className='s_s_first' onClick={jump3}  style={{ backgroundImage: `url(${thirdItem.image[0].path})` }}>
                                 <div className='inside' >
                                     <div className='name'> <p> {thirdItem.name}</p></div>
@@ -71,8 +71,8 @@ const Highlight = (props) => {
                                     <div className='description'><p>{thirdItem.description}</p></div>
                                     <div className='price'><p>{thirdItem.price}₮</p></div>
                                 </div>
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div> */}
                     </div>
                 </div>
             </div>

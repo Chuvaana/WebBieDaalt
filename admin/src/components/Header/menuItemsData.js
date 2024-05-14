@@ -6,7 +6,7 @@ export const menuItemsData = [
     },
     {
         title: 'Захиалгын жагсаалт',
-        url: '/orderlist',
+        url: '/',
     },
     {
         title: 'Бараа бүртгэгч',
