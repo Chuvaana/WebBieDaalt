@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link , useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './productlist.css';
 
 // Assuming ItemCard is imported from another file
@@ -32,7 +32,7 @@ const AddItemForm = () => {
             <div className="header_medeell">
                 <h1 className="baraa_garchig">Барааны жагсаалт</h1>
                 <button className="shuultuur">Ангиллаар шүүх</button>
-                
+
                 <Link to="/addproduct">
                     <button className="product_nemeh">Бараа бүртгэх</button>
                 </Link>
@@ -50,8 +50,9 @@ const AddItemForm = () => {
             <div className="data_body_productsaa">
                 {/* Mapping through ringItems and rendering ItemCard for each item */}
                 {ringItems.map((item, index) => (
-                    <ItemCard key={index} item={item} category="ring" />
+                    <ItemCard key={index} item={item} itemKey={index} category="ring" />
                 ))}
+
             </div>
         </div>
     );

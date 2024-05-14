@@ -108,6 +108,18 @@ function App() {
                 <Route path="/item/ring">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
+                <Route path="/item/bag">
+                  <Route path=":id" element={<ItemView />}/>
+                </Route>
+                <Route path="/item/maskchain">
+                  <Route path=":id" element={<ItemView />}/>
+                </Route>
+                <Route path="/item/sets">
+                  <Route path=":id" element={<ItemView />}/>
+                </Route>
+                <Route path="/item/sunglasses">
+                  <Route path=":id" element={<ItemView />}/>
+                </Route>
               </Route>
               <Route path="/cart" element={<Cart />} />
               <Route path="/delivery_form" element={<Delivery_form />} />
