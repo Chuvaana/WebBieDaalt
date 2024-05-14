@@ -7,7 +7,7 @@ import Header from '../components/Header/Header';
 import Worklist from '../components/Admin/WorkerList/Workerlist';
 import Addworker from '../components/Admin/AddWorker/AddWorker';
 import Addproduct from '../components/Admin/Admin';
-import Orderitemsproduct from '../components/Orderlist/Orderitemsproduct/Orderitemsproduct';
+// import Orderitemsproduct from '../components/Orderlist/Orderitemsproduct/Orderitemsproduct';
 import Orderlist from '../components/Orderlist/Orderlist';
 import Productlist from '../components/Admin/ProductList/Productlist';
 import Login from '../components/Account/Login/Login';
@@ -29,7 +29,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/addproduct" element={<Addproduct />} />
               <Route path="/productlist" element={<Productlist />} />
-              <Route path="/orderitemsproduct" element={<Orderitemsproduct />} />
+              {/* <Route path="/orderitemsproduct" element={<Orderitemsproduct />} /> */}
               <Route path="/addworker" element={<Addworker />} />
               <Route path="/" element={<Orderlist />} />
             </Routes>
