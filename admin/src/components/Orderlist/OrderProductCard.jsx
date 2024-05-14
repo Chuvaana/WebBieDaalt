@@ -22,11 +22,6 @@ const ItemCard = (props) => {
     } else if (item.delivery_status === 'Хүргэгдсэн') {
         color = '#4cff4c';
     }
-
-    const handleButtonClick = () => {
-        setButtonText(prevText => prevText === item.delivery_status ? 'Хүргэгдсэн' : item.delivery_status);
-    };
-
     return (
         <div className="data_body_products_detail">
             <div className="header_product_card">
