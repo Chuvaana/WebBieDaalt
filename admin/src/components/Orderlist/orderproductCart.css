@@ -1,12 +1,7 @@
-.data_body_products_detail{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
+ .data_body_products_detail{
+    width: 0%;
 }
-
+/*
 .data_body_products_detail .body_product_card .order_body_first{
     display: flex;
     flex-direction: row;
@@ -56,4 +51,44 @@
     width: 200px;
     align-items: center;
     text-align: center;
+} */
+
+.header_product_card h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
 }
+
+.body_product_card {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    /* background-color: #f9f9f9; */
+}
+
+table {
+    width: 100%;
+}
+
+table td {
+    padding: 10px;
+}
+
+.effect_loose {
+    padding: 10px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Define background colors for different delivery statuses */
+.effect_loose.bg-red {
+    background-color: #FF6C6C;
+    /* Red */
+}
+
+.effect_loose.bg-green {
+    background-color: #4cff4c;
+    /* Green */
+}
+
+/* Adjust other styles as needed */
