@@ -17,7 +17,7 @@ const AddItemForm = () => {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/order")
+        axios.get("http://localhost:5000/api/order/getOrder")
             .then(res => {
                 console.log(res.data);
                 // Filter the items where the category is 'ring'
