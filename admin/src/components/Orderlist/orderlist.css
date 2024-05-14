@@ -75,3 +75,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 }
+
+.data_body_products{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

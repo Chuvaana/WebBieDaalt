@@ -1,39 +1,31 @@
+// AddItemForm.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './orderlist.css';
 
-// Assuming ItemCard is imported from another file
 import ItemCard from "./OrderItemCard";
 import ProductCard from "./OrderProductCard";
 
 const AddItemForm = () => {
     const [ringItems, setRingItems] = useState([]);
-    const [isConditionMet, setIsConditionMet] = useState(true); // Initial condition
-    // const condition = true;
-
-    const handleConditionChange = () => {
-        setIsConditionMet(!isConditionMet); // Toggle the condition
-    };
+    const [selectedItem, setSelectedItem] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("http://localhost:5000/api/order/getOrder")
             .then(res => {
-                console.log(res.data);
-                // Filter the items where the category is 'ring'
-                const ringItems = res.data.filter(item => item.deliver_email === item.deliver_email);
-                setRingItems(ringItems); // Set the filtered items
+                setRingItems(res.data);
             })
             .catch(err => console.error("Error fetching data:", err));
 
-        window.scrollTo(0, 0);
-    }, []);
-    const navigate = useNavigate();
-    useEffect(() => {
         const user = localStorage.getItem('user');
-        if (!user)
-            navigate("/login")
-    });
+        if (!user) navigate("/login");
+    }, [navigate]);
+
+    const handleItemClick = (item) => {
+        setSelectedItem(item);
+    };
 
     return (
         <div className="orderlist">
@@ -43,7 +35,7 @@ const AddItemForm = () => {
                         <p>Захиалгын жагсаалт</p>
                     </div>
                     <div className="shuultuur">
-                        <button > Төлөвөөр шүүх</button>
+                        <button> Төлөвөөр шүүх</button>
                     </div>
                 </div>
                 <div className="orderlist_slide_body">
@@ -53,30 +45,19 @@ const AddItemForm = () => {
                         <p>Хугацаа</p>
                         <p>Төлөв</p>
                     </div>
-
                     <div className="data_body_productsaa">
-                        {/* Mapping through ringItems and rendering ItemCard for each item */}
                         {ringItems.map((item, index) => (
-                            <ItemCard key={index} item={item} />
+                            <ItemCard key={index} index={index} item={item} onClick={handleItemClick} />
                         ))}
                     </div>
                 </div>
             </div>
             <div className="order_data">
-
-                {/* <div className="header_product_card">
-                    <h1>Захиалгын дэлгэрэнгүй</h1>
-                </div>
-                {condition ? (
-                    <div>
-                        <p>Захиалсан бараа</p>
-                        {ringItems.map((item, index) => (
-                            <ItemCard key={index} item={item} />
-                        ))}
-                    </div>
+                {selectedItem ? (
+                    <ProductCard item={selectedItem} />
                 ) : (
-                    <p>No workers found.</p>
-                )} */}
+                    <p>Захиалгын дэлгэрэнгүй хараахан сонгогдоогүй байна.</p>
+                )}
             </div>
         </div>
     );

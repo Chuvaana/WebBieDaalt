@@ -102,7 +102,6 @@ const AddWorkerForm = () => {
                             <option value="">Ажилтны төлөв</option>
                             <option value="Идэвхтэй">Идэвхтэй</option>
                             <option value="Идэвхгүй">Идэвхгүй</option>
-                            <option value="Амарсан">Амарсан</option>
                         </select>
                         </div>
                     <div>
@@ -120,7 +119,7 @@ const AddWorkerForm = () => {
                     <button className="cancel_s" type="submit">Цуцлах</button>
                     </Link>
                     {/* <Link to="/workerlist"> */}
-                    <button type="submit">Add Worker</button>
+                    <button type="submit">Ажилтан нэмэх</button>
                     {/* </Link> */}
                 </div>
             </form>
