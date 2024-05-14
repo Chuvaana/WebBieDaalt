@@ -3,7 +3,7 @@ const router = express.Router()
 const cors = require("cors")
 const { getItem,getOrder, updateItem, deleteItem } = require("../controllers/orderController")
 
-router.get('/', cors(), getItem)
+router.get('/getOrder', cors(), getItem)
 
 router.post('/add', getOrder)
 router.put('/:id', updateItem)

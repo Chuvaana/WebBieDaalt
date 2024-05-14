@@ -1,10 +1,10 @@
-const Order = require("../models/orderModel");
+const Order1 = require("../models/OrderModel1");
 
 /* GET request handler */
 const getItem = async (req, res) => {
     try {
         // Query the "Items" collection to retrieve all items
-        const items = await Order.find();
+        const items = await Order1.find();
         // Respond with the retrieved items
         res.json(items);
         // res.send(items);
@@ -18,33 +18,29 @@ const getItem = async (req, res) => {
 
 const getOrder = async (req, res) => {
     try {
-        // Extracting request body parameters
-        const { orderid, product_id, product_code, product_number, order_price, order_all_price, deliver_loc_name, deliver_loc_District, deliver_loc_Committee, deliver_location, deliver_information, deliver_phone, deliver_email } = req.body;
+        // Extract data from the request body
+        const { deliver_phone, deliver_email, product, order_all_price, deliver_loc_District, deliver_loc_Committee, deliver_location } = req.body;
 
-        // Create a new order instance using the Order model
-        const newOrder = new Order({
-            product_id,
-            product_code,
-            product_number,
-            order_price,
+        // Create a new order instance
+        const newOrder = new Order1({
+            deliver_phone,
+            deliver_email,
+            product,
             order_all_price,
-            deliver_loc_name,
             deliver_loc_District,
             deliver_loc_Committee,
             deliver_location,
-            deliver_information,
-            deliver_phone,
-            deliver_email
+            delivery_status: "Баталгаажсан"
         });
 
         // Save the new order to the database
         const savedOrder = await newOrder.save();
 
-        // Respond with success message and the saved order
-        res.status(201).json({ message: "Order added successfully", order: savedOrder });
-    } catch (error) {
-        console.error("Error adding order:", error);
-        res.status(400).json({ message: "Unable to add order" });
+        // Respond with the saved order
+        res.status(201).json(savedOrder);
+    } catch (err) {
+        // If an error occurs, send an error response
+        res.status(500).json({ message: err.message });
     }
 };
 

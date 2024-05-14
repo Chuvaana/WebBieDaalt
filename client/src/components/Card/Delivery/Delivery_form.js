@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import axios from 'axios';
 import { CartItemsContext } from '../../../Context/CartItemsContext';
 
-import { Button, Form, Input, Select, Space, InputNumber, Radio, ConfigProvider } from 'antd';
+import { Button, Form, Input, Select, Space, InputNumber, Radio, ConfigProvider, message } from 'antd';
 import { useNavigate } from "react-router-dom";
 import './Delivery_form.css';
 import DeliveryCartCard from "./DeliveryCartCard/DeliveryCartCard";
@@ -234,44 +234,25 @@ const cities = [
     { id: 204, name: "24-р хороо", value: "24-р хороо", country: "Чингэлтэй" }
 ];
 
-const Delivery_form = () => {
+const DeliveryForm = () => {
     const [selectedCountry, setSelectedCountry] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
     const [cityItems, setCityItems] = useState([]);
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
-    const [addition, setAddition] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
-    const [mail, setMail] = useState("");
+    const [addition, setAddition] = useState("");
+    const [email, setEmail] = useState("");
+  
     const [value, setValue] = useState(1);
     const onChange = (e) => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);
     };
-    const [formData, setFormData] = useState({
-        product_id: '',
-        product_code: '',
-        product_number: '',
-        order_price: '',
-        order_all_price: '',
-        deliver_loc_name: '',
-        deliver_loc_District: '',
-        deliver_loc_Committee: '',
-        deliver_location: '',
-        deliver_information: '',
-        deliver_phone: '',
-        deliver_email: ''
-    });
 
-    const [form] = Form.useForm();
+    const navigate = useNavigate();
+    const cartItems = useContext(CartItemsContext);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value
-        });
-    };
     useEffect(() => {
         setCityItems([]);
         setSelectedCity("");
@@ -279,53 +260,38 @@ const Delivery_form = () => {
             setCityItems(cities.filter((c) => c.country === selectedCountry));
     }, [selectedCountry]);
 
-    const navigate = useNavigate();
-
-    const handleViewAllItems = async (e) => {
-        e.preventDefault();
+    const handleFormSubmit = async () => {
         try {
-            await form.validateFields();
-            const formValues = form.getFieldsValue();
-            console.log('Form values:', formValues);
+            const productData = cartItems.items.map(item => ({
+                name: item.name,
+                quantity: item.itemQuantity,
+                // Add other properties as needed
+            }));
 
+            const formData = {
+                deliver_phone: phoneNumber,
+                deliver_email: email,
+                product: productData,
+                order_all_price: cartItems.totalAmount + 8000, // Total price including delivery cost
+                deliver_loc_District: selectedCountry,
+                deliver_loc_Committee: selectedCity,
+                deliver_location: address,
+            };
 
+            // Send form data to backend
             const response = await axios.post('http://localhost:5000/api/order/add', formData);
-            console.log(response.data); // Log the response from the server
-            // Handle successful response if needed
-            // If the form is valid, navigate to the appropriate payment page
-            if (value === 1) {
-                navigate('/bank_payment');
-            } else if (value === 2) {
-
-                navigate('/kart_payment');
-            }
+            console.log(response.data);
+            navigate(value === 1 ? '/bank_payment' : '/kart_payment');
         } catch (error) {
             console.error('Error creating order:', error);
-            // Handle error response if needed
-            // Validate the form
-
-        };
+            message.error('Failed to create order. Please try again.');
+        }
     };
 
 
     const onFinish = (values) => {
         console.log(values);
     };
-
-    const cartItems = useContext(CartItemsContext);
-    console.log(cartItems.items[0]);
-    formData.product_id = cartItems.items[0].category;
-    formData.product_code = cartItems.items[0].category;
-    formData.product_number = cartItems.items[0].category;
-    formData.order_price = cartItems.totalAmount
-    formData.order_all_price = cartItems.totalAmount + 8000
-    formData.deliver_loc_name = name;
-    formData.deliver_loc_District =
-        formData.deliver_loc_Committee =
-        formData.deliver_location = address;
-    formData.deliver_information = addition;
-    formData.deliver_phone = phoneNumber;
-    formData.deliver_email = mail;
 
     return (
         <div className="delivery_form_body">
@@ -334,49 +300,47 @@ const Delivery_form = () => {
                     components: {
                         Button: {
                             colorPrimary: '#DB4444',
-                            algorithm: true, // Enable algorithm
+                            algorithm: true,
                         },
                         Input: {
                             colorPrimary: '#7D7463',
-                            algorithm: true, // Enable algorithm
+                            algorithm: true,
                         },
                         InputNumber: {
                             colorPrimary: '#7D7463',
-                            algorithm: true, // Enable algorithm
+                            algorithm: true,
                         },
                         Select: {
                             colorPrimary: '#7D7463',
-                            algorithm: true, // Enable algorithm
+                            algorithm: true,
                         },
                         Radio: {
                             colorPrimary: '#E72929',
-                            algorithm: true, // Enable algorithm
+                            algorithm: true,
                         }
                     },
                 }}
             >
-                <div className="d_form_body" >
+                <div className="d_form_body">
                     <div className="delivery_address_body">
-                        <h2>Хүргэлтийн хаяг</h2>
+                        <h2>Delivery Address</h2>
                         <Form
                             layout="vertical"
-                            form={form}
                             onFinish={onFinish}
                             style={{ maxWidth: 600 }}
                         >
                             <Form.Item
                                 name="name"
-                                label="Нэр"
-                                value={formData.product_id} onChange={handleChange}
-                                rules={[{ required: true, message: 'Нэрээ оруулна уу!' }]}
+                                label="Name"
+                                rules={[{ required: true, message: 'Please enter your name!' }]}
                             >
                                 <Input onChange={(e) => setName(e.target.value)} />
                             </Form.Item>
 
                             <Form.Item
                                 name="district"
-                                label="Дүүрэг"
-                                rules={[{ required: true, message: 'Дүүргээ сонгоно уу!' }]}
+                                label="District"
+                                rules={[{ required: true, message: 'Please select your district!' }]}
                             >
                                 <Select
                                     value={selectedCountry}
@@ -392,8 +356,8 @@ const Delivery_form = () => {
 
                             <Form.Item
                                 name="horoo"
-                                label="Хороо"
-                                rules={[{ required: true, message: 'Хороогоо сонгоно уу!' }]}
+                                label="City"
+                                rules={[{ required: true, message: 'Please select your city!' }]}
                             >
                                 <Select
                                     value={selectedCity}
@@ -409,70 +373,54 @@ const Delivery_form = () => {
 
                             <Form.Item
                                 name="address"
-                                label="Хүргүүлэх хаяг"
-                                value={formData.product_id} onChange={handleChange}
-                                rules={[{ required: true, message: 'Хүргүүлэх хаяг оруулна уу!' }]}
+                                label="Delivery Address"
+                                rules={[{ required: true, message: 'Please enter your delivery address!' }]}
                             >
                                 <Input onChange={(e) => setAddress(e.target.value)} />
                             </Form.Item>
+
                             <Form.Item
                                 name="addition"
-                                label="Нэмэлт мэдээлэл"
-                                value={formData.deliver_information} onChange={handleChange}
-                            // onChange={(value) => setAddition(value)}
+                                label="Additional Information"
                             >
                                 <Input onChange={(e) => setAddition(e.target.value)} />
                             </Form.Item>
+
                             <Form.Item
-                                label="Утасны дугаар"
-                                name="Утасны дугаар"
-                                value={formData.deliver_phone} onChange={handleChange}
-                                // onChange={(value) => setPhoneNUmber(value)}
+                                label="Phone Number"
+                                name="phoneNumber"
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Утасны дугаараа оруулна уу!',
+                                        message: 'Please enter your phone number!',
                                     },
-                                    ({ getFieldValue }) => ({
-                                        validator(rule, value = "") {
-                                            const isValid = /^[89]\d{7}$/.test(value);
-
-                                            if (!isValid) {
-                                                return Promise.reject("Утасны дугаараа шалгана уу!");
-                                            } else {
-                                                return Promise.resolve();
-                                            }
-                                        }
-                                    })
+                                    {
+                                        pattern: /^[89]\d{7}$/,
+                                        message: 'Please enter a valid phone number!',
+                                    }
                                 ]}
                             >
                                 <InputNumber
-                                    style={{
-                                        width: '100%',
-                                    }}
-                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    style={{ width: '100%' }}
+                                    onChange={(value) => setPhoneNumber(value)}
                                 />
                             </Form.Item>
 
-
-
                             <Form.Item
-                                name="mail"
-                                label="И-мэйл"
-                                value={formData.deliver_email} onChange={handleChange}
-                                // onChange={(value) => setMail(value)}
+                                name="email"
+                                label="Email"
                                 rules={[
                                     {
                                         type: 'email',
-                                        message: 'И-мэйл зөв хаягаа оруулна уу',
+                                        message: 'Please enter a valid email address!',
                                     },
                                     {
                                         required: true,
-                                        message: 'И-мэйл хаягаа оруулна уу!',
+                                        message: 'Please enter your email!',
                                     },
                                 ]}
                             >
-                                <Input onChange={(e) => setMail(e.target.value)} />
+                                <Input onChange={(e) => setEmail(e.target.value)} />
                             </Form.Item>
                         </Form>
                     </div>
@@ -511,7 +459,7 @@ const Delivery_form = () => {
                                         </Space>
                                     </Radio.Group><br></br>
                                 </div>
-                                <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleViewAllItems}>Төлөх</Button>
+                                <Button style={{ height: '46px', paddingLeft: '20px', paddingRight: '20px', fontSize: '16px' }} type='primary' onClick={handleFormSubmit}>Төлөх</Button>
 
                             </div >
                         )}
@@ -520,6 +468,6 @@ const Delivery_form = () => {
             </ConfigProvider >
         </div >
     );
-
 }
-export default Delivery_form;
+
+export default DeliveryForm;

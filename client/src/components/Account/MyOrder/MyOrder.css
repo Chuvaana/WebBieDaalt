@@ -1,0 +1,34 @@
+.myorder_list_frame {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    gap: 20px;
+}
+
+.header_myorder,
+.header_myorder_cart {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* justify-content: space-between; */
+    justify-content: center;
+    padding: 20px;
+}
+
+.body_myorder {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.twenty {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
