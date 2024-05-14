@@ -14,6 +14,7 @@ import Productlist from '../components/Admin/ProductList/Productlist';
 import CartItemsProvider from '../Context/CartItemsProvider';
 import WishItemsProvider from '../Context/WishItemsProvider';
 import SearchProvider from '../Context/SearchProvider';
+import Workerlist1 from '../components/Admin/WorkerList/Workerlist1';
 function App() {
 
   return (
@@ -24,7 +25,7 @@ function App() {
             <Header />
             <Routes>
             {/* <Footer /> */}
-              <Route path="/workerlist" element={<Worklist />} />
+              <Route path="/workerlist" element={<Workerlist1 />} />
               <Route path="/addproduct" element={<Addproduct />} />
               <Route path="/productlist" element={<Productlist />} />
               <Route path="/orderitemsproduct" element={<Orderitemsproduct />} />
