@@ -15,19 +15,18 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-import './worklist.css';
+import './productlist.css';
 
-function createData(no, lastname, firstname, rd, phone, mail, address, sincedate, status) {
+function createData(no, code, type, name, startCount, price, date, endCount) {
     return {
         no,
-        lastname,
-        firstname,
-        rd,
-        phone,
-        mail,
-        address,
-        sincedate,
-        status
+        code,
+        type,
+        name,
+        startCount,
+        price,
+        date,
+        endCount,
     };
 }
 
@@ -67,53 +66,47 @@ const headCells = [
         label: '№',
     },
     {
-        id: 'lastname',
+        id: 'code',
         numeric: false,
         disablePadding: true,
-        label: 'Овог',
+        label: 'Код',
     },
     {
-        id: 'firstname',
+        id: 'type',
         numeric: false,
         disablePadding: true,
+        label: 'Ангилал',
+    },
+    {
+        id: 'name',
+        numeric: true,
+        disablePadding: false,
         label: 'Нэр',
     },
     {
-        id: 'rd',
+        id: 'startCount',
         numeric: true,
         disablePadding: false,
-        label: 'РД',
+        label: 'Анх ирсэн тоо',
     },
     {
-        id: 'phone',
+        id: 'price',
         numeric: true,
         disablePadding: false,
-        label: 'Утас',
+        label: 'Нэгж үнэ',
     },
     {
-        id: 'mail',
+        id: 'date',
         numeric: true,
         disablePadding: false,
-        label: 'И-мэйл',
+        label: 'Хугацаа',
     },
     {
-        id: 'address',
+        id: 'endCount',
         numeric: true,
         disablePadding: false,
-        label: 'Гэрийн хаяг',
-    },
-    {
-        id: 'sincedate',
-        numeric: true,
-        disablePadding: false,
-        label: 'Ажилд орсон огноо',
-    },
-    {
-        id: 'status',
-        numeric: true,
-        disablePadding: false,
-        label: 'Төлөв',
-    },
+        label: 'Үлдэгдэл',
+    }
 ];
 
 function EnhancedTableHead(props) {
@@ -155,8 +148,8 @@ EnhancedTableHead.propTypes = {
     rowCount: PropTypes.number.isRequired,
 };
 
-export default function Workerlist1() {
-    const [workers, setWorkers] = useState([]);
+export default function ProductList1() {
+    const [ringItems, setRingItems] = useState([]);
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('no');
     const [selected, setSelected] = React.useState([]);
@@ -165,16 +158,21 @@ export default function Workerlist1() {
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/worker")
+        axios.get("http://localhost:5000/api/items")
             .then(res => {
                 console.log(res.data);
-                setWorkers(res.data);
+                // Filter the items where the category is 'ring'
+                // const ringItems = res.data.filter(item => item.category === item.category);
+                setRingItems(res.data); // Update the state with fetched data
             })
             .catch(err => console.error("Error fetching data:", err));
+
+        window.scrollTo(0, 0);
     }, []);
 
-    const rows = workers.map((item, index) => createData(index + 1, item.deliver_ovog, item.deliver_name, item.deliver_rd, item.deliver_phone, item.deliver_email, item.deliver_address, item.deliver_date, item.deliver_type));
-
+    const rows = ringItems.map((item, index) =>
+        createData(index + 1, item._id, item.category, item.name, item.quantity, item.price, item.createdAt, item.quantity)
+    );
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -228,9 +226,13 @@ export default function Workerlist1() {
 
     return (
         <div className='workerList_frame'>
+            <div className="header_medeell">
+                <h1 className="baraa_garchig">Барааны жагсаалт</h1>
 
-            <h2>Хүргэлтийн ажилтан</h2>
-
+                <Link to="/addproduct">
+                    <button className="product_nemeh">Бараа бүртгэх</button>
+                </Link>
+            </div>
             <Box sx={{ width: '100%' }}>
                 <Paper sx={{ width: '100%', mb: 2 }}>
                     <TableContainer>
@@ -252,7 +254,6 @@ export default function Workerlist1() {
                                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     .map((row, index) => {
                                         const labelId = `enhanced-table-checkbox-${index}`;
-                                        const statusColor = row.status === 'Идэвхтэй' ? 'green' : row.status === 'Идэвхгүй' ? 'red' : 'inherit';
 
                                         return (
                                             <TableRow
@@ -265,14 +266,14 @@ export default function Workerlist1() {
                                                 <TableCell component="th" id={labelId} scope="row" padding="none">
                                                     {row.no}
                                                 </TableCell>
-                                                <TableCell align="left">{row.lastname}</TableCell>
-                                                <TableCell align="left">{row.firstname}</TableCell>
-                                                <TableCell align="right">{row.rd}</TableCell>
-                                                <TableCell align="right">{row.phone}</TableCell>
-                                                <TableCell align="right">{row.mail}</TableCell>
-                                                <TableCell align="right">{row.address}</TableCell>
-                                                <TableCell align="right">{row.sincedate}</TableCell>
-                                                <TableCell align="right" style={{ backgroundColor: statusColor }}>{row.status}</TableCell>
+                                                <TableCell align="left">{row.code}</TableCell>
+                                                <TableCell align="left">{row.type}</TableCell>
+                                                <TableCell align="right">{row.name}</TableCell>
+                                                <TableCell align="right">{row.startCount}</TableCell>
+                                                <TableCell align="right">{row.price}</TableCell>
+                                                <TableCell align="right">{row.date}</TableCell>
+                                                <TableCell align="right">{row.endCount}</TableCell>
+
                                             </TableRow>
                                         );
                                     })}
@@ -296,11 +297,6 @@ export default function Workerlist1() {
                 </Paper>
 
             </Box>
-            <div className="footer_button">
-                <Link to="/addworker">
-                    <button className="worker_add_btn">Ажилтан нэмэх</button>
-                </Link>
-            </div>
         </div>
     );
 }
