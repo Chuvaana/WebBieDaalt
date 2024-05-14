@@ -23,22 +23,6 @@ const ItemCard = (props) => {
     } else if (item.delivery_status === 'Хүргэгдсэн') {
         color = '#4cff4c';
     }
-    // const [ringItems, setRingItems] = useState([]);
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000/api/order/getOrder")
-    //         .then(res => {
-    //             setRingItems(res.data);
-    //             // const ringItems = res.data.filter(item => item.category === props.item.deliver_phone);
-    //             // setRingItems(ringItems); // Set the filtered items
-    //         })
-    //         .catch(err => console.error("Error fetching data:", err));
-
-    //     const user = localStorage.getItem('user');
-    //     if (!user) navigate("/login");
-    // }, [navigate]);
-
-    // console.log(ringItems);
     return (
         <div className="data_body_products_detail">
             <div className="header_product_card">

@@ -17,6 +17,7 @@ import WishItemsProvider from "../Context/WishItemsProvider";
 import SearchProvider from "../Context/SearchProvider";
 import Workerlist1 from "../components/Admin/WorkerList/Workerlist1";
 import ProductList1 from "../components/Admin/ProductList/ProductList1";
+import OrderList1 from "../components/Orderlist/OrderList1";
 function App() {
   return (
     <CartItemsProvider>
@@ -32,7 +33,7 @@ function App() {
               <Route path="/productlist" element={<ProductList1 />} />
               {/* <Route path="/orderitemsproduct" element={<Orderitemsproduct />} /> */}
               <Route path="/addworker" element={<Addworker />} />
-              <Route path="/" element={<Orderlist />} />
+              <Route path="/" element={<OrderList1 />} />
             </Routes>
           </Router>
         </SearchProvider>
