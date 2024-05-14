@@ -8,10 +8,10 @@ const loginAuser = async (req, res) => {
     Worker.findOne({ deliver_username: deliver_username })
         .then(user => {
             if (user) {
-                if (user.deliver_password === deliver_password) {
+                if (user.deliver_password === deliver_password && user.deliver_admin === true) {
                     res.json(user)
                 } else {
-                    res.json("the password is incorrect")
+                    res.json("the password is incorrect Or You have not Admin right")
                 }
             } else {
                 res.json("No record exist")
@@ -46,6 +46,7 @@ const addWorker = async (req, res) => {
             deliver_date,
             deliver_type ,
             deliver_username,
+            deliver_admin,
             deliver_password} = req.body
 
         const newWorker = new Worker({
@@ -58,6 +59,7 @@ const addWorker = async (req, res) => {
             deliver_date,
             deliver_type,
             deliver_username,
+            deliver_admin,
             deliver_password
         });
         const savedWorker = await newWorker.save();

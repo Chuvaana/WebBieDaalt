@@ -17,7 +17,7 @@ const LoginCard = () => {
         axios.post('http://localhost:5000/api/worker/login', { deliver_username, deliver_password })
             .then(result => {
                 console.log(result.data);
-                if (result.data === "No record exist" || result.data === 'the password is incorrect') { 
+                if (result.data === "No record exist" || result.data === 'the password is incorrect Or You have not Admin right') { 
                     message.error("Нууц үг эсвэл нэр буруу байна",);
                 }
                 else {
@@ -45,7 +45,7 @@ const LoginCard = () => {
                 <div className="btn-all">
                     {/* <a href="/account/password_reset"> Нууц үгээ мартсан</a><br /> */}
                     <button type="submit" className="login-btn">Нэвтрэх</button><br />
-                    {/* <Link to="/account/register" className="register-btn">
+                    {/* <Link to="/register" className="register-btn">
                         Бүртгүүлэх
                     </Link> */}
 

@@ -11,6 +11,7 @@ import Addproduct from "../components/Admin/Admin";
 import Orderlist from "../components/Orderlist/Orderlist";
 import Productlist from "../components/Admin/ProductList/Productlist";
 import Login from "../components/Account/Login/Login";
+import Register from "../components/Account/Register/Register";
 // import Footer from '../components/Footer/Footer';
 import CartItemsProvider from "../Context/CartItemsProvider";
 import WishItemsProvider from "../Context/WishItemsProvider";
@@ -29,6 +30,7 @@ function App() {
               {/* <Footer /> */}
               <Route path="/workerlist" element={<Workerlist1 />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/addproduct" element={<Addproduct />} />
               <Route path="/productlist" element={<ProductList1 />} />
               {/* <Route path="/orderitemsproduct" element={<Orderitemsproduct />} /> */}

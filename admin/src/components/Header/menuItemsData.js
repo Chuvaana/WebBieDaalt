@@ -1,15 +1,15 @@
 export const menuItemsData = [
-    {
-        title: 'Хүргэлтийн ажилтан',
-        url: '/workerlist',
-        // url: '/services',
-    },
-    {
-        title: 'Захиалгын жагсаалт',
-        url: '/',
-    },
-    {
-        title: 'Бараа бүртгэгч',
-        url: '/productlist',
-    }
+  {
+    title: "Ажилтны жагсаалт",
+    url: "/workerlist",
+    // url: '/services',
+  },
+  {
+    title: "Захиалгын жагсаалт",
+    url: "/",
+  },
+  {
+    title: "Барааны жагсаалт",
+    url: "/productlist",
+  },
 ];
