@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import './orderproductCartlol.css'
 
 const ItemCard = (props) => {
+    const navigate = useNavigate();
     const { item } = props;
     const formattedDate = new Date(item.createdAt).toLocaleString('en-US', {
         year: 'numeric',
@@ -24,6 +28,7 @@ const ItemCard = (props) => {
             console.log(result.data);
             if (result.data.message === 'Delivery status updated successfully') {
                 console.log('Delivery status updated successfully');
+                navigate('/');
                 // Add any further actions you want to take upon successful status update
             } else {
                 console.log('Failed to update delivery status');
@@ -143,7 +148,7 @@ const ItemCard = (props) => {
                                 </select>
                             </td>
                             <td>
-                                <button onClick={handleStatusChange}>Шинэ төлөв</button>
+                                <button className="change_btnd" onClick={handleStatusChange}>Шинэ төлөв</button>
                             </td>
                         </tr>
                     </tbody>
