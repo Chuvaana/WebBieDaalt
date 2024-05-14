@@ -20,7 +20,12 @@ function Header() {
     const [profileVisible, setProfileVisible] = useState(false);
     const [ searchInput, setSearchInput] = useState('')
     const navigate = useNavigate()
-
+    const handleExit = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('user');
+        // Navigate to the login page
+        navigate('/login');
+    }
     const toggleProfileVisibility = () => {
         setProfileVisible(!profileVisible);
     };
@@ -108,7 +113,7 @@ function Header() {
 
                                         </svg>
                                     </div>
-                                    <a href='/account/login'>Гарах</a>
+                                    <a href='/login' onClick={handleExit}>Гарах</a>
                                 </div>
                             </div>
                         )}

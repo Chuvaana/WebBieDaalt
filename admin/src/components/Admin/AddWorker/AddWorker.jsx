@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './addworker.css'
 
 import { Link , useNavigate } from 'react-router-dom';
 const AddWorkerForm = () => {
+    
+    
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (!user)
+            navigate("/login")
+    });
     const [formData, setFormData] = useState({
         deliver_ovog: '',
         deliver_name: '',
@@ -18,6 +25,7 @@ const AddWorkerForm = () => {
     });
 
     const navigate = useNavigate();
+    
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
