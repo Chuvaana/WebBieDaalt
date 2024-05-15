@@ -23,9 +23,9 @@ function Footer() {
       </div>
       <div className='foot_helpmenu'>
         <div className='foot_header'><p>ТУСЛАХ ЦЭС</p></div>
-        <div className='pad'><a href=''>Бидний тухай</a></div>
-        <div className='pad'><a href=''>Хүргэлтийн нөхцөл</a></div>
-        <div className='pad'><a href=''>Төлбөр тооцоо</a></div>
+        <div className='pad'><a href='/about'>Бидний тухай</a></div>
+        <div className='pad'><a href='/delivery_condition'>Хүргэлтийн нөхцөл</a></div>
+        <div className='pad'><a href='/payment_support'>Төлбөр тооцоо</a></div>
         <div className='pad'><a href='/contact'>Холбоо барих</a></div>
       </div>
       <div className='foot_contact'>

@@ -47,6 +47,9 @@ import BankPayment from '../components/Card/PaymentType/BankPayment/BankPayment.
 import SuccessPayment from '../components/Card/PaymentType/Success_payment/Success_payment.js';
 import ChangePassAccount from '../components/Account/ChangePass/ChangePassAccount.js';
 import MyOrder from '../components/Account/MyOrder/MyOrder.js';
+import DeliveryCondition from '../components/Footer_menu_items/DeliveryCondition.js';
+import About from '../components/Footer_menu_items/About.js';
+import PaymentSupport from '../components/Footer_menu_items/PaymentSupportr.js';
 
 function App() {
 
@@ -128,6 +131,9 @@ function App() {
               <Route path="/success" element={<SuccessPayment />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/search/*" element={<SearchView />} />
+              <Route path="/delivery_condition" element={<DeliveryCondition />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/payment_support" element={<PaymentSupport />} />
             </Routes>
             <Footer />
             <Routes>

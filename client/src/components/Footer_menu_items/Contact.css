@@ -26,7 +26,7 @@
 }
 
 .contact-all .right_table_upper {
-    margin: 30px 40px 0px 40px;
+    margin: 30px 40px -35px 40px;
     display: flex;
     flex-flow: row;
     gap: 20px;
@@ -34,10 +34,7 @@
 
 .contact-all .right_table_upper input {
     padding-left: 12px;
-    width: 240px;
     height: 50px;
-    background: #F5F5F5;
-    border-style: none;
 }
 
 .contact-all .message {
@@ -49,8 +46,7 @@
 }
 
 .contact-all form {
-    display: flex;
-    justify-content: flex-end;
+    width: 90%;
     margin: 30px 40px 30px 40px;
 }
 

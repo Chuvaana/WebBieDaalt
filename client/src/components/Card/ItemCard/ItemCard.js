@@ -61,7 +61,7 @@ const ItemCard = (props) => {
           </div>
           {props.item.image && props.item.image.length > 0 && (
             <img
-              style={{ width: 245, height: 342, objectFit: "contain" }}
+              style={{ width: 245, height: 342, objectFit: "cover" }}
               src={props.item.image[0].path}
               alt=""
             />

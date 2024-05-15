@@ -5,18 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Badge from '@mui/material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
 
-import { WishItemsContext } from '../../Context/WishItemsContext';
-import { CartItemsContext } from '../../Context/CartItemsContext';
-import { SearchContext } from '../../Context/SearchContext';
-
 import logo from './logo.jpg';
 import Navbar from './Navbar';
 import './Header.css';
 
 function Header() {
-    const wishItems = useContext(WishItemsContext);
-    const cartItems = useContext(CartItemsContext);
-    const searchContext = useContext(SearchContext)
+
     const [profileVisible, setProfileVisible] = useState(false);
     const [ searchInput, setSearchInput] = useState('')
     const navigate = useNavigate()
@@ -36,16 +30,7 @@ function Header() {
         }
     };
 
-    const handelChange = (e) => {
-        setSearchInput(e.target.value)
-    }
-
-    const handelFormSubmit = (e) => {  
-        e.preventDefault()
-        searchContext.setSearchQuery(searchInput)
-        navigate('/search')
-    }
-
+    
     return (
         <>
             <div className="header">

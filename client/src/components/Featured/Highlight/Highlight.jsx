@@ -15,6 +15,7 @@ const Highlight = (props) => {
     const firstItem = Items[0];
     const secondItem = Items[1];
     const thirdItem = Items[2];
+    const fourthItem = Items[3];
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
 
@@ -28,6 +29,9 @@ const Highlight = (props) => {
     
     const jump3 = () => {
         navigate(`/item/${thirdItem.category}/${thirdItem._id}`);
+    };
+    const jump4 = () => {
+        navigate(`/item/${fourthItem.category}/${fourthItem._id}`);
     };
     
     
@@ -57,7 +61,7 @@ const Highlight = (props) => {
                                 <div className='price'><p>{secondItem.price}₮</p></div>
                             </div>
                         </div>
-                        {/* <div className='s_second'>
+                        <div className='s_second'>
                             <div className='s_s_first' onClick={jump3}  style={{ backgroundImage: `url(${thirdItem.image[0].path})` }}>
                                 <div className='inside' >
                                     <div className='name'> <p> {thirdItem.name}</p></div>
@@ -65,14 +69,14 @@ const Highlight = (props) => {
                                     <div className='price'><p>{thirdItem.price}₮</p></div>
                                 </div>
                             </div>
-                            <div className='s_s_second'  onClick={jump3}  style={{ backgroundImage: `url(${thirdItem.image[0].path})` }}>
+                            <div className='s_s_second'  onClick={jump4}  style={{ backgroundImage: `url(${thirdItem.image[0].path})` }}>
                                 <div className='inside' >
                                     <div className='name'> <p> {thirdItem.name}</p></div>
                                     <div className='description'><p>{thirdItem.description}</p></div>
                                     <div className='price'><p>{thirdItem.price}₮</p></div>
                                 </div>
-                            </div> */}
-                        {/* </div> */}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
