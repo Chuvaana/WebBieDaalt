@@ -29,8 +29,9 @@
 }
 
 .landing__container .landing_body .bigCart .texts {
-    height: fit-content;
-    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
 .landing__container .landing_body .bigCart .texts .title {
@@ -49,7 +50,7 @@
     height: fit-content;
     align-items: center;
     gap: 20px;
-    padding-top: 30px;
+    padding-top: 50px;
     width: fit-content;
     cursor: pointer;
 }
@@ -64,4 +65,9 @@
 .landing__container .landing_body .bigCart .photo .shopnow_image {
     height: 90%;
     width: auto;
+}
+
+.photo {
+    display: flex;
+    justify-content: center;
 }

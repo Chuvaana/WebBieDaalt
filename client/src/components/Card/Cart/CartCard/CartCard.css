@@ -26,7 +26,7 @@
 }
 
 .cart__item__image img{
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .item__image {
