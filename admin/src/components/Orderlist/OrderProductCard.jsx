@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { message } from 'antd';
 import './orderproductCartlol.css'
 
 const ItemCard = (props) => {
@@ -28,6 +28,7 @@ const ItemCard = (props) => {
             console.log(result.data);
             if (result.data.message === 'Delivery status updated successfully') {
                 console.log('Delivery status updated successfully');
+                message.success("Амжилттай өөрчиллөө");
                 navigate('/');
                 // Add any further actions you want to take upon successful status update
             } else {

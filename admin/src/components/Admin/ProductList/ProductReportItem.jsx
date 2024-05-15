@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './productlist.css';
 
+import { message } from 'antd'
 const ItemCard = (props) => {
   const [formData, setFormData] = useState({
     name: props.item.name || '',
@@ -55,6 +56,7 @@ const ItemCard = (props) => {
       });
 
       console.log(response.data);
+      message.success("Амжилттай өөрчиллөө");
       navigate('/productlist');
     } catch (error) {
       console.error('Error updating item:', error);

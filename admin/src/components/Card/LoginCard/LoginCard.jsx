@@ -39,7 +39,7 @@ const LoginCard = () => {
                     <h1>Нэвтрэх</h1>
                 </div>
                 <div className="input-all">
-                    <input type="text" className="phone-number" placeholder="Утасны дугаар" onChange={(e) => setphoneNumber(e.target.value)} required></input><br />
+                    <input type="text" className="phone-number" placeholder="Нэвтрэх нэр" onChange={(e) => setphoneNumber(e.target.value)} required></input><br />
                     <input type="password" className="password" placeholder="Нууц үг" onChange={(e) => setPassword(e.target.value)} required></input>
                 </div>
                 <div className="btn-all">
