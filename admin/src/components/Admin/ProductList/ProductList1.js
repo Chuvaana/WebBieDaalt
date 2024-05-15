@@ -212,7 +212,7 @@ export default function ProductList1() {
                 setSelectedItem(ringItems[i]);
             }
         }
-        
+
         // if( row.)
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
@@ -248,7 +248,7 @@ export default function ProductList1() {
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-    
+
 
     // const handleItemClick = (item) => {
     //     setSelectedItem(item);
