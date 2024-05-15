@@ -67,31 +67,31 @@ const ItemCard = (props) => {
         <div className="product_add_main">
           <form onSubmit={handleSubmit}>
             <div className="product_body_first">
-              <input type="text" name="name" placeholder={props.item.name} value={formData.name} onChange={handleChange} />
+              <input type="text" name="name" placeholder="{props.item.name}" value={props.item.name} onChange={handleChange} />
               <input type="text" name="category" placeholder={props.item.category} value={formData.category} onChange={handleChange} />
             </div>
             <div className="product_body_two">
-              <input type="text" name="color" placeholder={props.item.color} value={formData.color} onChange={handleChange} />
-              <input type="text" name="type" placeholder={props.item.type} value={formData.type} onChange={handleChange} />
+              <input type="text" name="color" placeholder={props.item.color} value={props.item.color} onChange={handleChange} />
+              <input type="text" name="type" placeholder={props.item.type} value={props.item.type} onChange={handleChange} />
             </div>
             <div className="product_body_three">
-              <input type="number" name="price" placeholder={props.item.price} value={formData.price} onChange={handleChange} />
-              <input type="text" name="size" placeholder={props.item.size} value={formData.size} onChange={handleChange} />
+              <input type="number" name="price" placeholder={props.item.price} value={props.item.price} onChange={handleChange} />
+              <input type="text" name="size" placeholder={props.item.size} value={props.item.size} onChange={handleChange} />
     
             </div>
             <div className="product_descr">
-              <textarea name="description" placeholder={props.item.description} value={formData.description} onChange={handleChange} />
+              <textarea name="description" placeholder={props.item.description} value={props.item.description} onChange={handleChange} />
             </div>
             <div className="product_hig_qua">
-              <input type="text" name="highlights" placeholder={props.item.highlights} value={formData.highlights} onChange={handleChange} />
-              <input type="number" name="quantity" placeholder={props.item.quantity} value={formData.quantity} onChange={handleChange} />
+              <input type="text" name="highlights" placeholder={props.item.highlights} value={props.item.highlights} onChange={handleChange} />
+              <input type="number" name="quantity" placeholder={props.item.quantity} value={props.item.quantity} onChange={handleChange} />
             </div>
             <div className="product_sale">
               <label>
                 Sale:
-                <input type="checkbox" name="sale" checked={formData.sale} onChange={() => setFormData({ ...formData, sale: !formData.sale })} />
+                <input type="checkbox" name="sale" checked={props.item.sale} onChange={() => setFormData({ ...props.item, sale: !props.item.sale })} />
               </label>
-              {formData.sale && <div className="prod_sale" > <input type="number" style={{ margin: '15px 0px  ', width: '330px', height: '50px'}} name="saleAmount" placeholder={props.item.saleAmount} value={formData.saleAmount} onChange={handleChange} /> </div>}
+              {props.item.sale && <div className="prod_sale" > <input type="number" style={{ margin: '15px 0px  ', width: '330px', height: '50px'}} name="saleAmount" placeholder={props.item.saleAmount} value={props.item.saleAmount} onChange={handleChange} /> </div>}
             </div>
             <div className="product_image">
               <input type="file" name="images" multiple onChange={handleImageChange} />

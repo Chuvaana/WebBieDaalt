@@ -15,6 +15,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+import WorkEdit from './WorkerEditForm';
 import "./worklist.css";
 
 function createData(
@@ -26,7 +27,8 @@ function createData(
   mail,
   address,
   sincedate,
-  status
+  status,
+  code
 ) {
   return {
     no,
@@ -38,6 +40,7 @@ function createData(
     address,
     sincedate,
     status,
+    code,
   };
 }
 
@@ -194,7 +197,8 @@ export default function Workerlist1() {
       item.deliver_email,
       item.deliver_address,
       item.deliver_date,
-      item.deliver_type
+      item.deliver_type,
+      item._id
     )
   );
 
@@ -213,7 +217,18 @@ export default function Workerlist1() {
     setSelected([]);
   };
 
-  const handleClick = (event, id) => {
+  const [selectedItem, setSelectedItem] = useState(null);
+
+
+
+  const handleClick = (event, id, row) => {
+
+    for (let i = 0; i < workers.length; i++) {
+      if (row.code === workers[i]._id) {
+        console.log(workers[i]);
+        setSelectedItem(workers[i]);
+      }
+    }
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
@@ -279,13 +294,13 @@ export default function Workerlist1() {
                       row.status === "Идэвхтэй"
                         ? "green"
                         : row.status === "Идэвхгүй"
-                        ? "red"
-                        : "inherit";
+                          ? "red"
+                          : "inherit";
 
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.no)}
+                        onClick={(event) => handleClick(event, row.no, row)}
                         tabIndex={-1}
                         key={row.no}
                       >
@@ -333,10 +348,18 @@ export default function Workerlist1() {
           />
         </Paper>
       </Box>
+
       <div className="footer_button">
         <Link to="/addworker">
           <button className="worker_add_btn">Ажилтан нэмэх</button>
         </Link>
+      </div>
+      <div className="data_body_productsaq">
+        {selectedItem ? (
+          <WorkEdit item={selectedItem} />
+        ) : (
+          <p></p>
+        )}
       </div>
     </div>
   );

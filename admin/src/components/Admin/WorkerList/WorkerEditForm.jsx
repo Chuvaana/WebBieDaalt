@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./addworker.css";
+import { useNavigate } from "react-router-dom";
 
-import { Link, useNavigate } from "react-router-dom";
-const AddWorkerForm = () => {
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) navigate("/login");
-  });
+const AddWorkerForm = (props) => {
   const [formData, setFormData] = useState({
     deliver_ovog: "",
     deliver_name: "",
@@ -24,22 +19,38 @@ const AddWorkerForm = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (props.item) {
+      setFormData({
+        deliver_ovog: props.item.deliver_ovog || "",
+        deliver_name: props.item.deliver_name || "",
+        deliver_rd: props.item.deliver_rd || "",
+        deliver_phone: props.item.deliver_phone || "",
+        deliver_email: props.item.deliver_email || "",
+        deliver_address: props.item.deliver_address || "",
+        deliver_date: props.item.deliver_date ? new Date(props.item.deliver_date).toISOString().split("T")[0] : "",
+        deliver_type: props.item.deliver_type || "",
+        deliver_username: props.item.deliver_username || "",
+        deliver_admin: props.item.deliver_admin || false,
+        deliver_password: props.item.deliver_password || "",
+      });
+    }
+  }, [props.item]);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
-        ...formData,
-        [name]: type === 'checkbox' ? checked : value
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value,
     });
-};
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/worker/add",
-        formData
-      );
+      const response = await axios.put(`http://localhost:5000/api/worker/${props.item._id}`, formData);
       console.log(response.data);
+
       // Reset form data after successful submission
       setFormData({
         deliver_ovog: "",
@@ -56,16 +67,14 @@ const AddWorkerForm = () => {
       });
 
       navigate("/workerlist");
-      // Handle success message or redirect user if needed
     } catch (error) {
-      console.error("Error adding worker:", error);
-      // Handle error message or show error to the user
+      console.error("Error updating worker:", error);
     }
   };
 
   return (
     <div className="workeradd_main">
-      <h2>Ажилтан нэмэх</h2>
+      <h2>Ажилтны мэдээлэл засах</h2>
       <form className="workeradd_body" onSubmit={handleSubmit}>
         <div className="input_header_first">
           <div>
@@ -199,14 +208,7 @@ const AddWorkerForm = () => {
           </div>
         </div>
         <div className="btn_subtim">
-          <Link to="/workerlist">
-            <button className="cancel_s" type="submit">
-              Цуцлах
-            </button>
-          </Link>
-          {/* <Link to="/workerlist"> */}
-          <button className="submit_s" type="submit">Ажилтан нэмэх</button>
-          {/* </Link> */}
+          <button className="submit_s" type="submit">Өөрчлөх</button>
         </div>
       </form>
     </div>

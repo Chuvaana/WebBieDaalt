@@ -90,7 +90,7 @@
   }
 
   
-.workeradd_main button{
+.submit_s{
   width: 167px;
   height: 56px;
   border-radius: 4px;
@@ -99,6 +99,6 @@
   color: white;
   transition: background-color 0.3s ease; /* Add transition for smoother effect */
 }
-.workeradd_main button:hover{
+.submit_s:hover{
   background-color: #c92929; /* Change background color on hover */
 }

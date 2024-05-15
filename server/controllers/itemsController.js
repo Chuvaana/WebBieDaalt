@@ -114,14 +114,28 @@ const updateItem = async (req, res) => {
 };
 
 /* DELETE Request handler */
-const deleteItem = (req, res) => {
-    res.json({ message: "delete Item" })
-}
+const deleteItem = async (req, res) => {
+    const itemId = req.params.id;
+
+    try {
+        // Find the item by ID and delete it
+        const deletedItem = await Item.findByIdAndDelete(itemId);
+
+        // Check if the item was found and deleted
+        if (!deletedItem) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        // Respond with success message and the deleted item
+        res.json({ message: "Item deleted successfully", item: deletedItem });
+    } catch (error) {
+        console.error("Error deleting item:", error);
+        res.status(500).json({ message: "Unable to delete item" });
+    }
+};
 
 module.exports = {
     getItem,
-    // getOrder,
-    // addWorker,
     addItem,
     updateItem,
     deleteItem

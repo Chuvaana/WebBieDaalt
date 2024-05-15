@@ -73,9 +73,54 @@ const addWorker = async (req, res) => {
 };
 
 /* PUT Request handler */
-const updateItem = (req, res) => {
-    res.json({ message: "update Item" })
-}
+const updateItem = async (req, res) => {
+    const workerId = req.params.id;
+    const {
+        deliver_ovog,
+        deliver_name,
+        deliver_rd,
+        deliver_phone,
+        deliver_email,
+        deliver_address,
+        deliver_date,
+        deliver_type,
+        deliver_username,
+        deliver_admin,
+        deliver_password
+    } = req.body;
+
+    try {
+        // Prepare the update data
+        const updateData = {
+            deliver_ovog,
+            deliver_name,
+            deliver_rd,
+            deliver_phone,
+            deliver_email,
+            deliver_address,
+            deliver_date,
+            deliver_type,
+            deliver_username,
+            deliver_admin,
+            deliver_password,
+            updatedAt: Date.now()
+        };
+
+        // Find the worker by ID and update it with the new data
+        const updatedWorker = await Worker.findByIdAndUpdate(workerId, updateData, { new: true });
+
+        // Check if the worker was found and updated
+        if (!updatedWorker) {
+            return res.status(404).json({ message: "Worker not found" });
+        }
+
+        // Respond with success message and the updated worker
+        res.status(202).json({ message: "Worker updated successfully", worker: updatedWorker });
+    } catch (error) {
+        console.error("Error updating worker:", error);
+        res.status(400).json({ message: "Unable to update worker" });
+    }
+};
 
 /* DELETE Request handler */
 const deleteItem = (req, res) => {

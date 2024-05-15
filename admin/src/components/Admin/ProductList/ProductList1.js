@@ -107,6 +107,12 @@ const headCells = [
         numeric: true,
         disablePadding: false,
         label: 'Үлдэгдэл',
+    },
+    {
+        id: 'delete_btn',
+        numeric: true,
+        disablePadding: false,
+        label: 'Устгах',
     }
 ];
 
@@ -188,6 +194,10 @@ export default function ProductList1() {
         }
         setSelected([]);
     };
+    const Delete_btn_command = (eve, row) => {
+        // console.log(row.code);
+        axios.delete(`http://localhost:5000/api/items/${row.code}`);
+    }
 
     const [selectedItem, setSelectedItem] = useState(null);
     const handleClick = (event, id, row) => {
@@ -286,6 +296,7 @@ export default function ProductList1() {
                                                 <TableCell align="center">{row.price}</TableCell>
                                                 <TableCell align="center">{row.date}</TableCell>
                                                 <TableCell align="center">{row.endCount}</TableCell>
+                                                <TableCell align="center"><button className="btn_delete" onClick={(eve) => Delete_btn_command(eve, row)}></button></TableCell>
 
                                             </TableRow>
                                         );

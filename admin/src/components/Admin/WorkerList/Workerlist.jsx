@@ -3,6 +3,7 @@ import axios from 'axios';
 import './worklist.css';
 import { Link, useNavigate } from 'react-router-dom';
 import ItemCard from './workItemCard';
+import WorkEdit from './WorkerEditForm';
 
 const AddItemForm = () => {
     const [workers, setWorkers] = useState([]);
@@ -26,6 +27,8 @@ const AddItemForm = () => {
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
     };
+
+    const [selectedItem, setSelectedItem] = useState(null);
 
     // Filter workers based on search query
     const filteredWorkers = workers.filter(worker => {
@@ -65,6 +68,13 @@ const AddItemForm = () => {
                     ))
                 ) : (
                     <p>No workers found.</p>
+                )}
+            </div>
+            <div className="data_body_productsaq">
+                {selectedItem ? (
+                    <WorkEdit item={selectedItem} />
+                ) : (
+                    <p>Барааны дэлгэрэнгүй хараахан сонгогдоогүй байна.</p>
                 )}
             </div>
             <div className="footer_button">
