@@ -62,57 +62,128 @@ const addItem = async (req, res) => {
 
 
 /* PUT Request handler */
+// const updateItem = async (req, res) => {
+//     const itemId = req.params.id;
+//     const { name, category, type, color, description, price, size, highlights, quantity, sale, saleAmount } = req.body;
+
+//     try {
+//         // Prepare the update data
+//         const updateData = {
+//             name,
+//             category,
+//             type,
+//             color,
+//             description,
+//             price,
+//             size, // Assuming size is sent as a comma-separated string
+//             highlights, // Assuming highlights is sent as a comma-separated string
+//             quantity,
+//             sale,
+//             saleAmount,
+//             updatedAt: Date.now()
+//         };
+
+//         // Check if there are images to update
+//         if (req.files && req.files.length > 0) {
+//             updateData.image = req.files.map(file => ({
+//                 fieldname: file.fieldname,
+//                 originalname: file.originalname,
+//                 encoding: file.encoding,
+//                 mimetype: file.mimetype,
+//                 destination: file.destination,
+//                 filename: file.filename,
+//                 path: `http://localhost:5000/images/${file.filename}`, // Construct the image path here
+//                 size: file.size
+//             }));
+//         }
+
+//         // Find the item by ID and update it with the new data
+//         const updatedItem = await Item.findByIdAndUpdate(itemId, updateData, { new: true });
+
+//         // Check if the item was found and updated
+//         if (!updatedItem) {
+//             return res.status(404).json({ message: "Item not found" });
+//         }
+
+//         // Respond with success message and the updated item
+//         res.status(202).json({ message: "Item updated successfully", item: updatedItem });
+//     } catch (error) {
+//         console.error("Error updating item:", error);
+//         res.status(400).json({ message: "Unable to update item" });
+//     }
+// };
 const updateItem = async (req, res) => {
     const itemId = req.params.id;
-    const { name, category, type, color, description, price, size, highlights, quantity, sale, saleAmount } = req.body;
-
+    const {
+      name,
+      category,
+      type,
+      color,
+      description,
+      price,
+      size,
+      highlights,
+      quantity,
+      sale,
+      saleAmount
+    } = req.body;
+  
     try {
-        // Prepare the update data
-        const updateData = {
-            name,
-            category,
-            type,
-            color,
-            description,
-            price,
-            size, // Assuming size is sent as a comma-separated string
-            highlights, // Assuming highlights is sent as a comma-separated string
-            quantity,
-            sale,
-            saleAmount,
-            updatedAt: Date.now()
-        };
-
-        // Check if there are images to update
-        if (req.files && req.files.length > 0) {
-            updateData.image = req.files.map(file => ({
-                fieldname: file.fieldname,
-                originalname: file.originalname,
-                encoding: file.encoding,
-                mimetype: file.mimetype,
-                destination: file.destination,
-                filename: file.filename,
-                path: `http://localhost:5000/images/${file.filename}`, // Construct the image path here
-                size: file.size
-            }));
-        }
-
-        // Find the item by ID and update it with the new data
-        const updatedItem = await Item.findByIdAndUpdate(itemId, updateData, { new: true });
-
-        // Check if the item was found and updated
-        if (!updatedItem) {
-            return res.status(404).json({ message: "Item not found" });
-        }
-
-        // Respond with success message and the updated item
-        res.status(202).json({ message: "Item updated successfully", item: updatedItem });
+      // Prepare the update data
+      const updateData = {
+        name,
+        category,
+        type,
+        color,
+        description,
+        price,
+        size: size ? size.split(',').map(s => s.trim()) : [], // Convert comma-separated string to array
+        highlights: highlights ? highlights.split(',').map(h => h.trim()) : [], // Convert comma-separated string to array
+        quantity,
+        sale,
+        saleAmount,
+        updatedAt: Date.now(),
+        image: req.files.map(file => ({
+            fieldname: file.fieldname,
+            originalname: file.originalname,
+            encoding: file.encoding,
+            mimetype: file.mimetype,
+            destination: file.destination,
+            filename: file.filename,
+            path: `http://localhost:5000/images/${file.filename}`, // Construct the image path here
+            size: file.size
+        }))
+      };
+  
+      // Check if there are images to update
+    //   if (req.files && req.files.length > 0) {
+    //     updateData.images = req.files.map(file => ({
+    //       fieldname: file.fieldname,
+    //       originalname: file.originalname,
+    //       encoding: file.encoding,
+    //       mimetype: file.mimetype,
+    //       destination: file.destination,
+    //       filename: file.filename,
+    //       path: `http://localhost:5000/images/${file.filename}`, // Construct the image path here
+    //       size: file.size
+    //     }));
+    //   }
+  
+      // Find the item by ID and update it with the new data
+      const updatedItem = await Item.findByIdAndUpdate(itemId, updateData, { new: true });
+  
+      // Check if the item was found and updated
+      if (!updatedItem) {
+        return res.status(404).json({ message: "Item not found" });
+      }
+  
+      // Respond with success message and the updated item
+      res.status(202).json({ message: "Item updated successfully", item: updatedItem });
     } catch (error) {
-        console.error("Error updating item:", error);
-        res.status(400).json({ message: "Unable to update item" });
+      console.error("Error updating item:", error);
+      res.status(400).json({ message: "Unable to update item" });
     }
-};
-
+  };
 /* DELETE Request handler */
 const deleteItem = async (req, res) => {
     const itemId = req.params.id;

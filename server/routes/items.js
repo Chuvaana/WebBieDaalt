@@ -10,8 +10,8 @@ router.get('/', cors(), getItem)
 router.post('/add', uploadPhoto.array('images'), addItem)
 // router.post('/add',  getOrder)
 // router.post('/add', addWorker)
-router.put('/:id', updateItem)
-
+router.put('/:id', uploadPhoto.array('images'), updateItem)
+// app.put('/api/items/:id', upload.array('images'), updateItem);
 router.delete('/:id', deleteItem)
 
 module.exports = router

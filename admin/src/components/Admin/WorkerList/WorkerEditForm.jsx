@@ -48,6 +48,7 @@ const AddWorkerForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // console.log(formData);
       const response = await axios.put(`http://localhost:5000/api/worker/${props.item._id}`, formData);
       console.log(response.data);
 
