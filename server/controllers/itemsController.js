@@ -16,75 +16,6 @@ const getItem = async (req, res) => {
     }
 }
 
-// const Worker = require("../models/deliverWorker")
-
-// const addWorker = async (req, res) => {
-//     try {
-//         const { deliver_ovog,
-//             deliver_name,
-//             deliver_rd,
-//             deliver_phone,
-//             deliver_email,
-//             deliver_address,
-//             deliver_date,
-//             deliver_type } = req.body
-
-//         const newWorker = new Worker({
-//             deliver_ovog,
-//             deliver_name,
-//             deliver_rd,
-//             deliver_phone,
-//             deliver_email,
-//             deliver_address,
-//             deliver_date,
-//             deliver_type
-//         });
-//         const savedWorker = await newWorker.save();
-
-//         // Respond with success message and the saved order
-//         res.status(201).json({ message: "Order added successfully", order: savedWorker });
-//     } catch (err) {
-//         console.error("Error adding order:", error);
-//         res.status(400).json({ message: "Unable to add order" });
-//     }
-// };
-
-const Order = require("../models/orderModel");
-
-const getOrder = async (req, res) => {
-    try {
-        // Extracting request body parameters
-        const { orderid, product_id, product_code, product_number, order_price, order_all_price, deliver_loc_name, deliver_loc_District, deliver_loc_Committee, deliver_location, deliver_information, deliver_phone, deliver_email } = req.body;
-
-        // Create a new order instance using the Order model
-        const newOrder = new Order({
-            orderid,
-            product_id,
-            product_code,
-            product_number,
-            order_price,
-            order_all_price,
-            deliver_loc_name,
-            deliver_loc_District,
-            deliver_loc_Committee,
-            deliver_location,
-            deliver_information,
-            deliver_phone,
-            deliver_email
-        });
-
-        // Save the new order to the database
-        const savedOrder = await newOrder.save();
-
-        // Respond with success message and the saved order
-        res.status(201).json({ message: "Order added successfully", order: savedOrder });
-    } catch (error) {
-        console.error("Error adding order:", error);
-        res.status(400).json({ message: "Unable to add order" });
-    }
-};
-
-
 /* POST Request handler */
 const addItem = async (req, res) => {
     try {
@@ -131,9 +62,56 @@ const addItem = async (req, res) => {
 
 
 /* PUT Request handler */
-const updateItem = (req, res) => {
-    res.json({ message: "update Item" })
-}
+const updateItem = async (req, res) => {
+    const itemId = req.params.id;
+    const { name, category, type, color, description, price, size, highlights, quantity, sale, saleAmount } = req.body;
+
+    try {
+        // Prepare the update data
+        const updateData = {
+            name,
+            category,
+            type,
+            color,
+            description,
+            price,
+            size, // Assuming size is sent as a comma-separated string
+            highlights, // Assuming highlights is sent as a comma-separated string
+            quantity,
+            sale,
+            saleAmount,
+            updatedAt: Date.now()
+        };
+
+        // Check if there are images to update
+        if (req.files && req.files.length > 0) {
+            updateData.image = req.files.map(file => ({
+                fieldname: file.fieldname,
+                originalname: file.originalname,
+                encoding: file.encoding,
+                mimetype: file.mimetype,
+                destination: file.destination,
+                filename: file.filename,
+                path: `http://localhost:5000/images/${file.filename}`, // Construct the image path here
+                size: file.size
+            }));
+        }
+
+        // Find the item by ID and update it with the new data
+        const updatedItem = await Item.findByIdAndUpdate(itemId, updateData, { new: true });
+
+        // Check if the item was found and updated
+        if (!updatedItem) {
+            return res.status(404).json({ message: "Item not found" });
+        }
+
+        // Respond with success message and the updated item
+        res.status(202).json({ message: "Item updated successfully", item: updatedItem });
+    } catch (error) {
+        console.error("Error updating item:", error);
+        res.status(400).json({ message: "Unable to update item" });
+    }
+};
 
 /* DELETE Request handler */
 const deleteItem = (req, res) => {
@@ -142,7 +120,7 @@ const deleteItem = (req, res) => {
 
 module.exports = {
     getItem,
-    getOrder,
+    // getOrder,
     // addWorker,
     addItem,
     updateItem,

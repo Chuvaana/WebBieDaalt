@@ -2,8 +2,9 @@
 import './productlist.css';
 
 const ItemCard = (props) => {
+    const { item, onClick, index } = props;
     return (
-        <div className="data_body_products">
+        <div className="data_body_products" onClick={() => onClick(item)}>
             <div className="code_prod">
                 <p>
                     {props.itemKey+1}

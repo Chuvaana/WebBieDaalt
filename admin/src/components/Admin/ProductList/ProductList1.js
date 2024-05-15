@@ -16,6 +16,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import './productlist.css';
+import ProductCa from './ProductReportItem'
 
 function createData(no, code, type, name, startCount, price, date, endCount) {
     return {
@@ -121,7 +122,7 @@ function EnhancedTableHead(props) {
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        align={headCell.numeric ? 'right' : 'left'}
+                        align="center"
                         padding={headCell.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === headCell.id ? order : false}
                     >
@@ -188,7 +189,16 @@ export default function ProductList1() {
         setSelected([]);
     };
 
-    const handleClick = (event, id) => {
+    const [selectedItem, setSelectedItem] = useState(null);
+    const handleClick = (event, id, row) => {
+        for (let i = 0; i < ringItems.length; i++) {
+            if (row.code === ringItems[i]._id) {
+                // console.log(ringItems[i]);
+                setSelectedItem(ringItems[i]);
+            }
+        }
+        
+        // if( row.)
         const selectedIndex = selected.indexOf(id);
         let newSelected = [];
 
@@ -223,7 +233,11 @@ export default function ProductList1() {
     const isSelected = (id) => selected.indexOf(id) !== -1;
 
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    
 
+    // const handleItemClick = (item) => {
+    //     setSelectedItem(item);
+    // };
     return (
         <div className='workerList_frame'>
             <div className="header_medeell">
@@ -258,21 +272,20 @@ export default function ProductList1() {
                                         return (
                                             <TableRow
                                                 hover
-                                                onClick={(event) => handleClick(event, row.no)}
+                                                onClick={(event) => handleClick(event, row.no, row)}
                                                 tabIndex={-1}
                                                 key={row.no}
-
                                             >
-                                                <TableCell component="th" id={labelId} scope="row" padding="none">
+                                                <TableCell component="th" id={labelId} scope="row" padding="none" align="center">
                                                     {row.no}
                                                 </TableCell>
-                                                <TableCell align="left">{row.code}</TableCell>
-                                                <TableCell align="left">{row.type}</TableCell>
-                                                <TableCell align="right">{row.name}</TableCell>
-                                                <TableCell align="right">{row.startCount}</TableCell>
-                                                <TableCell align="right">{row.price}</TableCell>
-                                                <TableCell align="right">{row.date}</TableCell>
-                                                <TableCell align="right">{row.endCount}</TableCell>
+                                                <TableCell align="center">{row.code}</TableCell>
+                                                <TableCell align="center">{row.type}</TableCell>
+                                                <TableCell align="center">{row.name}</TableCell>
+                                                <TableCell align="center">{row.startCount}</TableCell>
+                                                <TableCell align="center">{row.price}</TableCell>
+                                                <TableCell align="center">{row.date}</TableCell>
+                                                <TableCell align="center">{row.endCount}</TableCell>
 
                                             </TableRow>
                                         );
@@ -295,8 +308,15 @@ export default function ProductList1() {
                         onRowsPerPageChange={handleChangeRowsPerPage}
                     />
                 </Paper>
-
             </Box>
+
+            <div className="product_item_report_data_main">
+                {selectedItem ? (
+                    <ProductCa item={selectedItem} />
+                ) : (
+                    <p>Барааны дэлгэрэнгүй хараахан сонгогдоогүй байна.</p>
+                )}
+            </div>
         </div>
     );
 }

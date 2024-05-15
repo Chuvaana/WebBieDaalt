@@ -5,12 +5,15 @@ import './productlist.css';
 
 // Assuming ItemCard is imported from another file
 import ItemCard from './ProductItemCard';
+import ProductCa from './ProductReportItem';
 
 const AddItemForm = () => {
     const [ringItems, setRingItems] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
     const navigate = useNavigate();
     useEffect(() => {
         const user = localStorage.getItem('user');
+    console.log("item");
         if (!user)
             navigate("/login")
     });
@@ -26,6 +29,11 @@ const AddItemForm = () => {
 
         window.scrollTo(0, 0);
     }, []);
+
+    const handleItemClick = (item) => {
+        console.log("item");
+        // setSelectedItem(item);
+    };
 
     return (
         <div className="productlist">
@@ -50,9 +58,15 @@ const AddItemForm = () => {
             <div className="data_body_productsaa">
                 {/* Mapping through ringItems and rendering ItemCard for each item */}
                 {ringItems.map((item, index) => (
-                    <ItemCard key={index} item={item} itemKey={index} category="ring" />
+                    <ItemCard key={index} item={item} itemKey={index} category="ring" onClick={handleItemClick}/>
                 ))}
-
+            </div>
+            <div className="order_data">
+                {selectedItem ? (
+                    <ProductCa item={selectedItem} />
+                ) : (
+                    <p>Захиалгын дэлгэрэнгүй хараахан сонгогдоогүй байна.</p>
+                )}
             </div>
         </div>
     );
