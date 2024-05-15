@@ -13,12 +13,13 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link ,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import WorkEdit from './WorkerEditForm';
 import "./worklist.css";
 
 function createData(
+
   no,
   lastname,
   firstname,
@@ -30,6 +31,9 @@ function createData(
   status,
   code
 ) {
+  const formattedDate = new Date(sincedate);
+  const formattedDateString = `${formattedDate.getFullYear()}-${(formattedDate.getMonth() + 1).toString().padStart(2, '0')}-${formattedDate.getDate().toString().padStart(2, '0')} ${formattedDate.getHours().toString().padStart(2, '0')}:${formattedDate.getMinutes().toString().padStart(2, '0')}`;
+
   return {
     no,
     lastname,
@@ -38,7 +42,7 @@ function createData(
     phone,
     mail,
     address,
-    sincedate,
+    sincedate: formattedDateString,
     status,
     code,
   };
@@ -180,7 +184,7 @@ export default function Workerlist1() {
   useEffect(() => {
     const user = localStorage.getItem('user');
     if (!user)
-        navigate("/login")
+      navigate("/login")
     axios
       .get("http://localhost:5000/api/worker")
       .then((res) => {

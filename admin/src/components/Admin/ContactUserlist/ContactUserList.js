@@ -19,14 +19,19 @@ function createData(
     name,
     email,
     phoneNumber,
-    addition
+    addition,
+    createdAt
 ) {
+    const formattedDate = new Date(createdAt);
+    const formattedDateString = `${formattedDate.getFullYear()}-${(formattedDate.getMonth() + 1).toString().padStart(2, '0')}-${formattedDate.getDate().toString().padStart(2, '0')} ${formattedDate.getHours().toString().padStart(2, '0')}:${formattedDate.getMinutes().toString().padStart(2, '0')}`;
+
     return {
         no,
         name,
         email,
         phoneNumber,
-        addition
+        addition,
+        createdAt: formattedDateString
     };
 }
 
@@ -88,6 +93,12 @@ const headCells = [
         numeric: true,
         disablePadding: false,
         label: "Мэдээлэл",
+    },
+    {
+        id: "createdAt",
+        numeric: true,
+        disablePadding: false,
+        label: "Илгээсэн хугацаа",
     }
 ];
 
@@ -159,7 +170,8 @@ export default function ContactuserList() {
             item.name,
             item.phoneNumber,
             item.email,
-            item.addition
+            item.addition,
+            item.createdAt
         )
     );
 
@@ -266,6 +278,7 @@ export default function ContactuserList() {
                                                 <TableCell align="center">{row.phoneNumber}</TableCell>
                                                 <TableCell align="center">{row.email}</TableCell>
                                                 <TableCell align="center">{row.addition}</TableCell>
+                                                <TableCell align="center">{row.createdAt}</TableCell>
 
                                             </TableRow>
                                         );
