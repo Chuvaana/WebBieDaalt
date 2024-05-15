@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import { message } from 'antd'
 const AddWorkerForm = (props) => {
   const [formData, setFormData] = useState({
     deliver_ovog: "",
@@ -67,6 +68,7 @@ const AddWorkerForm = (props) => {
         deliver_password: "",
       });
 
+      message.success("Амжилттай өөрчиллөө");
       navigate("/workerlist");
     } catch (error) {
       console.error("Error updating worker:", error);

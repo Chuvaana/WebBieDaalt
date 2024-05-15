@@ -99,6 +99,9 @@ function App() {
                 <Route path="/item/earrings">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
+                <Route path="/item/necklaces">
+                  <Route path=":id" element={<ItemView />}/>
+                </Route>
                 <Route path="/item/bracelet">
                   <Route path=":id" element={<ItemView />}/>
                 </Route>
