@@ -13,8 +13,9 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Paper from '@mui/material/Paper';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+// import { Link , useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import trash from './recycle-bin.png';
 import './productlist.css';
 import ProductCa from './ProductReportItem'
 
@@ -164,7 +165,11 @@ export default function ProductList1() {
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+    const navigate = useNavigate();
     useEffect(() => {
+        const user = localStorage.getItem('user');
+        if (!user)
+            navigate("/login")
         axios.get("http://localhost:5000/api/items")
             .then(res => {
                 console.log(res.data);
@@ -296,7 +301,7 @@ export default function ProductList1() {
                                                 <TableCell align="center">{row.price}</TableCell>
                                                 <TableCell align="center">{row.date}</TableCell>
                                                 <TableCell align="center">{row.endCount}</TableCell>
-                                                <TableCell align="center"><button className="btn_delete" onClick={(eve) => Delete_btn_command(eve, row)}></button></TableCell>
+                                                <TableCell align="center"><button className="btn_delete" onClick={(eve) => Delete_btn_command(eve, row)}><img className="trash_img" src={trash}></img></button></TableCell>
 
                                             </TableRow>
                                         );

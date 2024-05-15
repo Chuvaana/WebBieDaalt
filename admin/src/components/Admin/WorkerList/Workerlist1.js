@@ -13,7 +13,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 
 import WorkEdit from './WorkerEditForm';
 import "./worklist.css";
@@ -176,8 +176,11 @@ export default function Workerlist1() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (!user)
+        navigate("/login")
     axios
       .get("http://localhost:5000/api/worker")
       .then((res) => {

@@ -67,3 +67,14 @@
     width: 50px;
     height: 50px;
 }
+
+.trash_img{
+    width: 20px;
+    height: 20px;
+    transition: 0.5s;
+}
+
+.trash_img:hover{
+    width: 30px;
+    height: 30px;
+}
