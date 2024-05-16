@@ -1,4 +1,6 @@
-.featured__products__container_all{
-    width: 80%;
-    margin: 50px;
+.featured__products__container_all {
+  width: 95%;
+  margin: 50px;
+  display: flex;
+  justify-content: center;
 }
