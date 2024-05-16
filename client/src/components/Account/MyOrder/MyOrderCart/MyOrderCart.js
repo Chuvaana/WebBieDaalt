@@ -20,6 +20,9 @@ const MyOrderCart = ({ item }) => {
      } else if(item.delivery_status == 'Хүргэгдсэн'){
         color = '#4cff4c';
      }
+     else if(item.delivery_status == 'Хүргэлтэнд гарсан'){
+        color = '#FFF455';
+     }
 
     return (
         <div className='header_myorder_cart'>
