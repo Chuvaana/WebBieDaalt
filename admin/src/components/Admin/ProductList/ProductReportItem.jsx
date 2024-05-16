@@ -76,14 +76,12 @@ const ItemCard = (props) => {
             name="name"
             placeholder={props.item.name}
             value={props.item.name}
-            value={props.item.name}
             onChange={handleChange}
           />
           <input
             type="text"
             name="category"
             placeholder={props.item.category}
-            value={props.item.category}
             value={props.item.category}
             onChange={handleChange}
           />
@@ -94,14 +92,12 @@ const ItemCard = (props) => {
             name="color"
             placeholder={props.item.color}
             value={props.item.color}
-            value={props.item.color}
             onChange={handleChange}
           />
           <input
             type="text"
             name="type"
             placeholder={props.item.type}
-            value={props.item.type}
             value={props.item.type}
             onChange={handleChange}
           />
@@ -111,7 +107,6 @@ const ItemCard = (props) => {
             type="number"
             name="price"
             placeholder={props.item.price}
-            value={props.item.price}
             value={props.item.price}
             onChange={handleChange}
           />
@@ -127,7 +122,6 @@ const ItemCard = (props) => {
           <textarea
             name="description"
             placeholder={props.item.description}
-            value={props.item.description}
             value={props.item.description}
             onChange={handleChange}
           />
@@ -145,7 +139,6 @@ const ItemCard = (props) => {
             name="quantity"
             placeholder={props.item.quantity}
             value={props.item.quantity}
-            value={props.item.quantity}
             onChange={handleChange}
           />
         </div>
@@ -155,7 +148,6 @@ const ItemCard = (props) => {
             <input
               type="checkbox"
               name="sale"
-              checked={props.item.sale}
               checked={props.item.sale}
               onChange={handleCheckboxChange}
             />
