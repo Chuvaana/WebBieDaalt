@@ -423,6 +423,7 @@ const DeliveryForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addition, setAddition] = useState("");
   const [email, setEmail] = useState("");
+  const [form] = Form.useForm();
 
   const [value, setValue] = useState(1);
   const onChange = (e) => {
@@ -441,7 +442,9 @@ const DeliveryForm = () => {
   }, [selectedCountry]);
 
   const handleFormSubmit = async () => {
+    await form.validateFields();
     try {
+
       const productData = cartItems.items.map((item) => ({
         name: item.name,
         quantity: item.itemQuantity,
@@ -508,6 +511,7 @@ const DeliveryForm = () => {
             <h2>Хүргэлтийн хаяг</h2>
             <Form
               layout="vertical"
+              form={form}
               onFinish={onFinish}
               style={{ maxWidth: 600 }}
             >
@@ -593,11 +597,11 @@ const DeliveryForm = () => {
                 rules={[
                   {
                     type: "email",
-                    message: "И-мэйл хаягаа оруулна уу!",
+                    message: " Үнэн зөв и-мэйл хаягаа оруулна уу! ",
                   },
                   {
                     required: true,
-                    message: "Үнэн зөв и-мэйл хаягаа оруулна уу!",
+                    message: "И-мэйл хаягаа оруулна уу!",
                   },
                 ]}
               >

@@ -2,13 +2,10 @@ import { useContext, useState } from 'react';
 import { CartItemsContext } from '../../../Context/CartItemsContext';
 
 import { useNavigate } from "react-router-dom";
-import Button from '@mui/material/Button';
-import axios from 'axios';
 import CartCard from './CartCard/CartCard';
 import './Cart.css';
 
 const Cart = () => {
-    const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
     const cartItems = useContext(CartItemsContext);
     console.log(cartItems.items[1])
     const navigate = useNavigate();
@@ -18,21 +15,6 @@ const Cart = () => {
             navigate("/delivery_form");
         else
             navigate("/account/login")
-        // if (cartItems.totalAmount > 0) {
-        //     const config = {
-        //         reason: 'checkout',
-        //         amount: cartItems.totalAmount
-        //     };
-
-        //     try {
-        //         const res = await axios.post("http://localhost:5000/api/payment", config);
-        //         console.log(res.data);
-        //         window.location.replace(res.data);
-        //         setOpenCheckoutModal(true);
-        //     } catch (err) {
-        //         console.error(err);
-        //     }
-        // }
 
     };
 
