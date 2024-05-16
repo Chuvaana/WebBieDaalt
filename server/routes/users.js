@@ -1,8 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const cors = require("cors")
-const {loginUser, addUser, getUser, recoveryPass, updatePass, updateUser, deleteUser } = require("../controllers/usersController")
+const {getData, loginUser, addUser, getUser, recoveryPass, updatePass, updateUser, deleteUser } = require("../controllers/usersController")
 
+router.get('/getter', getData)
 router.post('/login', loginUser)
 router.post('/register', addUser)
 router.post('/recovery', getUser)

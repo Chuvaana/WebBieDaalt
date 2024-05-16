@@ -16,4 +16,8 @@ export const menuItemsData = [
     title: "Санал хүсэлтийн жагсаалт",
     url: "/contactlist",
   },
+  {
+    title: "Хэрэглэгчийн жагсаалт",
+    url: "/userlist",
+  },
 ];

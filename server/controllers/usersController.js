@@ -1,5 +1,20 @@
 const User = require("../models/UserModel")
 
+const getData = async (req, res) =>{
+    try {
+        // Query the "Items" collection to retrieve all items
+        const items = await User.find();
+        // Respond with the retrieved items
+        res.json(items);
+        // res.send(items);
+
+    } catch (error) {
+        // Handle errors, if any
+        console.error("Error fetching items:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 /* GET request handler */
 const loginUser = async (req, res) => {
     const { phoneNumber, password } = req.body;
@@ -91,6 +106,7 @@ const deleteUser = (req, res) => {
 }
 
 module.exports = {
+    getData,
     loginUser,
     addUser,
     getUser,

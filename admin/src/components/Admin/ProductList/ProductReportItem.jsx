@@ -71,14 +71,14 @@ const ItemCard = (props) => {
             type="text"
             name="name"
             placeholder={props.item.name}
-            value={formData.name}
+            value={props.item.name}
             onChange={handleChange}
           />
           <input
             type="text"
             name="category"
             placeholder={props.item.category}
-            value={formData.category}
+            value={props.item.category}
             onChange={handleChange}
           />
         </div>
@@ -87,14 +87,14 @@ const ItemCard = (props) => {
             type="text"
             name="color"
             placeholder={props.item.color}
-            value={formData.color}
+            value={props.item.color}
             onChange={handleChange}
           />
           <input
             type="text"
             name="type"
             placeholder={props.item.type}
-            value={formData.type}
+            value={props.item.type}
             onChange={handleChange}
           />
         </div>
@@ -103,14 +103,14 @@ const ItemCard = (props) => {
             type="number"
             name="price"
             placeholder={props.item.price}
-            value={formData.price}
+            value={props.item.price}
             onChange={handleChange}
           />
           <input
             type="text"
             name="size"
             placeholder={props.item.size.join(', ')}
-            value={formData.size}
+            value={props.item.size}
             onChange={handleChange}
           />
         </div>
@@ -118,7 +118,7 @@ const ItemCard = (props) => {
           <textarea
             name="description"
             placeholder={props.item.description}
-            value={formData.description}
+            value={props.item.description}
             onChange={handleChange}
           />
         </div>
@@ -127,14 +127,14 @@ const ItemCard = (props) => {
             type="text"
             name="highlights"
             placeholder={props.item.highlights.join(', ')}
-            value={formData.highlights}
+            value={props.item.highlights}
             onChange={handleChange}
           />
           <input
             type="number"
             name="quantity"
             placeholder={props.item.quantity}
-            value={formData.quantity}
+            value={props.item.quantity}
             onChange={handleChange}
           />
         </div>
@@ -144,18 +144,18 @@ const ItemCard = (props) => {
             <input
               type="checkbox"
               name="sale"
-              checked={formData.sale}
+              checked={props.item.sale}
               onChange={handleCheckboxChange}
             />
           </label>
-          {formData.sale && (
+          {props.item.sale && (
             <div className="prod_sale">
               <input
                 type="number"
                 style={{ margin: '15px 0px', width: '330px', height: '50px' }}
                 name="saleAmount"
                 placeholder={props.item.saleAmount}
-                value={formData.saleAmount}
+                value={props.item.saleAmount}
                 onChange={handleChange}
               />
             </div>
