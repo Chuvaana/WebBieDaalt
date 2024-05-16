@@ -1,24 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./productlist.css";
-
 import { message } from "antd";
+
 const ItemCard = (props) => {
   const [formData, setFormData] = useState({
-    name: props.item.name || "",
-    category: props.item.category || "",
-    color: props.item.color || "",
-    type: props.item.type || "",
-    description: props.item.description || "",
-    price: props.item.price || "",
-    size: props.item.size.join(", ") || "",
-    highlights: props.item.highlights.join(", ") || "",
-    quantity: props.item.quantity || "",
-    sale: props.item.sale || false,
-    saleAmount: props.item.saleAmount || "",
+    name: "",
+    category: "",
+    color: "",
+    type: "",
+    description: "",
+    price: "",
+    size: "",
+    highlights: "",
+    quantity: "",
+    sale: false,
+    saleAmount: "",
     images: [], // This will hold the selected image files
   });
+
+  useEffect(() => {
+    setFormData({
+      name: props.item.name || "",
+      category: props.item.category || "",
+      color: props.item.color || "",
+      type: props.item.type || "",
+      description: props.item.description || "",
+      price: props.item.price || "",
+      size: props.item.size.join(", ") || "",
+      highlights: props.item.highlights.join(", ") || "",
+      quantity: props.item.quantity || "",
+      sale: props.item.sale || false,
+      saleAmount: props.item.saleAmount || "",
+      images: [], // This will hold the selected image files
+    });
+  }, [props.item]);
 
   const navigate = useNavigate();
 
@@ -74,15 +91,15 @@ const ItemCard = (props) => {
           <input
             type="text"
             name="name"
-            placeholder={props.item.name}
-            value={props.item.name}
+            placeholder="Name"
+            value={formData.name}
             onChange={handleChange}
           />
           <input
             type="text"
             name="category"
-            placeholder={props.item.category}
-            value={props.item.category}
+            placeholder="Category"
+            value={formData.category}
             onChange={handleChange}
           />
         </div>
@@ -90,15 +107,15 @@ const ItemCard = (props) => {
           <input
             type="text"
             name="color"
-            placeholder={props.item.color}
-            value={props.item.color}
+            placeholder="Color"
+            value={formData.color}
             onChange={handleChange}
           />
           <input
             type="text"
             name="type"
-            placeholder={props.item.type}
-            value={props.item.type}
+            placeholder="Type"
+            value={formData.type}
             onChange={handleChange}
           />
         </div>
@@ -106,23 +123,23 @@ const ItemCard = (props) => {
           <input
             type="number"
             name="price"
-            placeholder={props.item.price}
-            value={props.item.price}
+            placeholder="Price"
+            value={formData.price}
             onChange={handleChange}
           />
           <input
             type="text"
             name="size"
-            placeholder={props.item.size.join(', ')}
-            value={props.item.size}
+            placeholder="Size (comma-separated)"
+            value={formData.size}
             onChange={handleChange}
           />
         </div>
         <div className="product_descr">
           <textarea
             name="description"
-            placeholder={props.item.description}
-            value={props.item.description}
+            placeholder="Description"
+            value={formData.description}
             onChange={handleChange}
           />
         </div>
@@ -130,15 +147,15 @@ const ItemCard = (props) => {
           <input
             type="text"
             name="highlights"
-            placeholder={props.item.highlights.join(', ')}
-            value={props.item.highlights}
+            placeholder="Highlights (comma-separated)"
+            value={formData.highlights}
             onChange={handleChange}
           />
           <input
             type="number"
             name="quantity"
-            placeholder={props.item.quantity}
-            value={props.item.quantity}
+            placeholder="Quantity"
+            value={formData.quantity}
             onChange={handleChange}
           />
         </div>
@@ -148,18 +165,18 @@ const ItemCard = (props) => {
             <input
               type="checkbox"
               name="sale"
-              checked={props.item.sale}
+              checked={formData.sale}
               onChange={handleCheckboxChange}
             />
           </label>
-          {props.item.sale && (
+          {formData.sale && (
             <div className="prod_sale">
               <input
                 type="number"
                 style={{ margin: "15px 0px", width: "330px", height: "50px" }}
                 name="saleAmount"
-                placeholder={props.item.saleAmount}
-                value={props.item.saleAmount}
+                placeholder="Sale Amount"
+                value={formData.saleAmount}
                 onChange={handleChange}
               />
             </div>
